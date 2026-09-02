@@ -1,0 +1,238 @@
+/* Aplica box-sizing a todos os elementos para facilitar o controle das dimensões */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Define os estilos gerais da página */
+body {
+    /* Remove a margem padrão do navegador */
+    margin: 0;
+
+    /* Define a fonte principal */
+    font-family: Arial, sans-serif;
+
+    /* Melhora o espaçamento entre as linhas */
+    line-height: 1.6;
+
+    /* Define a cor de fundo da página */
+    background-color: #f4f7f2;
+
+    /* Define a cor principal dos textos */
+    color: #1f2d24;
+}
+
+
+/* Estiliza o cabeçalho */
+header {
+    /* Define o espaço interno */
+    padding: 30px 20px;
+
+    /* Centraliza o conteúdo */
+    text-align: center;
+
+    /* Define a cor de fundo */
+    background-color: #dcebd8;
+}
+
+
+/* Ajusta o espaçamento do título principal */
+header h1 {
+    margin: 0 0 10px;
+}
+
+
+/* Organiza os links de navegação */
+nav {
+    /* Coloca os links em uma linha flexível */
+    display: flex;
+
+    /* Centraliza os links */
+    justify-content: center;
+
+    /* Permite que os links quebrem linha em telas menores */
+    flex-wrap: wrap;
+
+    /* Define o espaço entre os links */
+    gap: 15px;
+
+    /* Cria espaço acima da navegação */
+    margin-top: 20px;
+}
+
+
+/* Estiliza os links da navegação */
+nav a {
+    /* Define o espaço interno dos links */
+    padding: 8px 12px;
+
+    /* Define a cor do texto */
+    color: #1f2d24;
+
+    /* Remove o sublinhado padrão */
+    text-decoration: none;
+
+    /* Arredonda as bordas */
+    border-radius: 5px;
+}
+
+
+/* Adiciona destaque aos links quando o mouse passa sobre eles */
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* Define a largura e o espaçamento do conteúdo principal */
+main {
+    /* Limita a largura máxima e mantém margens laterais */
+    width: min(100% - 40px, 1000px);
+
+    /* Centraliza o conteúdo */
+    margin: 0 auto;
+
+    /* Adiciona espaço vertical */
+    padding: 40px 0;
+}
+
+
+/* Estiliza cada seção principal */
+section {
+    /* Cria espaço abaixo de cada seção */
+    margin-bottom: 50px;
+
+    /* Cria espaço interno */
+    padding: 25px;
+
+    /* Define o fundo das seções */
+    background-color: #ffffff;
+
+    /* Arredonda as bordas */
+    border-radius: 10px;
+}
+
+
+/* Remove o espaço superior extra dos títulos das seções */
+section h2 {
+    margin-top: 0;
+}
+
+
+/* Cria espaço acima do formulário */
+form {
+    margin-top: 25px;
+}
+
+
+/* Estiliza o agrupamento de campos */
+fieldset {
+    /* Define o espaço interno */
+    padding: 25px;
+
+    /* Define a borda */
+    border: 1px solid #b8c8b4;
+
+    /* Arredonda as bordas */
+    border-radius: 8px;
+}
+
+
+/* Estiliza o título do grupo de campos */
+legend {
+    /* Adiciona espaço lateral */
+    padding: 0 8px;
+
+    /* Destaca o texto */
+    font-weight: bold;
+}
+
+
+/* Estiliza os textos dos labels */
+label {
+    /* Faz o label ocupar sua própria linha */
+    display: block;
+
+    /* Adiciona espaço abaixo do label */
+    margin-bottom: 6px;
+
+    /* Deixa o texto em negrito */
+    font-weight: bold;
+}
+
+
+/* Estiliza os campos de entrada e a área de texto */
+input,
+textarea {
+    /* Faz os campos ocuparem toda a largura disponível */
+    width: 100%;
+
+    /* Define o espaço interno */
+    padding: 10px;
+
+    /* Mantém a fonte do formulário */
+    font: inherit;
+
+    /* Define a borda */
+    border: 1px solid #9aa99a;
+
+    /* Arredonda os campos */
+    border-radius: 5px;
+}
+
+
+/* Destaca o campo que está atualmente selecionado */
+input:focus,
+textarea:focus {
+    /* Cria um contorno visível para facilitar a identificação */
+    outline: 2px solid #426b45;
+
+    /* Afasta o contorno do elemento */
+    outline-offset: 2px;
+}
+
+
+/* Permite redimensionar apenas verticalmente o textarea */
+textarea {
+    resize: vertical;
+}
+
+
+/* Estiliza o botão de envio */
+button {
+    /* Define o espaço interno */
+    padding: 12px 20px;
+
+    /* Mantém a fonte do restante do formulário */
+    font: inherit;
+
+    /* Destaca o texto */
+    font-weight: bold;
+
+    /* Remove a borda padrão */
+    border: 0;
+
+    /* Arredonda as bordas */
+    border-radius: 5px;
+
+    /* Mostra que o elemento pode ser clicado */
+    cursor: pointer;
+}
+
+
+/* Adiciona destaque visual ao botão quando o mouse passa sobre ele */
+button:hover {
+    text-decoration: underline;
+}
+
+
+/* Estiliza o rodapé */
+footer {
+    /* Define o espaço interno */
+    padding: 30px 20px;
+
+    /* Centraliza o conteúdo */
+    text-align: center;
+
+    /* Define a cor de fundo */
+    background-color: #dcebd8;
+}

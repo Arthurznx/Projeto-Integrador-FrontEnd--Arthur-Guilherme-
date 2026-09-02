@@ -1,11 +1,302 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+<!-- Define o documento como HTML5 e o idioma como português do Brasil -->
+
 <head>
+    <!-- Define a codificação de caracteres -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto "Animalia"</title>
+
+    <!-- Adapta a página para diferentes tamanhos de tela -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- Título exibido na aba do navegador -->
+    <title>Animalia - Preservação Ambiental</title>
+
+    <!-- Conecta o HTML ao arquivo de estilos CSS -->
+    <link rel="stylesheet" href="Css/style.css">
 </head>
+
 <body>
-    
+
+    <!-- Cabeçalho principal da página -->
+    <header>
+
+        <!-- Título principal da página -->
+        <h1>Animalia</h1>
+
+        <!-- Breve descrição do projeto -->
+        <p>
+            Conhecimento e preservação da fauna da Paraíba.
+        </p>
+
+        <!-- Área de navegação principal -->
+        <nav aria-label="Navegação principal">
+
+            <!-- Links que levam às diferentes seções da página -->
+            <a href="#inicio">Início</a>
+            <a href="#fauna">Fauna da Paraíba</a>
+            <a href="#album">Meu álbum</a>
+            <a href="#registro">Registrar encontro</a>
+
+        </nav>
+    </header>
+
+
+    <!-- Conteúdo principal da página: existe apenas um main -->
+    <main>
+
+        <!-- Seção de apresentação do projeto -->
+        <section id="inicio">
+
+            <!-- Título da seção -->
+            <h2>Conheça o Animalia</h2>
+
+            <!-- Explica a finalidade do projeto -->
+            <p>
+                O Animalia é um projeto voltado para a preservação
+                ambiental e para a divulgação da fauna da Paraíba.
+            </p>
+
+            <p>
+                A aplicação apresenta informações sobre animais
+                encontrados no estado, incluindo características,
+                curiosidades e informações relacionadas ao risco
+                de extinção.
+            </p>
+
+            <p>
+                O objetivo é tornar o conhecimento sobre a fauna
+                paraibana mais acessível e conscientizar a população
+                sobre a importância da preservação ambiental.
+            </p>
+
+        </section>
+
+
+        <!-- Seção com informações sobre a fauna paraibana -->
+        <section id="fauna">
+
+            <!-- Título da seção -->
+            <h2>Fauna da Paraíba</h2>
+
+            <!-- Apresenta a proposta de conhecimento sobre os animais -->
+            <p>
+                Conheça melhor os animais que fazem parte da fauna
+                paraibana e descubra a importância de cada espécie
+                para o equilíbrio ambiental.
+            </p>
+
+            <p>
+                No Animalia, informações sobre características,
+                habitat, curiosidades e conservação poderão ser
+                consultadas de maneira simples e intuitiva.
+            </p>
+
+        </section>
+
+
+        <!-- Seção destinada ao álbum de registros do usuário -->
+        <section id="album">
+
+            <!-- Título da seção -->
+            <h2>Meu álbum de encontros</h2>
+
+            <!-- Explica a função do álbum -->
+            <p>
+                O álbum permite que os usuários registrem momentos
+                de encontro com animais e construam suas próprias
+                coleções de observações da fauna paraibana.
+            </p>
+
+            <p>
+                Cada registro poderá conter informações sobre o
+                animal observado, além de uma fotografia ou relato
+                da experiência.
+            </p>
+
+        </section>
+
+
+        <!-- Seção que contém o formulário de registro -->
+        <section id="registro">
+
+            <!-- Título da seção -->
+            <h2>Registrar encontro com um animal</h2>
+
+            <!-- Orientação para preenchimento do formulário -->
+            <p>
+                Preencha as informações abaixo para registrar uma
+                observação no seu álbum.
+            </p>
+
+            <!-- Formulário para registrar um encontro com um animal -->
+            <form action="#" method="post">
+
+                <!-- Agrupa os campos relacionados ao encontro -->
+                <fieldset>
+
+                    <!-- Nome que identifica o grupo de campos -->
+                    <legend>Informações do encontro</legend>
+
+
+                    <!-- Campo para informar o nome do animal -->
+                    <p>
+                        <!-- Label associado ao input através do for/id -->
+                        <label for="animal">
+                            Nome do animal:
+                        </label>
+
+                        <!-- Campo de texto obrigatório -->
+                        <input
+                            type="text"
+                            id="animal"
+                            name="animal"
+                            placeholder="Ex.: Preguiça"
+                            required
+                        >
+                    </p>
+
+
+                    <!-- Campo para informar a espécie -->
+                    <p>
+                        <!-- Label associado ao input -->
+                        <label for="especie">
+                            Espécie:
+                        </label>
+
+                        <!-- Campo de texto obrigatório -->
+                        <input
+                            type="text"
+                            id="especie"
+                            name="especie"
+                            placeholder="Ex.: Bradypus variegatus"
+                            required
+                        >
+                    </p>
+
+
+                    <!-- Campo para informar a quantidade observada -->
+                    <p>
+                        <!-- Label associado ao campo numérico -->
+                        <label for="quantidade">
+                            Quantidade de animais observados:
+                        </label>
+
+                        <!-- Campo numérico com limites de 1 a 50 -->
+                        <input
+                            type="number"
+                            id="quantidade"
+                            name="quantidade"
+                            min="1"
+                            max="50"
+                            value="1"
+                            required
+                        >
+                    </p>
+
+
+                    <!-- Campo para informar a data do encontro -->
+                    <p>
+                        <!-- Label associado ao campo de data -->
+                        <label for="data-encontro">
+                            Data do encontro:
+                        </label>
+
+                        <!-- Campo específico para datas -->
+                        <input
+                            type="date"
+                            id="data-encontro"
+                            name="data-encontro"
+                            required
+                        >
+                    </p>
+
+
+                    <!-- Campo para informar o local da observação -->
+                    <p>
+                        <!-- Label associado ao campo -->
+                        <label for="local">
+                            Local do encontro:
+                        </label>
+
+                        <!-- Campo de texto obrigatório -->
+                        <input
+                            type="text"
+                            id="local"
+                            name="local"
+                            placeholder="Ex.: Parque, praia ou área rural"
+                            required
+                        >
+                    </p>
+
+
+                    <!-- Campo para adicionar uma fotografia -->
+                    <p>
+                        <!-- Label associado ao campo de arquivo -->
+                        <label for="foto">
+                            Foto do encontro:
+                        </label>
+
+                        <!-- Permite selecionar uma imagem do dispositivo -->
+                        <input
+                            type="file"
+                            id="foto"
+                            name="foto"
+                            accept="image/*"
+                        >
+                    </p>
+
+
+                    <!-- Campo para escrever o relato do encontro -->
+                    <p>
+                        <!-- Label associado ao textarea -->
+                        <label for="relato">
+                            Relato do encontro:
+                        </label>
+
+                        <!-- Área para textos maiores e com várias linhas -->
+                        <textarea
+                            id="relato"
+                            name="relato"
+                            rows="6"
+                            placeholder="Conte como foi o encontro com o animal..."
+                        ></textarea>
+                    </p>
+
+
+                    <!-- Botão responsável pelo envio do formulário -->
+                    <button type="submit">
+                        Adicionar ao álbum
+                    </button>
+
+                </fieldset>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Rodapé da página -->
+    <footer>
+
+        <!-- Identificação do projeto -->
+        <p>
+            Animalia — Projeto Integrador Front-end
+        </p>
+
+        <!-- Descrição resumida da finalidade acadêmica -->
+        <p>
+            Projeto acadêmico voltado à divulgação da fauna
+            da Paraíba e à preservação ambiental.
+        </p>
+
+    </footer>
+
 </body>
+
 </html>
