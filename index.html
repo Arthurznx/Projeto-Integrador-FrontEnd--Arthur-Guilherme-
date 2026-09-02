@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <!-- Define o documento como HTML5 e o idioma como português do Brasil -->
 
 <head>
+
     <!-- Define a codificação de caracteres -->
     <meta charset="UTF-8">
 
@@ -17,6 +19,7 @@
 
     <!-- Conecta o HTML ao arquivo de estilos CSS -->
     <link rel="stylesheet" href="CSS/style.css">
+
 </head>
 
 <body>
@@ -24,7 +27,7 @@
     <!-- Cabeçalho principal da página -->
     <header>
 
-        <!-- Título principal da página -->
+        <!-- Título principal do projeto -->
         <h1>Animalia</h1>
 
         <!-- Breve descrição do projeto -->
@@ -35,17 +38,30 @@
         <!-- Área de navegação principal -->
         <nav aria-label="Navegação principal">
 
-            <!-- Links que levam às diferentes seções da página -->
+            <!-- Link para a seção inicial -->
             <a href="#inicio">Início</a>
+
+            <!-- Link para a seção da fauna -->
             <a href="#fauna">Fauna da Paraíba</a>
+
+            <!-- Link para a seção de sons -->
+            <a href="#sons">Sons da fauna</a>
+
+            <!-- Link para a seção do álbum -->
             <a href="#album">Meu álbum</a>
+
+            <!-- Link para o formulário de registro -->
             <a href="#registro">Registrar encontro</a>
 
         </nav>
+
     </header>
 
 
-    <!-- Conteúdo principal da página: existe apenas um main -->
+    <!--
+        Conteúdo principal da página.
+        Existe apenas UM elemento <main>, diretamente dentro do <body>.
+    -->
     <main>
 
         <!-- Seção de apresentação do projeto -->
@@ -60,6 +76,7 @@
                 ambiental e para a divulgação da fauna da Paraíba.
             </p>
 
+            <!-- Apresenta os tipos de informações disponíveis -->
             <p>
                 A aplicação apresenta informações sobre animais
                 encontrados no estado, incluindo características,
@@ -67,6 +84,7 @@
                 de extinção.
             </p>
 
+            <!-- Explica o objetivo de conscientização do projeto -->
             <p>
                 O objetivo é tornar o conhecimento sobre a fauna
                 paraibana mais acessível e conscientizar a população
@@ -89,11 +107,67 @@
                 para o equilíbrio ambiental.
             </p>
 
+            <!-- Apresenta outras informações que poderão ser consultadas -->
             <p>
                 No Animalia, informações sobre características,
                 habitat, curiosidades e conservação poderão ser
                 consultadas de maneira simples e intuitiva.
             </p>
+
+        </section>
+
+
+        <!--
+            Seção de mídia adicionada para o conteúdo de áudio relacionado ao tema do Animalia.
+        -->
+        <section id="sons">
+
+            <!-- Título da seção de áudio -->
+            <h2>Sons da Fauna paraibana</h2>
+
+            <!-- Explicação sobre a finalidade do conteúdo de áudio -->
+            <p>
+                Ouça um exemplo de som relacionado à fauna.
+                Esta seção busca aproximar o usuário dos animais
+                apresentados pelo projeto Animalia.
+            </p>
+
+            <!--
+                Player de áudio.
+
+                O preload="metadata" foi escolhido porque o áudio
+                não precisa ser carregado completamente antes de
+                o usuário decidir reproduzi-lo. O navegador pode
+                carregar apenas informações básicas do arquivo,
+                como sua duração.
+            -->
+            <audio controls preload="metadata">
+
+                <!--
+                    PRIMEIRO FORMATO DE ÁUDIO.
+                    Este é o primeiro formato oferecido ao navegador.
+                -->
+                <source
+                    src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.mp3.mpeg"
+                    type="audio/mpeg"
+                >
+
+                <!--
+                    SEGUNDO FORMATO DE ÁUDIO.
+                    Este formato funciona como alternativa ao MP3.
+                -->
+                <source
+                    src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.ogg"
+                    type="audio/ogg"
+                >
+
+                <!--
+                    Mensagem exibida caso o navegador não consiga
+                    reproduzir nenhum dos formatos disponibilizados.
+                -->
+                Seu navegador não suporta a reprodução de áudio.
+
+            </audio>
 
         </section>
 
@@ -111,6 +185,7 @@
                 coleções de observações da fauna paraibana.
             </p>
 
+            <!-- Explica o conteúdo dos registros -->
             <p>
                 Cada registro poderá conter informações sobre o
                 animal observado, além de uma fotografia ou relato
@@ -132,6 +207,7 @@
                 observação no seu álbum.
             </p>
 
+
             <!-- Formulário para registrar um encontro com um animal -->
             <form action="#" method="post">
 
@@ -144,12 +220,13 @@
 
                     <!-- Campo para informar o nome do animal -->
                     <p>
+
                         <!-- Label associado ao input através do for/id -->
                         <label for="animal">
                             Nome do animal:
                         </label>
 
-                        <!-- Campo de texto obrigatório -->
+                        <!-- Campo obrigatório para o nome do animal -->
                         <input
                             type="text"
                             id="animal"
@@ -157,17 +234,19 @@
                             placeholder="Ex.: Preguiça"
                             required
                         >
+
                     </p>
 
 
                     <!-- Campo para informar a espécie -->
                     <p>
-                        <!-- Label associado ao input -->
+
+                        <!-- Label associado ao input através do for/id -->
                         <label for="especie">
                             Espécie:
                         </label>
 
-                        <!-- Campo de texto obrigatório -->
+                        <!-- Campo obrigatório para a espécie -->
                         <input
                             type="text"
                             id="especie"
@@ -175,17 +254,22 @@
                             placeholder="Ex.: Bradypus variegatus"
                             required
                         >
+
                     </p>
 
 
                     <!-- Campo para informar a quantidade observada -->
                     <p>
+
                         <!-- Label associado ao campo numérico -->
                         <label for="quantidade">
                             Quantidade de animais observados:
                         </label>
 
-                        <!-- Campo numérico com limites de 1 a 50 -->
+                        <!--
+                            Campo numérico com limite mínimo e máximo.
+                            O required impede o envio sem preenchimento.
+                        -->
                         <input
                             type="number"
                             id="quantidade"
@@ -195,34 +279,38 @@
                             value="1"
                             required
                         >
+
                     </p>
 
 
                     <!-- Campo para informar a data do encontro -->
                     <p>
+
                         <!-- Label associado ao campo de data -->
                         <label for="data-encontro">
                             Data do encontro:
                         </label>
 
-                        <!-- Campo específico para datas -->
+                        <!-- Campo semântico específico para datas -->
                         <input
                             type="date"
                             id="data-encontro"
                             name="data-encontro"
                             required
                         >
+
                     </p>
 
 
                     <!-- Campo para informar o local da observação -->
                     <p>
+
                         <!-- Label associado ao campo -->
                         <label for="local">
                             Local do encontro:
                         </label>
 
-                        <!-- Campo de texto obrigatório -->
+                        <!-- Campo obrigatório para localização -->
                         <input
                             type="text"
                             id="local"
@@ -230,11 +318,13 @@
                             placeholder="Ex.: Parque, praia ou área rural"
                             required
                         >
+
                     </p>
 
 
                     <!-- Campo para adicionar uma fotografia -->
                     <p>
+
                         <!-- Label associado ao campo de arquivo -->
                         <label for="foto">
                             Foto do encontro:
@@ -247,27 +337,30 @@
                             name="foto"
                             accept="image/*"
                         >
+
                     </p>
 
 
                     <!-- Campo para escrever o relato do encontro -->
                     <p>
+
                         <!-- Label associado ao textarea -->
                         <label for="relato">
                             Relato do encontro:
                         </label>
 
-                        <!-- Área para textos maiores e com várias linhas -->
+                        <!-- Área destinada a textos maiores -->
                         <textarea
                             id="relato"
                             name="relato"
                             rows="6"
                             placeholder="Conte como foi o encontro com o animal..."
                         ></textarea>
+
                     </p>
 
 
-                    <!-- Botão responsável pelo envio do formulário -->
+                    <!-- Botão semântico responsável pelo envio do formulário -->
                     <button type="submit">
                         Adicionar ao álbum
                     </button>

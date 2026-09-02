@@ -236,3 +236,13 @@ footer {
     /* Define a cor de fundo */
     background-color: #dcebd8;
 }
+/* Seção de sons da fauna */
+#sons {
+    margin-top: 30px;
+}
+
+/* Player de áudio */
+audio {
+    width: 100%;
+    margin-top: 15px;
+}
