@@ -246,3 +246,10 @@ audio {
     width: 100%;
     margin-top: 15px;
 }
+/* SVG icon */
+svg {
+    fill: #1f2d24;
+    height: 50px;
+    align-items: center;
+}
+
