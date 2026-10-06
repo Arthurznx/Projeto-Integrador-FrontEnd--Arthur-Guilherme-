@@ -1,248 +1,219 @@
-/* Aplica box-sizing a todos os elementos para facilitar o controle das dimensões */
-* {
-    box-sizing: border-box;
+/* style.CSS do Projeto Animalia */
+
+/* Variáveis do projeto */
+:root {
+    --cor-fundo: #f4f7f2;
+    --cor-texto: #1f2d24;
+    --cor-destaque: #dcebd8;
+    --cor-secao: #ffffff;
+    --cor-borda: #b8c8b4;
+    --cor-campo: #9aa99a;
+    --cor-foco: #426b45;
+
+    --espaco-pequeno: 0.5rem;
+    --espaco-medio: 1rem;
+    --espaco-grande: 2rem;
+
+    --raio: 0.5rem;
 }
 
-
-/* Define os estilos gerais da página */
+/* rem facilita a adaptação da fonte */
 body {
-    /* Remove a margem padrão do navegador */
     margin: 0;
-
-    /* Define a fonte principal */
     font-family: Arial, sans-serif;
-
-    /* Melhora o espaçamento entre as linhas */
+    font-size: 1rem;
     line-height: 1.6;
-
-    /* Define a cor de fundo da página */
-    background-color: #f4f7f2;
-
-    /* Define a cor principal dos textos */
-    color: #1f2d24;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
 }
 
 
-/* Estiliza o cabeçalho */
+/* Cabeçalho */
 header {
-    /* Define o espaço interno */
     padding: 30px 20px;
-
-    /* Centraliza o conteúdo */
     text-align: center;
-
-    /* Define a cor de fundo */
-    background-color: #dcebd8;
+    background-color: var(--cor-destaque);
 }
 
-
-/* Ajusta o espaçamento do título principal */
+/* Combinador: seleciona o h1 dentro do header */
 header h1 {
     margin: 0 0 10px;
+    font-size: 2rem;
 }
 
 
-/* Organiza os links de navegação */
+/* Ícone SVG */
+svg {
+    height: 50px;
+    fill: var(--cor-texto);
+}
+
+
+/* Navegação */
 nav {
-    /* Coloca os links em uma linha flexível */
     display: flex;
-
-    /* Centraliza os links */
     justify-content: center;
-
-    /* Permite que os links quebrem linha em telas menores */
     flex-wrap: wrap;
-
-    /* Define o espaço entre os links */
-    gap: 15px;
-
-    /* Cria espaço acima da navegação */
+    gap: var(--espaco-medio);
     margin-top: 20px;
 }
 
-
-/* Estiliza os links da navegação */
 nav a {
-    /* Define o espaço interno dos links */
-    padding: 8px 12px;
-
-    /* Define a cor do texto */
-    color: #1f2d24;
-
-    /* Remove o sublinhado padrão */
+    padding: var(--espaco-pequeno) var(--espaco-medio);
+    color: var(--cor-texto);
     text-decoration: none;
-
-    /* Arredonda as bordas */
-    border-radius: 5px;
+    border-radius: var(--raio);
 }
 
 
-/* Adiciona destaque aos links quando o mouse passa sobre eles */
+/* Estados dos links */
+nav a:link {
+    color: var(--cor-texto);
+}
+
+nav a:visited {
+    color: #526b58;
+}
+
 nav a:hover {
     text-decoration: underline;
 }
 
+nav a:active {
+    color: var(--cor-foco);
+}
 
-/* Define a largura e o espaçamento do conteúdo principal */
+
+/* Conteúdo principal */
 main {
-    /* Limita a largura máxima e mantém margens laterais */
     width: min(100% - 40px, 1000px);
-
-    /* Centraliza o conteúdo */
     margin: 0 auto;
-
-    /* Adiciona espaço vertical */
     padding: 40px 0;
 }
 
 
-/* Estiliza cada seção principal */
+/* Seções */
 section {
-    /* Cria espaço abaixo de cada seção */
     margin-bottom: 50px;
-
-    /* Cria espaço interno */
     padding: 25px;
-
-    /* Define o fundo das seções */
-    background-color: #ffffff;
-
-    /* Arredonda as bordas */
-    border-radius: 10px;
+    background-color: var(--cor-secao);
+    border-radius: var(--raio);
 }
 
-
-/* Remove o espaço superior extra dos títulos das seções */
 section h2 {
     margin-top: 0;
+    font-size: 1.5rem;
 }
 
 
-/* Cria espaço acima do formulário */
+/* Lista */
+.lista-fauna {
+    margin-top: var(--espaco-medio);
+    padding-left: var(--espaco-grande);
+    list-style-type: disc;
+}
+
+.lista-fauna li {
+    margin-bottom: var(--espaco-pequeno);
+}
+
+
+/* Tabela */
+.tabela-fauna {
+    width: 100%;
+    margin-top: var(--espaco-medio);
+    border-collapse: collapse;
+}
+
+.tabela-fauna th,
+.tabela-fauna td {
+    padding: var(--espaco-medio);
+    border: 1px solid var(--cor-borda);
+    text-align: left;
+}
+
+.tabela-fauna th {
+    background-color: var(--cor-destaque);
+}
+
+
+/* Formulário */
 form {
     margin-top: 25px;
 }
 
-
-/* Estiliza o agrupamento de campos */
 fieldset {
-    /* Define o espaço interno */
     padding: 25px;
-
-    /* Define a borda */
-    border: 1px solid #b8c8b4;
-
-    /* Arredonda as bordas */
-    border-radius: 8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
 }
 
-
-/* Estiliza o título do grupo de campos */
 legend {
-    /* Adiciona espaço lateral */
-    padding: 0 8px;
-
-    /* Destaca o texto */
+    padding: 0 var(--espaco-pequeno);
     font-weight: bold;
 }
 
+.campo {
+    margin-bottom: var(--espaco-medio);
+}
 
-/* Estiliza os textos dos labels */
 label {
-    /* Faz o label ocupar sua própria linha */
     display: block;
-
-    /* Adiciona espaço abaixo do label */
     margin-bottom: 6px;
-
-    /* Deixa o texto em negrito */
     font-weight: bold;
 }
 
-
-/* Estiliza os campos de entrada e a área de texto */
 input,
 textarea {
-    /* Faz os campos ocuparem toda a largura disponível */
     width: 100%;
-
-    /* Define o espaço interno */
     padding: 10px;
-
-    /* Mantém a fonte do formulário */
     font: inherit;
-
-    /* Define a borda */
-    border: 1px solid #9aa99a;
-
-    /* Arredonda os campos */
-    border-radius: 5px;
+    border: 1px solid var(--cor-campo);
+    border-radius: var(--raio);
 }
 
-
-/* Destaca o campo que está atualmente selecionado */
 input:focus,
 textarea:focus {
-    /* Cria um contorno visível para facilitar a identificação */
-    outline: 2px solid #426b45;
-
-    /* Afasta o contorno do elemento */
+    outline: 2px solid var(--cor-foco);
     outline-offset: 2px;
 }
 
-
-/* Permite redimensionar apenas verticalmente o textarea */
 textarea {
     resize: vertical;
 }
 
 
-/* Estiliza o botão de envio */
+/* Botão */
 button {
-    /* Define o espaço interno */
     padding: 12px 20px;
-
-    /* Mantém a fonte do restante do formulário */
     font: inherit;
-
-    /* Destaca o texto */
     font-weight: bold;
-
-    /* Remove a borda padrão */
     border: 0;
-
-    /* Arredonda as bordas */
-    border-radius: 5px;
-
-    /* Mostra que o elemento pode ser clicado */
+    border-radius: var(--raio);
     cursor: pointer;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
 }
 
-
-/* Adiciona destaque visual ao botão quando o mouse passa sobre ele */
 button:hover {
     text-decoration: underline;
 }
 
 
-/* Estiliza o rodapé */
-footer {
-    /* Define o espaço interno */
-    padding: 30px 20px;
-
-    /* Centraliza o conteúdo */
-    text-align: center;
-
-    /* Define a cor de fundo */
-    background-color: #dcebd8;
-}
-/* Seção de sons da fauna */
+/* Áudio */
 #sons {
     margin-top: 30px;
 }
 
-/* Player de áudio */
 audio {
     width: 100%;
     margin-top: 15px;
+}
+
+
+/* Rodapé */
+footer {
+    padding: 30px 20px;
+    text-align: center;
+    background-color: var(--cor-destaque);
 }

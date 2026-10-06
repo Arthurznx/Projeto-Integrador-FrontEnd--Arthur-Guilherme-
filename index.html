@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<!-- Define o documento como HTML5 e o idioma como português do Brasil -->
-
 <head>
 
-    <!-- Define a codificação de caracteres -->
+    <!-- Configurações básicas -->
     <meta charset="UTF-8">
 
-    <!-- Adapta a página para diferentes tamanhos de tela -->
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <!-- Título exibido na aba do navegador -->
     <title>Animalia - Preservação Ambiental</title>
 
-    <!-- Conecta o HTML ao arquivo de estilos CSS -->
+    <!-- Arquivos CSS -->
+    <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/style.css">
 
 </head>
 
 <body>
 
-    <!-- Cabeçalho principal da página -->
+    <!-- Cabeçalho -->
     <header>
 
-        <!-- Título principal do projeto -->
+        <!-- Ícone do projeto -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+        >
+            <path d="M320 32C327 32 333.7 35.1 338.3 40.5L474.3 200.5C480.4 207.6 481.7 217.6 477.8 226.1C473.9 234.6 465.4 240 456 240L431.1 240L506.3 328.5C512.4 335.6 513.7 345.6 509.8 354.1C505.9 362.6 497.4 368 488 368L449.5 368L538.3 472.5C544.4 479.6 545.7 489.6 541.8 498.1C537.9 506.6 529.4 512 520 512L352 512L352 576C352 593.7 337.7 608 320 608C302.3 608 288 593.7 288 576L288 512L120 512C110.6 512 102.1 506.6 98.2 498.1C94.3 489.6 95.6 479.6 101.7 472.5L190.5 368L152 368C142.6 368 134.1 362.6 130.2 354.1C126.3 345.6 127.6 335.6 133.7 328.5L208.9 240L184 240C174.6 240 166.1 234.6 162.2 226.1C158.3 217.6 159.6 207.6 165.7 200.5L301.7 40.5C306.3 35.1 313 32 320 32z"/>
+        </svg>
+
         <h1>Animalia</h1>
 
-        <!-- Breve descrição do projeto -->
         <p>
             Conhecimento e preservação da fauna da Paraíba.
         </p>
 
-        <!-- Área de navegação principal -->
+        <!-- Navegação -->
         <nav aria-label="Navegação principal">
 
-            <!-- Link para a seção inicial -->
             <a href="#inicio">Início</a>
-
-            <!-- Link para a seção da fauna -->
             <a href="#fauna">Fauna da Paraíba</a>
-
-            <!-- Link para a seção de sons -->
             <a href="#sons">Sons da fauna</a>
-
-            <!-- Link para a seção do álbum -->
             <a href="#album">Meu álbum</a>
-
-            <!-- Link para o formulário de registro -->
             <a href="#registro">Registrar encontro</a>
 
         </nav>
@@ -58,25 +52,18 @@
     </header>
 
 
-    <!--
-        Conteúdo principal da página.
-        Existe apenas UM elemento <main>, diretamente dentro do <body>.
-    -->
     <main>
 
-        <!-- Seção de apresentação do projeto -->
+        <!-- Apresentação -->
         <section id="inicio">
 
-            <!-- Título da seção -->
             <h2>Conheça o Animalia</h2>
 
-            <!-- Explica a finalidade do projeto -->
             <p>
                 O Animalia é um projeto voltado para a preservação
                 ambiental e para a divulgação da fauna da Paraíba.
             </p>
 
-            <!-- Apresenta os tipos de informações disponíveis -->
             <p>
                 A aplicação apresenta informações sobre animais
                 encontrados no estado, incluindo características,
@@ -84,7 +71,6 @@
                 de extinção.
             </p>
 
-            <!-- Explica o objetivo de conscientização do projeto -->
             <p>
                 O objetivo é tornar o conhecimento sobre a fauna
                 paraibana mais acessível e conscientizar a população
@@ -94,77 +80,102 @@
         </section>
 
 
-        <!-- Seção com informações sobre a fauna paraibana -->
+        <!-- Fauna -->
         <section id="fauna">
 
-            <!-- Título da seção -->
             <h2>Fauna da Paraíba</h2>
 
-            <!-- Apresenta a proposta de conhecimento sobre os animais -->
             <p>
                 Conheça melhor os animais que fazem parte da fauna
                 paraibana e descubra a importância de cada espécie
                 para o equilíbrio ambiental.
             </p>
 
-            <!-- Apresenta outras informações que poderão ser consultadas -->
             <p>
                 No Animalia, informações sobre características,
                 habitat, curiosidades e conservação poderão ser
                 consultadas de maneira simples e intuitiva.
             </p>
 
+
+            <!-- Lista de informações -->
+            <ul class="lista-fauna">
+
+                <li>Características dos animais.</li>
+
+                <li>Habitat e distribuição das espécies.</li>
+
+                <li>Curiosidades sobre a fauna paraibana.</li>
+
+                <li>Informações sobre conservação e risco de extinção.</li>
+
+            </ul>
+
+
+            <!-- Tabela de informações -->
+            <table class="tabela-fauna">
+
+                <thead>
+
+                    <tr>
+                        <th scope="col">Animal</th>
+                        <th scope="col">Ambiente</th>
+                        <th scope="col">Informação</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Preguiça</td>
+                        <td>Florestas</td>
+                        <td>Animal de hábitos principalmente arborícolas.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tatu</td>
+                        <td>Caatinga</td>
+                        <td>Mamífero adaptado a diferentes ambientes.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Colhereiro</td>
+                        <td>Manguezais</td>
+                        <td>Ave conhecida pela coloração rosada e bico em formato de colher.</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
         </section>
 
 
-        <!--
-            Seção de mídia adicionada para o conteúdo de áudio relacionado ao tema do Animalia.
-        -->
+        <!-- Sons -->
         <section id="sons">
 
-            <!-- Título da seção de áudio -->
             <h2>Sons da Fauna paraibana</h2>
 
-            <!-- Explicação sobre a finalidade do conteúdo de áudio -->
             <p>
                 Ouça um exemplo de som relacionado à fauna.
                 Esta seção busca aproximar o usuário dos animais
                 apresentados pelo projeto Animalia.
             </p>
 
-            <!--
-                Player de áudio.
-
-                O preload="metadata" foi escolhido porque o áudio
-                não precisa ser carregado completamente antes de
-                o usuário decidir reproduzi-lo. O navegador pode
-                carregar apenas informações básicas do arquivo,
-                como sua duração.
-            -->
+            <!-- Player de áudio -->
             <audio controls preload="metadata">
 
-                <!--
-                    PRIMEIRO FORMATO DE ÁUDIO.
-                    Este é o primeiro formato oferecido ao navegador.
-                -->
                 <source
                     src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.mp3.mpeg"
                     type="audio/mpeg"
                 >
 
-                <!--
-                    SEGUNDO FORMATO DE ÁUDIO.
-                    Este formato funciona como alternativa ao MP3.
-                -->
                 <source
                     src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.ogg"
                     type="audio/ogg"
                 >
 
-                <!--
-                    Mensagem exibida caso o navegador não consiga
-                    reproduzir nenhum dos formatos disponibilizados.
-                -->
                 Seu navegador não suporta a reprodução de áudio.
 
             </audio>
@@ -172,20 +183,17 @@
         </section>
 
 
-        <!-- Seção destinada ao álbum de registros do usuário -->
+        <!-- Álbum -->
         <section id="album">
 
-            <!-- Título da seção -->
             <h2>Meu álbum de encontros</h2>
 
-            <!-- Explica a função do álbum -->
             <p>
                 O álbum permite que os usuários registrem momentos
                 de encontro com animais e construam suas próprias
                 coleções de observações da fauna paraibana.
             </p>
 
-            <!-- Explica o conteúdo dos registros -->
             <p>
                 Cada registro poderá conter informações sobre o
                 animal observado, além de uma fotografia ou relato
@@ -195,38 +203,29 @@
         </section>
 
 
-        <!-- Seção que contém o formulário de registro -->
+        <!-- Registro -->
         <section id="registro">
 
-            <!-- Título da seção -->
             <h2>Registrar encontro com um animal</h2>
 
-            <!-- Orientação para preenchimento do formulário -->
             <p>
                 Preencha as informações abaixo para registrar uma
                 observação no seu álbum.
             </p>
 
-
-            <!-- Formulário para registrar um encontro com um animal -->
             <form action="#" method="post">
 
-                <!-- Agrupa os campos relacionados ao encontro -->
                 <fieldset>
 
-                    <!-- Nome que identifica o grupo de campos -->
                     <legend>Informações do encontro</legend>
 
 
-                    <!-- Campo para informar o nome do animal -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao input através do for/id -->
                         <label for="animal">
                             Nome do animal:
                         </label>
 
-                        <!-- Campo obrigatório para o nome do animal -->
                         <input
                             type="text"
                             id="animal"
@@ -238,15 +237,12 @@
                     </p>
 
 
-                    <!-- Campo para informar a espécie -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao input através do for/id -->
                         <label for="especie">
                             Espécie:
                         </label>
 
-                        <!-- Campo obrigatório para a espécie -->
                         <input
                             type="text"
                             id="especie"
@@ -258,18 +254,12 @@
                     </p>
 
 
-                    <!-- Campo para informar a quantidade observada -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao campo numérico -->
                         <label for="quantidade">
                             Quantidade de animais observados:
                         </label>
 
-                        <!--
-                            Campo numérico com limite mínimo e máximo.
-                            O required impede o envio sem preenchimento.
-                        -->
                         <input
                             type="number"
                             id="quantidade"
@@ -283,15 +273,12 @@
                     </p>
 
 
-                    <!-- Campo para informar a data do encontro -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao campo de data -->
                         <label for="data-encontro">
                             Data do encontro:
                         </label>
 
-                        <!-- Campo semântico específico para datas -->
                         <input
                             type="date"
                             id="data-encontro"
@@ -302,15 +289,12 @@
                     </p>
 
 
-                    <!-- Campo para informar o local da observação -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao campo -->
                         <label for="local">
                             Local do encontro:
                         </label>
 
-                        <!-- Campo obrigatório para localização -->
                         <input
                             type="text"
                             id="local"
@@ -322,15 +306,12 @@
                     </p>
 
 
-                    <!-- Campo para adicionar uma fotografia -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao campo de arquivo -->
                         <label for="foto">
                             Foto do encontro:
                         </label>
 
-                        <!-- Permite selecionar uma imagem do dispositivo -->
                         <input
                             type="file"
                             id="foto"
@@ -341,15 +322,12 @@
                     </p>
 
 
-                    <!-- Campo para escrever o relato do encontro -->
-                    <p>
+                    <p class="campo">
 
-                        <!-- Label associado ao textarea -->
                         <label for="relato">
                             Relato do encontro:
                         </label>
 
-                        <!-- Área destinada a textos maiores -->
                         <textarea
                             id="relato"
                             name="relato"
@@ -360,7 +338,6 @@
                     </p>
 
 
-                    <!-- Botão semântico responsável pelo envio do formulário -->
                     <button type="submit">
                         Adicionar ao álbum
                     </button>
@@ -374,15 +351,13 @@
     </main>
 
 
-    <!-- Rodapé da página -->
+    <!-- Rodapé -->
     <footer>
 
-        <!-- Identificação do projeto -->
         <p>
             Animalia — Projeto Integrador Front-end
         </p>
 
-        <!-- Descrição resumida da finalidade acadêmica -->
         <p>
             Projeto acadêmico voltado à divulgação da fauna
             da Paraíba e à preservação ambiental.
