@@ -1,0 +1,20 @@
+/* reset.CSS do projeto Animalia */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+fieldset {
+    margin: 0;
+    padding: 0;
+}
