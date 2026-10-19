@@ -1,4 +1,3 @@
-
 /* Variáveis do projeto */
 :root {
     --cor-fundo: #f4f7f2;
@@ -297,8 +296,9 @@ textarea {
     resize: vertical;
 }
 
-/* Botão do formulário */
-form button {
+/* Botões do formulário e da análise de avistamentos */
+form button,
+#botao-analisar {
     padding: 12px 20px;
     font-weight: bold;
     border: 0;
@@ -308,8 +308,28 @@ form button {
     color: var(--cor-texto);
 }
 
-form button:hover {
+form button:hover,
+#botao-analisar:hover {
     background-color: var(--cor-hover);
+}
+
+/* Resultado da análise de avistamentos (preenchido pelo JavaScript) */
+.saida-analise {
+    margin-top: var(--espaco-medio);
+    padding: var(--espaco-medio);
+
+    font-family: inherit;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+}
+
+/* Esconde a caixa enquanto não há resultado */
+.saida-analise:empty {
+    display: none;
 }
 
 /* Áudio */
