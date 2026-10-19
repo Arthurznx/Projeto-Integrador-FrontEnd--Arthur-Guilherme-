@@ -1,62 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-
     <!-- Configurações básicas -->
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Animalia - Preservação Ambiental</title>
 
     <!-- Arquivos CSS -->
     <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/style.css">
-
 </head>
 
 <body>
 
-    <!-- Cabeçalho -->
-    <header>
-
-        <!-- Ícone do projeto -->
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 640 640"
-        >
-            <path d="M320 32C327 32 333.7 35.1 338.3 40.5L474.3 200.5C480.4 207.6 481.7 217.6 477.8 226.1C473.9 234.6 465.4 240 456 240L431.1 240L506.3 328.5C512.4 335.6 513.7 345.6 509.8 354.1C505.9 362.6 497.4 368 488 368L449.5 368L538.3 472.5C544.4 479.6 545.7 489.6 541.8 498.1C537.9 506.6 529.4 512 520 512L352 512L352 576C352 593.7 337.7 608 320 608C302.3 608 288 593.7 288 576L288 512L120 512C110.6 512 102.1 506.6 98.2 498.1C94.3 489.6 95.6 479.6 101.7 472.5L190.5 368L152 368C142.6 368 134.1 362.6 130.2 354.1C126.3 345.6 127.6 335.6 133.7 328.5L208.9 240L184 240C174.6 240 166.1 234.6 162.2 226.1C158.3 217.6 159.6 207.6 165.7 200.5L301.7 40.5C306.3 35.1 313 32 320 32z"/>
-        </svg>
-
+    <!-- Cabeçalho do projeto -->
+    <header class="cabecalho">
         <h1>Animalia</h1>
-
-        <p>
-            Conhecimento e preservação da fauna da Paraíba.
-        </p>
-
-        <!-- Navegação -->
-        <nav aria-label="Navegação principal">
-
-            <a href="#inicio">Início</a>
-            <a href="#fauna">Fauna da Paraíba</a>
-            <a href="#sons">Sons da fauna</a>
-            <a href="#album">Meu álbum</a>
-            <a href="#registro">Registrar encontro</a>
-
-        </nav>
-
+        <p>Conhecimento e preservação da fauna da Paraíba.</p>
     </header>
 
+    <!--
+        A navbar sticky cria um contexto de empilhamento.
+        Se o dropdown ficar atrás de outro elemento, verificar no DevTools
+        os contextos de empilhamento antes de alterar o z-index.
+    -->
+    <nav class="navbar" aria-label="Navegação principal">
+
+        <!-- Logo e identificação -->
+        <a class="marca" href="#inicio" aria-label="Animalia - Início">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <path d="M320 32C327 32 333.7 35.1 338.3 40.5L474.3 200.5C480.4 207.6 481.7 217.6 477.8 226.1C473.9 234.6 465.4 240 456 240L431.1 240L506.3 328.5C512.4 335.6 513.7 345.6 509.8 354.1C505.9 362.6 497.4 368 488 368L449.5 368L538.3 472.5C544.4 479.6 545.7 489.6 541.8 498.1C537.9 506.6 529.4 512 520 512L352 512L352 576C352 593.7 337.7 608 320 608C302.3 608 288 593.7 288 576L288 512L120 512C110.6 512 102.1 506.6 98.2 498.1C94.3 489.6 95.6 479.6 101.7 472.5L190.5 368L152 368C142.6 368 134.1 362.6 130.2 354.1C126.3 345.6 127.6 335.6 133.7 328.5L208.9 240L184 240C174.6 240 166.1 234.6 162.2 226.1C158.3 217.6 159.6 207.6 165.7 200.5L301.7 40.5C306.3 35.1 313 32 320 32z"/>
+            </svg>
+            <span>Animalia</span>
+        </a>
+
+        <!-- Botão visual para telas estreitas, sem JavaScript -->
+        <button
+            class="botao-menu"
+            type="button"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Links principais -->
+        <ul class="menu-principal">
+
+            <li>
+                <a class="ativo" href="#inicio" aria-current="location">
+                    Início
+                </a>
+            </li>
+
+            <!-- Item pai relativo para posicionar o dropdown -->
+            <li class="item-dropdown">
+                <a href="#fauna" aria-haspopup="true">
+                    Fauna da Paraíba
+                    <span class="seta" aria-hidden="true">▾</span>
+                </a>
+
+                <ul class="submenu">
+                    <li>
+                        <a href="#fauna">Características e habitats</a>
+                    </li>
+                    <li>
+                        <a href="#conservacao">Conservação das espécies</a>
+                    </li>
+                    <li>
+                        <a href="#sons">Sons da fauna</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#album">Meu álbum</a>
+            </li>
+
+            <li>
+                <a href="#registro">Registrar encontro</a>
+            </li>
+
+        </ul>
+    </nav>
 
     <main>
 
         <!-- Apresentação -->
         <section id="inicio">
-
             <h2>Conheça o Animalia</h2>
 
             <p>
@@ -76,13 +117,10 @@
                 paraibana mais acessível e conscientizar a população
                 sobre a importância da preservação ambiental.
             </p>
-
         </section>
-
 
         <!-- Fauna -->
         <section id="fauna">
-
             <h2>Fauna da Paraíba</h2>
 
             <p>
@@ -97,65 +135,67 @@
                 consultadas de maneira simples e intuitiva.
             </p>
 
-
-            <!-- Lista de informações -->
             <ul class="lista-fauna">
-
                 <li>Características dos animais.</li>
-
                 <li>Habitat e distribuição das espécies.</li>
-
                 <li>Curiosidades sobre a fauna paraibana.</li>
-
                 <li>Informações sobre conservação e risco de extinção.</li>
-
             </ul>
 
-
             <!-- Tabela de informações -->
-            <table class="tabela-fauna">
+            <div class="tabela-responsiva">
+                <table class="tabela-fauna">
+                    <thead>
+                        <tr>
+                            <th scope="col">Animal</th>
+                            <th scope="col">Ambiente</th>
+                            <th scope="col">Informação</th>
+                        </tr>
+                    </thead>
 
-                <thead>
+                    <tbody>
+                        <tr>
+                            <td>Preguiça</td>
+                            <td>Florestas</td>
+                            <td>Animal de hábitos principalmente arborícolas.</td>
+                        </tr>
 
-                    <tr>
-                        <th scope="col">Animal</th>
-                        <th scope="col">Ambiente</th>
-                        <th scope="col">Informação</th>
-                    </tr>
+                        <tr>
+                            <td>Tatu</td>
+                            <td>Caatinga</td>
+                            <td>Mamífero adaptado a diferentes ambientes.</td>
+                        </tr>
 
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>Preguiça</td>
-                        <td>Florestas</td>
-                        <td>Animal de hábitos principalmente arborícolas.</td>
-                    </tr>
-
-                    <tr>
-                        <td>Tatu</td>
-                        <td>Caatinga</td>
-                        <td>Mamífero adaptado a diferentes ambientes.</td>
-                    </tr>
-
-                    <tr>
-                        <td>Colhereiro</td>
-                        <td>Manguezais</td>
-                        <td>Ave conhecida pela coloração rosada e bico em formato de colher.</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+                        <tr>
+                            <td>Colhereiro</td>
+                            <td>Manguezais</td>
+                            <td>Ave conhecida pela coloração rosada e bico em formato de colher.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
+        <!-- Conservação: destino do submenu -->
+        <section id="conservacao">
+            <h2>Conservação das espécies</h2>
+
+            <p>
+                Preservar a fauna significa proteger os habitats,
+                respeitar os animais silvestres e conhecer os riscos
+                que ameaçam a sobrevivência das espécies.
+            </p>
+
+            <p>
+                A conscientização ambiental contribui para atitudes
+                responsáveis e para a conservação da biodiversidade
+                da Paraíba.
+            </p>
+        </section>
 
         <!-- Sons -->
         <section id="sons">
-
-            <h2>Sons da Fauna paraibana</h2>
+            <h2>Sons da fauna paraibana</h2>
 
             <p>
                 Ouça um exemplo de som relacionado à fauna.
@@ -163,9 +203,7 @@
                 apresentados pelo projeto Animalia.
             </p>
 
-            <!-- Player de áudio -->
             <audio controls preload="metadata">
-
                 <source
                     src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.mp3.mpeg"
                     type="audio/mpeg"
@@ -177,15 +215,11 @@
                 >
 
                 Seu navegador não suporta a reprodução de áudio.
-
             </audio>
-
         </section>
-
 
         <!-- Álbum -->
         <section id="album">
-
             <h2>Meu álbum de encontros</h2>
 
             <p>
@@ -199,13 +233,10 @@
                 animal observado, além de uma fotografia ou relato
                 da experiência.
             </p>
-
         </section>
-
 
         <!-- Registro -->
         <section id="registro">
-
             <h2>Registrar encontro com um animal</h2>
 
             <p>
@@ -214,18 +245,11 @@
             </p>
 
             <form action="#" method="post">
-
                 <fieldset>
-
                     <legend>Informações do encontro</legend>
 
-
                     <p class="campo">
-
-                        <label for="animal">
-                            Nome do animal:
-                        </label>
-
+                        <label for="animal">Nome do animal:</label>
                         <input
                             type="text"
                             id="animal"
@@ -233,16 +257,10 @@
                             placeholder="Ex.: Preguiça"
                             required
                         >
-
                     </p>
 
-
                     <p class="campo">
-
-                        <label for="especie">
-                            Espécie:
-                        </label>
-
+                        <label for="especie">Espécie:</label>
                         <input
                             type="text"
                             id="especie"
@@ -250,16 +268,12 @@
                             placeholder="Ex.: Bradypus variegatus"
                             required
                         >
-
                     </p>
 
-
                     <p class="campo">
-
                         <label for="quantidade">
                             Quantidade de animais observados:
                         </label>
-
                         <input
                             type="number"
                             id="quantidade"
@@ -269,32 +283,20 @@
                             value="1"
                             required
                         >
-
                     </p>
 
-
                     <p class="campo">
-
-                        <label for="data-encontro">
-                            Data do encontro:
-                        </label>
-
+                        <label for="data-encontro">Data do encontro:</label>
                         <input
                             type="date"
                             id="data-encontro"
                             name="data-encontro"
                             required
                         >
-
                     </p>
 
-
                     <p class="campo">
-
-                        <label for="local">
-                            Local do encontro:
-                        </label>
-
+                        <label for="local">Local do encontro:</label>
                         <input
                             type="text"
                             id="local"
@@ -302,69 +304,44 @@
                             placeholder="Ex.: Parque, praia ou área rural"
                             required
                         >
-
                     </p>
 
-
                     <p class="campo">
-
-                        <label for="foto">
-                            Foto do encontro:
-                        </label>
-
+                        <label for="foto">Foto do encontro:</label>
                         <input
                             type="file"
                             id="foto"
                             name="foto"
                             accept="image/*"
                         >
-
                     </p>
 
-
                     <p class="campo">
-
-                        <label for="relato">
-                            Relato do encontro:
-                        </label>
-
+                        <label for="relato">Relato do encontro:</label>
                         <textarea
                             id="relato"
                             name="relato"
                             rows="6"
                             placeholder="Conte como foi o encontro com o animal..."
                         ></textarea>
-
                     </p>
 
-
-                    <button type="submit">
-                        Adicionar ao álbum
-                    </button>
-
+                    <button type="submit">Adicionar ao álbum</button>
                 </fieldset>
-
             </form>
-
         </section>
 
     </main>
 
-
     <!-- Rodapé -->
     <footer>
-
-        <p>
-            Animalia — Projeto Integrador Front-end
-        </p>
+        <p>Animalia — Projeto Integrador Front-end</p>
 
         <p>
             Projeto acadêmico voltado à divulgação da fauna
             da Paraíba e à preservação ambiental.
         </p>
-
     </footer>
 
 </body>
-
 </html>

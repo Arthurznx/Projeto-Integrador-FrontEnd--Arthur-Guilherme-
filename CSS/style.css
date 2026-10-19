@@ -1,4 +1,3 @@
-/* style.CSS do Projeto Animalia */
 
 /* Variáveis do projeto */
 :root {
@@ -9,6 +8,7 @@
     --cor-borda: #b8c8b4;
     --cor-campo: #9aa99a;
     --cor-foco: #426b45;
+    --cor-hover: #c4ddbf;
 
     --espaco-pequeno: 0.5rem;
     --espaco-medio: 1rem;
@@ -17,9 +17,8 @@
     --raio: 0.5rem;
 }
 
-/* rem facilita a adaptação da fonte */
+/* Estilos gerais */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
@@ -27,62 +26,170 @@ body {
     color: var(--cor-texto);
 }
 
+a {
+    color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--cor-foco);
+    outline-offset: 3px;
+}
 
 /* Cabeçalho */
-header {
+.cabecalho {
     padding: 30px 20px;
     text-align: center;
     background-color: var(--cor-destaque);
 }
 
-/* Combinador: seleciona o h1 dentro do header */
-header h1 {
-    margin: 0 0 10px;
+.cabecalho h1 {
+    margin-bottom: var(--espaco-pequeno);
     font-size: 2rem;
 }
 
+/* Barra de navegação fixa durante a rolagem */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-/* Ícone SVG */
-svg {
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--espaco-medio);
+
+    padding: 10px 20px;
+    background-color: var(--cor-destaque);
+    border-top: 1px solid var(--cor-borda);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+/* Logo e identificação */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-pequeno);
+
+    color: var(--cor-texto);
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.marca svg {
+    display: block;
+    width: 32px;
+    height: 32px;
     fill: var(--cor-texto);
 }
 
-
-/* Navegação */
-nav {
+/* Menu principal com Flexbox */
+.menu-principal {
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--espaco-medio);
-    margin-top: 20px;
+    gap: var(--espaco-pequeno);
 }
 
-nav a {
+.menu-principal > li {
+    position: relative;
+}
+
+.menu-principal > li > a {
+    display: block;
     padding: var(--espaco-pequeno) var(--espaco-medio);
+
+    color: var(--cor-texto);
+    text-decoration: none;
+    border-radius: var(--raio);
+    transition: background-color 0.2s ease;
+}
+
+/* Estados dos links */
+.menu-principal > li > a:hover,
+.menu-principal > li > a:focus-visible {
+    background-color: var(--cor-hover);
+}
+
+/* Seção atual */
+.menu-principal > li > a.ativo {
+    background-color: var(--cor-foco);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Seta do dropdown */
+.seta {
+    display: inline-block;
+    margin-left: 3px;
+}
+
+/* Submenu */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1001;
+
+    display: none;
+    min-width: 220px;
+    padding: var(--espaco-pequeno);
+
+    background-color: var(--cor-secao);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    box-shadow: 0 4px 10px rgb(31 45 36 / 15%);
+}
+
+/* Exibe o submenu ao passar o mouse ou navegar pelo teclado */
+.item-dropdown:hover > .submenu,
+.item-dropdown:focus-within > .submenu {
+    display: block;
+}
+
+/* Links do submenu */
+.submenu a {
+    display: block;
+    padding: var(--espaco-pequeno) var(--espaco-medio);
+
     color: var(--cor-texto);
     text-decoration: none;
     border-radius: var(--raio);
 }
 
-
-/* Estados dos links */
-nav a:link {
-    color: var(--cor-texto);
+.submenu a:hover,
+.submenu a:focus-visible {
+    background-color: var(--cor-destaque);
 }
 
-nav a:visited {
-    color: #526b58;
+/* Botão hambúrguer: somente estrutura visual */
+.botao-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    width: 44px;
+    height: 44px;
+    padding: 9px;
+
+    background-color: transparent;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    cursor: default;
 }
 
-nav a:hover {
-    text-decoration: underline;
+.botao-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-texto);
+    border-radius: 2px;
 }
-
-nav a:active {
-    color: var(--cor-foco);
-}
-
 
 /* Conteúdo principal */
 main {
@@ -91,37 +198,40 @@ main {
     padding: 40px 0;
 }
 
-
 /* Seções */
 section {
     margin-bottom: 50px;
     padding: 25px;
     background-color: var(--cor-secao);
     border-radius: var(--raio);
+    scroll-margin-top: 100px;
 }
 
 section h2 {
-    margin-top: 0;
+    margin-bottom: var(--espaco-medio);
     font-size: 1.5rem;
 }
 
-
-/* Lista */
+/* Lista da fauna */
 .lista-fauna {
     margin-top: var(--espaco-medio);
     padding-left: var(--espaco-grande);
-    list-style-type: disc;
+    list-style: disc;
 }
 
 .lista-fauna li {
     margin-bottom: var(--espaco-pequeno);
 }
 
-
 /* Tabela */
+.tabela-responsiva {
+    max-width: 100%;
+    margin-top: var(--espaco-medio);
+    overflow-x: auto;
+}
+
 .tabela-fauna {
     width: 100%;
-    margin-top: var(--espaco-medio);
     border-collapse: collapse;
 }
 
@@ -136,13 +246,13 @@ section h2 {
     background-color: var(--cor-destaque);
 }
 
-
 /* Formulário */
 form {
     margin-top: 25px;
 }
 
 fieldset {
+    min-width: 0;
     padding: 25px;
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio);
@@ -167,7 +277,8 @@ input,
 textarea {
     width: 100%;
     padding: 10px;
-    font: inherit;
+    color: var(--cor-texto);
+    background-color: #ffffff;
     border: 1px solid var(--cor-campo);
     border-radius: var(--raio);
 }
@@ -178,15 +289,17 @@ textarea:focus {
     outline-offset: 2px;
 }
 
+input[type="file"] {
+    padding: var(--espaco-pequeno);
+}
+
 textarea {
     resize: vertical;
 }
 
-
-/* Botão */
-button {
+/* Botão do formulário */
+form button {
     padding: 12px 20px;
-    font: inherit;
     font-weight: bold;
     border: 0;
     border-radius: var(--raio);
@@ -195,25 +308,67 @@ button {
     color: var(--cor-texto);
 }
 
-button:hover {
-    text-decoration: underline;
+form button:hover {
+    background-color: var(--cor-hover);
 }
-
 
 /* Áudio */
-#sons {
-    margin-top: 30px;
-}
-
 audio {
+    display: block;
     width: 100%;
     margin-top: 15px;
 }
-
 
 /* Rodapé */
 footer {
     padding: 30px 20px;
     text-align: center;
     background-color: var(--cor-destaque);
+}
+
+/* Ajustes para telas estreitas */
+@media (max-width: 760px) {
+    .navbar {
+        gap: var(--espaco-pequeno);
+    }
+
+    .botao-menu {
+        flex-shrink: 0;
+    }
+
+    .menu-principal {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .menu-principal > li > a {
+        width: 100%;
+    }
+
+    /* O submenu permanece ligado ao item pai */
+    .submenu {
+        position: static;
+        min-width: 0;
+        margin: 0 var(--espaco-pequeno);
+        box-shadow: none;
+    }
+
+    section {
+        padding: 20px;
+        scroll-margin-top: 20px;
+    }
+
+    .tabela-fauna th,
+    .tabela-fauna td {
+        padding: var(--espaco-pequeno);
+    }
+}
+
+/* Reduz transições para quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .menu-principal > li > a {
+        transition: none;
+    }
 }

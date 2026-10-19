@@ -1,11 +1,12 @@
-/* reset.CSS do projeto Animalia */
 
+/* Normalização básica */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
+/* Remove espaçamentos padrão */
 html,
 body,
 h1,
@@ -14,7 +15,42 @@ h3,
 p,
 ul,
 ol,
-fieldset {
+fieldset,
+figure {
     margin: 0;
     padding: 0;
+}
+
+/* Mantém os controles com a fonte do documento */
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove o estilo padrão da lista do menu */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Evita que imagens e mídias ultrapassem o contêiner */
+img,
+svg,
+audio,
+video {
+    max-width: 100%;
+}
+
+/* Facilita a rolagem até as seções */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Evita animações de rolagem para quem prefere movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
