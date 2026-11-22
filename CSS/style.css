@@ -416,7 +416,7 @@ footer {
     font-weight: bold;
 }
 
-.ocasionAL {
+.ocasional {
     color: #856404;
     font-weight: bold;
 }
@@ -432,4 +432,130 @@ footer {
     padding: 15px;
     background-color: var(--cor-destaque);
     border-radius: var(--raio);
+}
+
+/* Lista interativa de espécies */
+
+.lista-especies {
+    margin-top: var(--espaco-medio);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-medio);
+}
+
+.lista-especies .card-avistamento {
+    margin-top: 0;
+}
+
+.lista-especies .card-avistamento h3 {
+    margin-bottom: 8px;
+}
+
+.lista-especies .card-avistamento button {
+    margin-top: var(--espaco-pequeno);
+    margin-right: var(--espaco-pequeno);
+    padding: 10px 16px;
+    border: 0;
+    border-radius: var(--raio);
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lista-especies .card-avistamento button:hover {
+    background-color: var(--cor-hover);
+}
+
+.lista-especies .card-avistamento.marcado {
+    border: 2px solid var(--cor-foco);
+}
+
+.lista-especies .card-avistamento.marcado h3::after {
+    content: " — Marcado";
+    color: var(--cor-foco);
+    font-size: 0.9rem;
+}
+
+.lista-especies .frequente {
+    color: #286b36;
+    font-weight: bold;
+}
+
+.lista-especies .ocasional {
+    color: #856404;
+    font-weight: bold;
+}
+
+.lista-especies .rara {
+    color: #8b3434;
+    font-weight: bold;
+}
+
+#controles-especies {
+    margin-top: var(--espaco-medio);
+}
+
+#controles-especies[hidden] {
+    display: none;
+}
+
+#botao-estado {
+    padding: 12px 20px;
+    font-weight: bold;
+    border: 0;
+    border-radius: var(--raio);
+    cursor: pointer;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+}
+
+#botao-estado:hover {
+    background-color: var(--cor-hover);
+}
+
+#resumo-lista {
+    margin-top: var(--espaco-medio);
+    padding: var(--espaco-medio);
+    background-color: var(--cor-destaque);
+    border-radius: var(--raio);
+}
+
+#busca-especies,
+#filtro-especies {
+    width: 100%;
+    padding: 10px;
+    color: var(--cor-texto);
+    background-color: #ffffff;
+    border: 1px solid var(--cor-campo);
+    border-radius: var(--raio);
+}
+
+#filtro-especies {
+    cursor: pointer;
+}
+
+#form-adicionar-especie {
+    margin-top: var(--espaco-medio);
+}
+
+#form-adicionar-especie button {
+    padding: 12px 20px;
+    font-weight: bold;
+    border: 0;
+    border-radius: var(--raio);
+    cursor: pointer;
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto);
+}
+
+#form-adicionar-especie button:hover {
+    background-color: var(--cor-hover);
+}
+
+.lista-especies button:focus-visible,
+#botao-estado:focus-visible,
+#form-adicionar-especie button:focus-visible {
+    outline: 3px solid var(--cor-foco);
+    outline-offset: 3px;
 }
