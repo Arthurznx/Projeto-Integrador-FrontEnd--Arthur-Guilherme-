@@ -1,45 +1,10 @@
+
 /*
- * ============================================================
- * ANIMALIA - Mini-analisador de avistamentos da fauna paraibana
- * ============================================================
- * TEMA
- *   Registro de avistamentos de animais da fauna da Paraíba
- *   (projeto Animalia, Projeto Integrador Front-end).
- *
- * ENTRADA
- *   1) Um limite de avistamentos (número inteiro de 1 a 50) que define
- *      quando uma espécie é considerada "Frequente".
- *   2) Nomes de espécies digitados pela pessoa para somar +1 avistamento,
- *      repetindo até ela digitar "sair".
- *
- * PROCESSAMENTO
- *   - Valida o limite (Cancelar, vazio, texto e fora da faixa).
- *   - Classifica cada espécie em Frequente / Ocasional / Rara (if / else if / else).
- *   - Escolhe uma orientação de conservação conforme o ambiente (switch).
- *   - Resume o conjunto: total, média, quantidade de frequentes e a mais avistada.
- *
- * SAÍDA
- *   - Tabela no console (console.table), frases com template literal
- *     e o mesmo texto exibido na página (#saida-analise).
- *
- * TESTE DE MESA (limite = 10 e "sair" digitado de primeira, sem novos registros)
- *   Faixas: avistamentos >= 10 -> Frequente | >= 5 -> Ocasional | senão -> Rara
- *
- *   volta | i | espécie    | avist. | frequência | total | frequentes | mais avistada
- *   ------+---+------------+--------+------------+-------+------------+--------------
- *     1   | 0 | Preguiça   |   12   | Frequente  |  12   |     1      | Preguiça (12)
- *     2   | 1 | Tatu       |    7   | Ocasional  |  19   |     1      | Preguiça (12)
- *     3   | 2 | Colhereiro |    3   | Rara       |  22   |     1      | Preguiça (12)
- *
- *   Ao final das 6 voltas: total = 61, frequentes = 3, média = 10.2
- *   e a mais avistada é o Sagui (20). Esses valores devem aparecer no console.
- * ============================================================
+ * ANIMALIA - Mini-analisador de avistamentos
+ * Análise da fauna paraibana.
  */
 
-// ------------------------------------------------------------
-// DADOS: 6 espécies com 4 propriedades cada.
-// Os números de avistamentos são exemplos fictícios do projeto.
-// ------------------------------------------------------------
+// DADOS: seis espécies com quatro propriedades.
 const especies = [
     { nome: "Preguiça", especie: "Bradypus variegatus", ambiente: "floresta", avistamentos: 12 },
     { nome: "Tatu", especie: "Tolypeutes tricinctus", ambiente: "caatinga", avistamentos: 7 },
@@ -53,22 +18,19 @@ const LIMITE_MINIMO = 1;
 const LIMITE_MAXIMO = 50;
 const LIMITE_PADRAO = 10;
 
-// ------------------------------------------------------------
-// ENTRADA: lê o limite com prompt, converte com Number() e valida.
-// Retorna o número válido ou null se a pessoa clicar em Cancelar.
-// ------------------------------------------------------------
-function lerLimite(minimo, maximo) {
+// Lê e valida o limite.
+// Os parâmetros possuem valores padrão.
+function lerLimite(minimo = LIMITE_MINIMO, maximo = LIMITE_MAXIMO) {
     let limite = null;
     let valido = false;
 
     while (!valido) {
         const entrada = prompt(
-            `Quantos avistamentos uma espécie precisa ter para ser "Frequente"?\n` +
+            `Quantos avistamentos tornam uma espécie "Frequente"?\n` +
             `Digite um número inteiro de ${minimo} a ${maximo}.`
         );
 
         if (entrada === null) {
-            // Cancelar: sai da leitura sem valor
             return null;
         }
 
@@ -80,12 +42,12 @@ function lerLimite(minimo, maximo) {
             const numero = Number(texto);
 
             if (Number.isNaN(numero)) {
-                alert("Isso não é um número. Digite apenas dígitos, por exemplo: 10.");
+                alert("Digite um número válido.");
             } else if (!Number.isInteger(numero) || numero < minimo || numero > maximo) {
-                alert(`Valor fora da faixa. Digite um inteiro entre ${minimo} e ${maximo}.`);
+                alert(`Digite um número inteiro entre ${minimo} e ${maximo}.`);
             } else {
                 limite = numero;
-                valido = true; // atualiza a condição de saída do laço
+                valido = true;
             }
         }
     }
@@ -93,176 +55,215 @@ function lerLimite(minimo, maximo) {
     return limite;
 }
 
-// ------------------------------------------------------------
-// CLASSIFICAÇÃO: if / else if / else (3 faixas), da maior para a menor.
-// ------------------------------------------------------------
-function classificarFrequencia(avistamentos, limite) {
-    let frequencia;
-
+// Classifica a frequência dos avistamentos.
+function classificarFrequencia(avistamentos, limite = LIMITE_PADRAO) {
     if (avistamentos >= limite) {
-        frequencia = "Frequente";
+        return "Frequente";
     } else if (avistamentos >= limite / 2) {
-        frequencia = "Ocasional";
+        return "Ocasional";
     } else {
-        frequencia = "Rara";
+        return "Rara";
     }
-
-    return frequencia;
 }
 
-// ------------------------------------------------------------
-// SWITCH: uma orientação para cada ambiente, com break e default.
-// ------------------------------------------------------------
+// Retorna uma orientação de conservação conforme o ambiente.
 function orientacaoPorAmbiente(ambiente) {
-    let orientacao;
-
     switch (ambiente) {
         case "floresta":
-            orientacao = "Preservar a mata e evitar o desmatamento.";
-            break;
+            return "Preservar a mata e evitar o desmatamento.";
         case "caatinga":
-            orientacao = "Proteger a vegetação nativa e combater a caça.";
-            break;
+            return "Proteger a vegetação nativa e combater a caça.";
         case "manguezal":
-            orientacao = "Evitar poluição e aterros nas áreas de mangue.";
-            break;
+            return "Evitar poluição e aterros nas áreas de mangue.";
         case "praia":
-            orientacao = "Não deixar lixo e respeitar a área de desova.";
-            break;
+            return "Não deixar lixo e respeitar a área de desova.";
         default:
-            orientacao = "Ambiente sem orientação cadastrada.";
-            break;
+            return "Ambiente sem orientação cadastrada.";
     }
-
-    return orientacao;
 }
 
-// Remove acentos e maiúsculas para comparar o que a pessoa digita
+// Normaliza o texto para facilitar a comparação dos nomes.
 function normalizarTexto(texto) {
     return String(texto)
         .trim()
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "");
+        .replace(/[\u0300-\u036f]/g, "");
 }
 
-// ------------------------------------------------------------
-// WHILE: pede nomes de espécies até a pessoa digitar "sair".
-// A condição é atualizada no fim de cada volta (sem continue).
-// ------------------------------------------------------------
+// Solicita o nome de uma espécie.
 function lerComando() {
-    const nomes = especies.map((e) => e.nome).join(", ");
+    const nomes = especies.map((animal) => animal.nome).join(", ");
+
     const resposta = prompt(
         `Registrar um novo avistamento (+1).\n` +
         `Espécies: ${nomes}\n` +
-        `Digite o nome da espécie ou "sair" para continuar.`
+        `Digite o nome da espécie ou "sair".`
     );
 
-    // Cancelar (null) é tratado como "sair"
     return normalizarTexto(resposta ?? "sair");
 }
 
+// Registra novos avistamentos.
 function registrarAvistamentos() {
     let comando = lerComando();
 
     while (comando !== "sair") {
-        const encontrada = especies.find((e) => normalizarTexto(e.nome) === comando);
+        const encontrada = especies.find(
+            (animal) => normalizarTexto(animal.nome) === comando
+        );
 
         if (encontrada === undefined) {
-            alert("Espécie não encontrada. Confira o nome ou digite \"sair\".");
+            alert('Espécie não encontrada. Digite um nome válido ou "sair".');
         } else {
-            encontrada.avistamentos += 1;
+            encontrada.avistamentos++;
             alert(`${encontrada.nome}: agora são ${encontrada.avistamentos} avistamentos.`);
         }
 
-        comando = lerComando(); // atualiza a condição de saída
+        comando = lerComando();
     }
 }
 
-// ------------------------------------------------------------
-// RESUMO: for com 4 padrões (contador, acumulador, máximo e média).
-// ------------------------------------------------------------
-function analisar(limite) {
-    let total = 0;                 // acumulador
-    let frequentes = 0;            // contador
-    let maisAvistada = especies[0]; // máximo
-    const relatorio = [];
+// ANALISAR: utiliza map, filter e reduce sem alterar o array original.
+function analisar(limite = LIMITE_PADRAO) {
 
-    // i < length (e não <=) para não passar do último índice
-    for (let i = 0; i < especies.length; i++) {
-        const item = especies[i];
-        const frequencia = classificarFrequencia(item.avistamentos, limite);
-        const orientacao = orientacaoPorAmbiente(item.ambiente);
+    // MAP: cria uma nova lista com os dados classificados.
+    const relatorio = especies.map((animal) => ({
+        nome: animal.nome,
+        especie: animal.especie,
+        ambiente: animal.ambiente,
+        avistamentos: animal.avistamentos,
+        frequencia: classificarFrequencia(animal.avistamentos, limite),
+        orientacao: orientacaoPorAmbiente(animal.ambiente)
+    }));
 
-        total += item.avistamentos;
+    // FILTER: seleciona somente as espécies frequentes.
+    const frequentes = relatorio.filter(
+        (animal) => animal.frequencia === "Frequente"
+    );
 
-        if (frequencia === "Frequente") {
-            frequentes++;
-        }
+    // REDUCE: soma todos os avistamentos.
+    const total = relatorio.reduce(
+        (soma, animal) => soma + animal.avistamentos,
+        0
+    );
 
-        if (item.avistamentos > maisAvistada.avistamentos) {
-            maisAvistada = item;
-        }
+    // REDUCE: encontra a espécie com mais avistamentos.
+    const maisAvistada = relatorio.reduce((maior, animal) => {
+        return animal.avistamentos > maior.avistamentos ? animal : maior;
+    }, relatorio[0]);
 
-        relatorio.push({
-            nome: item.nome,
-            especie: item.especie,
-            ambiente: item.ambiente,
-            avistamentos: item.avistamentos,
-            frequencia: frequencia,
-            orientacao: orientacao
-        });
-    }
+    // Calcula a média.
+    const media = total / relatorio.length;
 
-    const media = total / especies.length; // média
-
-    return { relatorio, total, frequentes, maisAvistada, media };
+    return {
+        relatorio,
+        total,
+        frequentes,
+        maisAvistada,
+        media
+    };
 }
 
-// ------------------------------------------------------------
-// SAÍDA: console.table + frases com template literal.
-// ------------------------------------------------------------
+// EXIBIÇÃO: apresenta os resultados na página.
 function exibirResultado(resultado, limite) {
-    const { relatorio, total, frequentes, maisAvistada, media } = resultado;
 
-    const palavraEspecie = frequentes === 1 ? "espécie" : "espécies";
-    const situacao = frequentes > 0
-        ? `${frequentes} ${palavraEspecie} com avistamentos frequentes`
-        : "nenhuma espécie com avistamentos frequentes";
+    // Seleciona a área de resultado e verifica se ela existe.
+    const saida = document.querySelector("#saida-analise");
 
-    const frases = [
-        `Limite para "Frequente": ${limite} avistamentos.`,
-        `Total de avistamentos: ${total}.`,
-        `Média por espécie: ${media.toFixed(1)}.`,
-        `Situação: ${situacao}.`,
-        `Mais avistada: ${maisAvistada.nome} (${maisAvistada.especie}) com ${maisAvistada.avistamentos} avistamentos.`
-    ];
-
-    console.table(relatorio);
-    frases.forEach((frase) => console.log(frase));
-
-    // Mostra também na página, se a área de saída existir
-    const saida = document.getElementById("saida-analise");
-    if (saida !== null) {
-        saida.textContent = frases.join("\n");
+    if (saida === null) {
+        console.error("Área de resultado não encontrada.");
+        return;
     }
+
+    // Limpa os resultados anteriores.
+    saida.textContent = "";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = "Resultado da análise";
+    saida.appendChild(titulo);
+
+    // Cria um elemento para cada animal.
+    resultado.relatorio.forEach((animal) => {
+        const card = document.createElement("article");
+        card.classList.add("card-avistamento");
+
+        const nome = document.createElement("h4");
+        nome.textContent = animal.nome;
+
+        const dados = document.createElement("p");
+        dados.textContent =
+            `Espécie: ${animal.especie} | ` +
+            `Ambiente: ${animal.ambiente} | ` +
+            `Avistamentos: ${animal.avistamentos}`;
+
+        const frequencia = document.createElement("p");
+        frequencia.textContent = `Classificação: ${animal.frequencia}`;
+        frequencia.classList.add(
+            animal.frequencia.toLowerCase()
+        );
+
+        const orientacao = document.createElement("p");
+        orientacao.textContent = `Conservação: ${animal.orientacao}`;
+
+        card.appendChild(nome);
+        card.appendChild(dados);
+        card.appendChild(frequencia);
+        card.appendChild(orientacao);
+
+        saida.appendChild(card);
+    });
+
+    // REDUCE: gera o resumo geral dos avistamentos.
+    const resumo = resultado.relatorio.reduce((texto, animal) => {
+        return texto +
+            `${animal.nome}: ${animal.avistamentos} avistamentos. `;
+    }, "");
+
+    const resumoElemento = document.createElement("p");
+    resumoElemento.classList.add("resumo-avistamentos");
+    resumoElemento.textContent = resumo;
+
+    saida.appendChild(resumoElemento);
+
+    // Apresenta os dados no Console.
+    console.table(resultado.relatorio);
+
+    console.log(`Limite para Frequente: ${limite}`);
+    console.log(`Total de avistamentos: ${resultado.total}`);
+    console.log(`Média por espécie: ${resultado.media.toFixed(1)}`);
+    console.log(`Espécies frequentes: ${resultado.frequentes.length}`);
+    console.log(
+        `Mais avistada: ${resultado.maisAvistada.nome} ` +
+        `(${resultado.maisAvistada.avistamentos} avistamentos)`
+    );
 }
 
-// ------------------------------------------------------------
-// FLUXO PRINCIPAL
-// ------------------------------------------------------------
+// FLUXO PRINCIPAL.
 function iniciarAnalise() {
-    // ?? usa o limite padrão quando a pessoa cancela (null)
-    const limite = lerLimite(LIMITE_MINIMO, LIMITE_MAXIMO) ?? LIMITE_PADRAO;
+    const limiteInformado = lerLimite();
+
+    const limite = limiteInformado ?? LIMITE_PADRAO;
 
     registrarAvistamentos();
 
     const resultado = analisar(limite);
+
     exibirResultado(resultado, limite);
 }
 
-// Liga o botão da página à análise (o script usa defer, então o DOM já existe)
-const botaoAnalisar = document.getElementById("botao-analisar");
+// Seleciona o botão e verifica se ele existe.
+const botaoAnalisar = document.querySelector("#botao-analisar");
+
 if (botaoAnalisar !== null) {
     botaoAnalisar.addEventListener("click", iniciarAnalise);
 }
+
+// TESTES: funções disponíveis no Console.
+console.log("Teste de classificação:");
+console.log(classificarFrequencia(12, 10));
+console.log(classificarFrequencia(7, 10));
+console.log(classificarFrequencia(3, 10));
+
+console.log("Teste de análise:");
+console.log(analisar(10));
