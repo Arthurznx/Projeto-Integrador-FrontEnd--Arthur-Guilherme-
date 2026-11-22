@@ -392,3 +392,44 @@ footer {
         transition: none;
     }
 }
+
+/* Cartões dos resultados de avistamentos */
+.card-avistamento {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--cor-secao);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+}
+
+.card-avistamento h4 {
+    margin-bottom: 8px;
+}
+
+.card-avistamento p {
+    margin-bottom: 5px;
+}
+
+/* Classificação dos animais */
+.frequente {
+    color: #286b36;
+    font-weight: bold;
+}
+
+.ocasionAL {
+    color: #856404;
+    font-weight: bold;
+}
+
+.rara {
+    color: #8b3434;
+    font-weight: bold;
+}
+
+/* Resumo geral */
+.resumo-avistamentos {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--cor-destaque);
+    border-radius: var(--raio);
+}
