@@ -5,11 +5,13 @@
     <!-- Configurações básicas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Animalia - Conhecimento, exploração e preservação da fauna paraibana com integração ao iNaturalist e registro de encontros com animais.">
 
-    <title>Animalia - Preservação Ambiental</title>
+    <title>Animalia - Exploração da Fauna Paraibana</title>
 
-    <!-- Arquivos CSS -->
+    <!-- Arquivos CSS em minúsculas e modulares -->
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variaveis.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -17,19 +19,17 @@
 
     <!-- Cabeçalho do projeto -->
     <header class="cabecalho">
-        <h1>Animalia</h1>
-        <p>Conhecimento e preservação da fauna da Paraíba.</p>
+        <div class="cabecalho-conteudo">
+            <h1>Animalia</h1>
+            <p>Conhecimento, exploração e preservação da fauna da Paraíba.</p>
+        </div>
     </header>
 
-    <!--
-        A navbar sticky cria um contexto de empilhamento.
-        Se o dropdown ficar atrás de outro elemento, verificar no DevTools
-        os contextos de empilhamento antes de alterar o z-index.
-    -->
+    <!-- Barra de navegação responsiva -->
     <nav class="navbar" aria-label="Navegação principal">
 
         <!-- Logo e identificação -->
-        <a class="marca" href="#inicio" aria-label="Animalia - Início">
+        <a class="marca" href="index.html#inicio" aria-label="Animalia - Página inicial">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 640 640"
@@ -41,11 +41,13 @@
             <span>Animalia</span>
         </a>
 
-        <!-- Botão visual para telas estreitas, sem JavaScript -->
+        <!-- Botão hambúrguer acessível para telas móveis -->
         <button
             class="botao-menu"
+            id="botao-menu"
             type="button"
-            aria-label="Abrir menu de navegação"
+            aria-label="Alternar menu de navegação"
+            aria-controls="menu-principal"
             aria-expanded="false"
         >
             <span></span>
@@ -54,7 +56,7 @@
         </button>
 
         <!-- Links principais -->
-        <ul class="menu-principal">
+        <ul class="menu-principal" id="menu-principal">
 
             <li>
                 <a class="ativo" href="#inicio" aria-current="location">
@@ -62,7 +64,7 @@
                 </a>
             </li>
 
-            <!-- Item pai relativo para posicionar o dropdown -->
+            <!-- Menu dropdown de espécies e biomas -->
             <li class="item-dropdown">
                 <a href="#fauna" aria-haspopup="true">
                     Fauna da Paraíba
@@ -71,27 +73,17 @@
 
                 <ul class="submenu">
                     <li>
-                        <a href="#fauna">Características e habitats</a>
+                        <a href="#fauna">Explorar espécies</a>
                     </li>
                     <li>
-                        <a href="#conservacao">Conservação das espécies</a>
-                    </li>
-                    <li>
-                        <a href="#sons">Sons da fauna</a>
+                        <a href="#conservacao">Conservação e biomas</a>
                     </li>
                 </ul>
             </li>
 
+            <!-- Aba renomeada para Álbum Animal -->
             <li>
-                <a href="#album">Meu álbum</a>
-            </li>
-
-            <li>
-                <a href="#registro">Registrar encontro</a>
-            </li>
-
-            <li>
-                <a href="#analise">Analisar avistamentos</a>
+                <a href="album.html">Álbum Animal</a>
             </li>
 
         </ul>
@@ -99,376 +91,184 @@
 
     <main>
 
-        <!-- Apresentação -->
-        <section id="inicio">
-            <h2>Conheça o Animalia</h2>
+        <!-- Apresentação do Projeto -->
+        <section id="inicio" class="hero-apresentacao">
+            <div>
+                <span class="badge-tag">Biodiversidade da Paraíba</span>
+                <h2>Conheça o Animalia</h2>
 
-            <p>
-                O Animalia é um projeto voltado para a preservação
-                ambiental e para a divulgação da fauna da Paraíba.
-            </p>
+                <p>
+                    O <strong>Animalia</strong> é uma plataforma dedicada à divulgação, exploração e preservação da fauna nativa do estado da Paraíba. Nosso objetivo é conectar as pessoas à rica diversidade biológica da região, desde o semiárido da Caatinga até as matas e o litoral paraibano.
+                </p>
 
-            <p>
-                A aplicação apresenta informações sobre animais
-                encontrados no estado, incluindo características,
-                curiosidades e informações relacionadas ao risco
-                de extinção.
-            </p>
+                <p>
+                    Explore espécies catalogadas com dados autênticos de observações científicas, pesquise animais por nome popular ou científico e utilize o <strong>Álbum Animal</strong> para registrar e documentar seus próprios avistamentos na natureza.
+                </p>
 
-            <p>
-                O objetivo é tornar o conhecimento sobre a fauna
-                paraibana mais acessível e conscientizar a população
-                sobre a importância da preservação ambiental.
-            </p>
-        </section>
-
-        <!-- Fauna -->
-        <section id="fauna">
-            <h2>Fauna da Paraíba</h2>
-
-            <p>
-                Conheça melhor os animais que fazem parte da fauna
-                paraibana e descubra a importância de cada espécie
-                para o equilíbrio ambiental.
-            </p>
-
-            <p>
-                No Animalia, informações sobre características,
-                habitat, curiosidades e conservação poderão ser
-                consultadas de maneira simples e intuitiva.
-            </p>
-
-            <ul class="lista-fauna">
-                <li>Características dos animais.</li>
-                <li>Habitat e distribuição das espécies.</li>
-                <li>Curiosidades sobre a fauna paraibana.</li>
-                <li>Informações sobre conservação e risco de extinção.</li>
-            </ul>
-
-            <!-- Tabela de informações -->
-            <div class="tabela-responsiva">
-                <table class="tabela-fauna">
-                    <thead>
-                        <tr>
-                            <th scope="col">Animal</th>
-                            <th scope="col">Ambiente</th>
-                            <th scope="col">Informação</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Preguiça</td>
-                            <td>Florestas</td>
-                            <td>Animal de hábitos principalmente arborícolas.</td>
-                        </tr>
-
-                        <tr>
-                            <td>Tatu</td>
-                            <td>Caatinga</td>
-                            <td>Mamífero adaptado a diferentes ambientes.</td>
-                        </tr>
-
-                        <tr>
-                            <td>Colhereiro</td>
-                            <td>Manguezais</td>
-                            <td>Ave conhecida pela coloração rosada e bico em formato de colher.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="pilulas-biomas" aria-label="Biomas e ecossistemas representados">
+                    <span class="pilula-bioma">🌵 Caatinga</span>
+                    <span class="pilula-bioma">🌳 Mata Atlântica</span>
+                    <span class="pilula-bioma">🦀 Manguezais</span>
+                    <span class="pilula-bioma">🌊 Litoral e Restingas</span>
+                </div>
             </div>
         </section>
 
-        <!-- Conservação: destino do submenu -->
-        <section id="conservacao">
-            <h2>Conservação das espécies</h2>
+        <!-- Seção de Exploração da Fauna com Barra de Pesquisa e Cards -->
+        <section id="fauna">
+            <h2>Explorar Fauna da Paraíba</h2>
 
             <p>
-                Preservar a fauna significa proteger os habitats,
-                respeitar os animais silvestres e conhecer os riscos
-                que ameaçam a sobrevivência das espécies.
+                Pesquise e conheça espécies observadas em território paraibano. Os dados são integrados à API científica do <strong>iNaturalist</strong> e complementados com informações biológicas detalhadas.
             </p>
 
-            <p>
-                A conscientização ambiental contribui para atitudes
-                responsáveis e para a conservação da biodiversidade
-                da Paraíba.
-            </p>
-        </section>
-
-        <!-- Sons -->
-        <section id="sons">
-            <h2>Sons da fauna paraibana</h2>
-
-            <p>
-                Ouça um exemplo de som relacionado à fauna.
-                Esta seção busca aproximar o usuário dos animais
-                apresentados pelo projeto Animalia.
-            </p>
-
-            <audio controls preload="metadata">
-                <source
-                    src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.mp3.mpeg"
-                    type="audio/mpeg"
-                >
-
-                <source
-                    src="assets/audio/placidplace-nature-soundstropicaljunglebirds-108380.ogg"
-                    type="audio/ogg"
-                >
-
-                Seu navegador não suporta a reprodução de áudio.
-            </audio>
-        </section>
-
-        <!-- Álbum -->
-        <section id="album">
-            <h2>Meu álbum de encontros</h2>
-
-            <p>
-                O álbum permite que os usuários registrem momentos
-                de encontro com animais e construam suas próprias
-                coleções de observações da fauna paraibana.
-            </p>
-
-            <p>
-                Cada registro poderá conter informações sobre o
-                animal observado, além de uma fotografia ou relato
-                da experiência.
-            </p>
-        </section>
-
-        <!-- Registro -->
-        <section id="registro">
-            <h2>Registrar encontro com um animal</h2>
-
-            <p>
-                Preencha as informações abaixo para registrar uma
-                observação no seu álbum.
-            </p>
-
-            <form action="#" method="post">
-                <fieldset>
-                    <legend>Informações do encontro</legend>
-
-                    <p class="campo">
-                        <label for="animal">Nome do animal:</label>
-                        <input
-                            type="text"
-                            id="animal"
-                            name="animal"
-                            placeholder="Ex.: Preguiça"
-                            required
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="especie">Espécie:</label>
-                        <input
-                            type="text"
-                            id="especie"
-                            name="especie"
-                            placeholder="Ex.: Bradypus variegatus"
-                            required
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="quantidade">
-                            Quantidade de animais observados:
-                        </label>
-                        <input
-                            type="number"
-                            id="quantidade"
-                            name="quantidade"
-                            min="1"
-                            max="50"
-                            value="1"
-                            required
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="data-encontro">Data do encontro:</label>
-                        <input
-                            type="date"
-                            id="data-encontro"
-                            name="data-encontro"
-                            required
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="local">Local do encontro:</label>
-                        <input
-                            type="text"
-                            id="local"
-                            name="local"
-                            placeholder="Ex.: Parque, praia ou área rural"
-                            required
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="foto">Foto do encontro:</label>
-                        <input
-                            type="file"
-                            id="foto"
-                            name="foto"
-                            accept="image/*"
-                        >
-                    </p>
-
-                    <p class="campo">
-                        <label for="relato">Relato do encontro:</label>
-                        <textarea
-                            id="relato"
-                            name="relato"
-                            rows="6"
-                            placeholder="Conte como foi o encontro com o animal..."
-                        ></textarea>
-                    </p>
-
-                    <button type="submit">Adicionar ao álbum</button>
-                </fieldset>
-            </form>
-        </section>
-
-        <!-- Análise de avistamentos (JavaScript: js/logica.js) -->
-        
-        <section id="analise">
-            <h2>Analisar avistamentos</h2>
-
-            <p>
-                Gerencie os registros de espécies da fauna paraibana.
-                Pesquise, filtre, marque ou remova espécies e acompanhe
-                o resumo atualizado automaticamente.
-            </p>
-
-            <button
-                type="button"
-                id="botao-estado"
-                aria-expanded="false"
-                aria-controls="controles-especies"
-            >
-                Mostrar controles
-            </button>
-
-            <div id="controles-especies" hidden>
-
-                <div class="campo">
-                    <label for="busca-especies">
-                        Buscar espécie:
-                    </label>
-
+            <!-- Barra de Pesquisa Dinâmica -->
+            <div class="barra-pesquisa-container">
+                <div class="campo-busca-wrapper">
+                    <svg class="icone-busca" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
                     <input
                         type="search"
-                        id="busca-especies"
-                        placeholder="Digite o nome do animal..."
+                        id="campo-busca-animais"
+                        class="input-busca-animais"
+                        placeholder="Buscar por nome popular, científico, classe ou habitat..."
+                        aria-label="Buscar animais da fauna paraibana"
+                        autocomplete="off"
                     >
+                    <button type="button" id="btn-limpar-busca" class="botao-limpar-busca" aria-label="Limpar campo de pesquisa" hidden>
+                        ✕
+                    </button>
                 </div>
 
-                <div class="campo">
-                    <label for="filtro-especies">
-                        Filtrar registros:
-                    </label>
-
-                    <select id="filtro-especies">
-                        <option value="todos">Todos</option>
-                        <option value="marcados">Marcados</option>
-                        <option value="nao-marcados">Não marcados</option>
-                    </select>
+                <!-- Filtros rápidos por classe/grupo taxonômico -->
+                <div class="filtros-categorias" role="group" aria-label="Filtrar por grupo de animal">
+                    <span class="filtro-rotulo">Filtrar por grupo:</span>
+                    <button type="button" class="btn-filtro ativo" data-filtro="todos">Todos</button>
+                    <button type="button" class="btn-filtro" data-filtro="mamiferos">Mamíferos</button>
+                    <button type="button" class="btn-filtro" data-filtro="aves">Aves</button>
+                    <button type="button" class="btn-filtro" data-filtro="repteis">Répteis</button>
+                    <button type="button" class="btn-filtro" data-filtro="anfibios">Anfíbios</button>
                 </div>
 
-                <form id="form-adicionar-especie">
-                    <fieldset>
-                        <legend>Adicionar nova espécie</legend>
-
-                        <div class="campo">
-                            <label for="novo-nome">
-                                Nome do animal:
-                            </label>
-
-                            <input
-                                type="text"
-                                id="novo-nome"
-                                required
-                                placeholder="Ex.: Raposa"
-                            >
-                        </div>
-
-                        <div class="campo">
-                            <label for="novo-especie">
-                                Nome científico:
-                            </label>
-
-                            <input
-                                type="text"
-                                id="novo-especie"
-                                required
-                                placeholder="Ex.: Vulpes vulpes"
-                            >
-                        </div>
-
-                        <div class="campo">
-                            <label for="novo-ambiente">
-                                Ambiente:
-                            </label>
-
-                            <select id="novo-ambiente" required>
-                                <option value="">Selecione</option>
-                                <option value="floresta">Floresta</option>
-                                <option value="caatinga">Caatinga</option>
-                                <option value="manguezal">Manguezal</option>
-                                <option value="praia">Praia</option>
-                            </select>
-                        </div>
-
-                        <div class="campo">
-                            <label for="novo-avistamentos">
-                                Avistamentos:
-                            </label>
-
-                            <input
-                                type="number"
-                                id="novo-avistamentos"
-                                min="0"
-                                max="50"
-                                value="0"
-                                required
-                            >
-                        </div>
-
-                        <button type="submit">
-                            Adicionar espécie
-                        </button>
-                    </fieldset>
-                </form>
+                <!-- Resumo dinâmico e identificação da fonte de dados -->
+                <div class="info-resultados">
+                    <span id="contador-resultados" aria-live="polite">Carregando espécies...</span>
+                    <span class="badge-fonte-inaturalist">
+                        <span>●</span> Dados integrados com iNaturalist (Paraíba, PB)
+                    </span>
+                </div>
             </div>
 
-            <p
-                id="resumo-lista"
-                class="resumo-avistamentos"
-                aria-live="polite"
-            ></p>
+            <!-- Grade Dinâmica de Cards da Fauna -->
+            <div id="container-cards-fauna" class="grid-fauna" aria-live="polite">
+                <!-- Preenchido dinamicamente pelo JavaScript (fauna-explorer.js) -->
+                <div class="estado-carregando">
+                    <div class="spinner" aria-hidden="true"></div>
+                    <p>Consultando dados da fauna paraibana no iNaturalist...</p>
+                </div>
+            </div>
+        </section>
 
-            <ul id="lista-especies" class="lista-especies"></ul>
+        <!-- Seção de Conservação e Biomas -->
+        <section id="conservacao">
+            <h2>Conservação e Ecossistemas da Paraíba</h2>
+
+            <p>
+                A preservação da fauna paraibana depende da proteção integral de seus ecossistemas naturais. Conhecer as características e ameaças de cada bioma é essencial para a conservação das espécies.
+            </p>
+
+            <div class="grid-conservacao">
+                <div class="card-conservacao">
+                    <h3>🌵 Caatinga Paraibana</h3>
+                    <p>
+                        Único bioma exclusivamente brasileiro, abriga espécies notáveis como o Tatu-bola, mocós e diversas serpentes adaptadas à aridez. Evitar o desmatamento e o tráfico de animais silvestres é prioritário.
+                    </p>
+                </div>
+
+                <div class="card-conservacao">
+                    <h3>🌳 Mata Atlântica</h3>
+                    <p>
+                        Presente na faixa litorânea e brejos de altitude da Paraíba. Habitat de primatas como o Sagui-de-tufos-brancos e preguiças. A conservação de fragmentos florestais é crucial para corredores ecológicos.
+                    </p>
+                </div>
+
+                <div class="card-conservacao">
+                    <h3>🦀 Manguezais e Estuários</h3>
+                    <p>
+                        Berçários naturais vitais para aves costeiras como o Guará e o Colhereiro, além de moluscos e crustáceos. O combate à poluição hídrica e à ocupação desordenada preserva este equilíbrio.
+                    </p>
+                </div>
+
+                <div class="card-conservacao">
+                    <h3>🌊 Restingas e Praias</h3>
+                    <p>
+                        Áreas de desova de tartarugas marinhas e descanso de aves migratórias. Manter praias limpas e proteger os ninhos sinalizados são ações diretas de cidadania ambiental.
+                    </p>
+                </div>
+            </div>
         </section>
 
     </main>
 
+    <!-- Modal de Detalhes Científicos e Biológicos do Animal -->
+    <div id="modal-detalhes-animal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
+        <div class="modal-conteudo">
+            <button type="button" class="modal-fechar" id="modal-btn-fechar" aria-label="Fechar detalhes do animal">✕</button>
+
+            <h3 id="modal-titulo">Detalhes da Espécie</h3>
+            <p id="modal-especie" class="card-animal-especie"></p>
+
+            <img id="modal-foto" class="modal-detalhes-foto" src="" alt="" loading="lazy">
+
+            <table class="modal-tabela-info">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nome Popular</th>
+                        <td id="modal-nome-popular"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nome Científico</th>
+                        <td id="modal-nome-cientifico"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Grupo Taxonômico</th>
+                        <td id="modal-grupo"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Habitat / Bioma</th>
+                        <td id="modal-habitat"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Estado de Conservação</th>
+                        <td id="modal-conservacao"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Local de Observação</th>
+                        <td id="modal-local"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="secao-ninjas-extra" id="modal-info-complementar">
+                <h4>Informações Biológicas Complementares</h4>
+                <p id="modal-descricao-complementar"></p>
+                <p id="modal-dieta"></p>
+            </div>
+        </div>
+    </div>
+
     <!-- Rodapé -->
     <footer>
-        <p>Animalia — Projeto Integrador Front-end</p>
-
+        <p><strong>Animalia</strong> — Preservação e Divulgação da Fauna da Paraíba</p>
         <p>
-            Projeto acadêmico voltado à divulgação da fauna
-            da Paraíba e à preservação ambiental.
+            Projeto acadêmico integrador front-end. Dados científicos integrados via iNaturalist API e Animals API.
         </p>
     </footer>
 
-    <!-- JavaScript do projeto (defer: executa após o HTML ser lido) -->
-    <script src="js/logica.js" defer></script>
+    <!-- Script principal em JavaScript moderno (ES Modules) -->
+    <script type="module" src="js/main.js"></script>
 
 </body>
 </html>
