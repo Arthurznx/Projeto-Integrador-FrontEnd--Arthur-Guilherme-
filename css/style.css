@@ -1,0 +1,813 @@
+/**
+ * Estilos Gerais - Animalia (Preservação da Fauna da Paraíba)
+ * Identidade visual inspirada na biodiversidade brasileira e no iNaturalist
+ */
+@import url('variaveis.css');
+
+/* ==========================================================================
+   Estilos Gerais e Reset Complementar
+   ========================================================================== */
+body {
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--cor-destaque-folha);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Cabeçalho
+   ========================================================================== */
+.cabecalho {
+    padding: var(--espaco-extra) var(--espaco-grande);
+    text-align: center;
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-primaria-clara) 100%);
+    color: var(--cor-texto-invertido);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.cabecalho-conteudo {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.cabecalho h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--espaco-pequeno);
+    color: var(--cor-texto-invertido);
+}
+
+.cabecalho p {
+    font-size: 1.125rem;
+    color: var(--cor-destaque-suave);
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Barra de Navegação Sticky
+   ========================================================================== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--espaco-medio);
+    padding: 12px var(--espaco-grande);
+    background-color: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Marca / Logo */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-pequeno);
+    color: var(--cor-primaria);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    transition: transform var(--transicao-rapida);
+}
+
+.marca:hover {
+    transform: translateY(-1px);
+}
+
+.marca svg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    fill: var(--cor-destaque-folha);
+}
+
+/* Menu Principal */
+.menu-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--espaco-pequeno);
+}
+
+.menu-principal > li {
+    position: relative;
+}
+
+.menu-principal > li > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    color: var(--cor-texto-secundario);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--raio);
+    transition: background-color var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.menu-principal > li > a:hover {
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+}
+
+.menu-principal > li > a.ativo {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-invertido);
+}
+
+.seta {
+    font-size: 0.75rem;
+    transition: transform var(--transicao-rapida);
+}
+
+.item-dropdown:hover .seta {
+    transform: rotate(180deg);
+}
+
+/* Submenu Dropdown */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1001;
+    display: none;
+    min-width: 230px;
+    padding: var(--espaco-pequeno);
+    margin-top: 4px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra-hover);
+}
+
+.item-dropdown:hover > .submenu,
+.item-dropdown:focus-within > .submenu {
+    display: block;
+}
+
+.submenu a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--cor-texto);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--raio-pequeno);
+    transition: background-color var(--transicao-rapida);
+}
+
+.submenu a:hover,
+.submenu a:focus-visible {
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+}
+
+/* Botão hambúrguer interativo para telas pequenas */
+.botao-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    cursor: pointer;
+    transition: background-color var(--transicao-rapida);
+}
+
+.botao-menu:hover {
+    background-color: var(--cor-destaque-suave);
+}
+
+.botao-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    border-radius: 2px;
+    transition: transform var(--transicao-normal), opacity var(--transicao-normal);
+}
+
+/* ==========================================================================
+   Conteúdo Principal
+   ========================================================================== */
+main {
+    width: min(100% - 32px, 1140px);
+    margin: 0 auto;
+    padding: var(--espaco-extra) 0;
+}
+
+section {
+    margin-bottom: var(--espaco-extra);
+    padding: var(--espaco-grande);
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: var(--raio-medio);
+    box-shadow: var(--sombra-card);
+    scroll-margin-top: 90px;
+}
+
+section h2 {
+    margin-bottom: var(--espaco-medio);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-pequeno);
+}
+
+/* ==========================================================================
+   Seção Início / Apresentação
+   ========================================================================== */
+.hero-apresentacao {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espaco-medio);
+}
+
+.badge-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--raio-pilula);
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+    margin-bottom: var(--espaco-pequeno);
+}
+
+.pilulas-biomas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-pequeno);
+    margin-top: var(--espaco-medio);
+}
+
+.pilula-bioma {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background-color: var(--cor-terrosa-clara);
+    border: 1px solid var(--cor-terrosa-borda);
+    border-radius: var(--raio-pilula);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cor-terrosa-escura);
+}
+
+/* ==========================================================================
+   Barra de Pesquisa e Filtros de Animais
+   ========================================================================== */
+.barra-pesquisa-container {
+    margin: var(--espaco-medio) 0 var(--espaco-grande);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-medio);
+}
+
+.campo-busca-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.icone-busca {
+    position: absolute;
+    left: 14px;
+    width: 20px;
+    height: 20px;
+    color: var(--cor-texto-suave);
+    pointer-events: none;
+}
+
+.input-busca-animais {
+    width: 100%;
+    padding: 14px 44px 14px 44px;
+    font-size: 1.05rem;
+    border: 2px solid var(--cor-borda);
+    border-radius: var(--raio-medio);
+    background-color: var(--cor-superficie);
+    color: var(--cor-texto);
+    transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+
+.input-busca-animais:focus {
+    border-color: var(--cor-destaque-folha);
+    box-shadow: 0 0 0 4px rgba(116, 172, 0, 0.15);
+    outline: none;
+}
+
+.botao-limpar-busca {
+    position: absolute;
+    right: 12px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    background: transparent;
+    border: 0;
+    color: var(--cor-texto-suave);
+    cursor: pointer;
+    border-radius: var(--raio-pequeno);
+}
+
+.botao-limpar-busca:hover {
+    color: var(--cor-primaria);
+}
+
+/* Filtros por Categoria Taxonômica / Bioma */
+.filtros-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaco-pequeno);
+}
+
+.filtro-rotulo {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cor-texto-secundario);
+    margin-right: 4px;
+}
+
+.btn-filtro {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-secundario);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pilula);
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+}
+
+.btn-filtro:hover {
+    background-color: var(--cor-destaque-suave);
+    border-color: var(--cor-destaque-borda);
+    color: var(--cor-primaria);
+}
+
+.btn-filtro.ativo {
+    background-color: var(--cor-destaque-folha);
+    border-color: var(--cor-destaque-folha);
+    color: var(--cor-texto-invertido);
+}
+
+/* Informações de Status e Contagem */
+.info-resultados {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--espaco-pequeno);
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    padding: 4px 0;
+}
+
+.badge-fonte-inaturalist {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-destaque-folha-hover);
+    border-radius: var(--raio-pequeno);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   Grid de Cards da Fauna Paraibana
+   ========================================================================== */
+.grid-fauna {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--espaco-grande);
+    margin-top: var(--espaco-grande);
+}
+
+.card-animal {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-medio);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: transform var(--transicao-normal), box-shadow var(--transicao-normal), border-color var(--transicao-normal);
+}
+
+.card-animal:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+    border-color: var(--cor-destaque-borda);
+}
+
+.card-animal-foto-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: var(--cor-destaque-suave);
+}
+
+.card-animal-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-animal:hover .card-animal-foto {
+    transform: scale(1.05);
+}
+
+.badge-taxonomia {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 3px 10px;
+    background-color: rgba(22, 50, 31, 0.85);
+    color: var(--cor-texto-invertido);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--raio-pilula);
+    backdrop-filter: blur(4px);
+}
+
+.badge-conservacao {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--raio-pequeno);
+    color: #ffffff;
+}
+
+.badge-conservacao.lc { background-color: var(--cor-status-lc); }
+.badge-conservacao.nt { background-color: var(--cor-status-nt); }
+.badge-conservacao.vu { background-color: var(--cor-status-vu); }
+.badge-conservacao.en { background-color: var(--cor-status-en); }
+.badge-conservacao.cr { background-color: var(--cor-status-cr); }
+
+.card-animal-conteudo {
+    padding: var(--espaco-medio);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-animal-nome {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    margin-bottom: 2px;
+}
+
+.card-animal-especie {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--cor-texto-suave);
+    margin-bottom: var(--espaco-pequeno);
+}
+
+.card-animal-habitat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: var(--cor-terrosa-clara);
+    color: var(--cor-terrosa-escura);
+    border-radius: var(--raio-pequeno);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: var(--espaco-pequeno);
+    align-self: flex-start;
+}
+
+.card-animal-descricao {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+    margin-bottom: var(--espaco-medio);
+    flex-grow: 1;
+}
+
+.card-animal-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-pequeno);
+    padding-top: var(--espaco-pequeno);
+    border-top: 1px solid var(--cor-borda-suave);
+    font-size: 0.8rem;
+}
+
+.card-animal-fonte {
+    color: var(--cor-texto-suave);
+}
+
+.btn-detalhes-animal {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    background-color: var(--cor-destaque-suave);
+    border: 1px solid var(--cor-destaque-borda);
+    border-radius: var(--raio);
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+}
+
+.btn-detalhes-animal:hover {
+    background-color: var(--cor-destaque-folha);
+    color: var(--cor-texto-invertido);
+    border-color: var(--cor-destaque-folha);
+}
+
+/* ==========================================================================
+   Estados de Carregamento, Erro e Vazio
+   ========================================================================== */
+.estado-carregando,
+.estado-erro,
+.estado-vazio {
+    padding: var(--espaco-extra) var(--espaco-grande);
+    text-align: center;
+    grid-column: 1 / -1;
+    border-radius: var(--raio-medio);
+    background-color: var(--cor-fundo);
+    border: 1px dashed var(--cor-borda);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto var(--espaco-medio);
+    border: 4px solid var(--cor-destaque-medio);
+    border-top-color: var(--cor-destaque-folha);
+    border-radius: 50%;
+    animation: rodar 0.8s linear infinite;
+}
+
+@keyframes rodar {
+    to { transform: rotate(360deg); }
+}
+
+.estado-erro {
+    border-color: var(--cor-perigo);
+    background-color: var(--cor-perigo-fundo);
+    color: var(--cor-perigo);
+}
+
+.btn-tentar-novamente {
+    margin-top: var(--espaco-medio);
+    padding: 8px 18px;
+    font-weight: 700;
+    color: var(--cor-texto-invertido);
+    background-color: var(--cor-primaria);
+    border: 0;
+    border-radius: var(--raio);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Seção Conservação
+   ========================================================================== */
+.grid-conservacao {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--espaco-medio);
+    margin-top: var(--espaco-medio);
+}
+
+.card-conservacao {
+    padding: var(--espaco-medio);
+    background-color: var(--cor-fundo);
+    border-left: 4px solid var(--cor-destaque-folha);
+    border-radius: var(--raio-pequeno);
+}
+
+.card-conservacao h3 {
+    font-size: 1.1rem;
+    color: var(--cor-primaria);
+    margin-bottom: var(--espaco-pequeno);
+}
+
+.card-conservacao p {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* ==========================================================================
+   Modal de Detalhes do Animal
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(22, 50, 31, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--espaco-medio);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transicao-normal), visibility var(--transicao-normal);
+}
+
+.modal-overlay.aberto {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-conteudo {
+    width: min(100%, 650px);
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: var(--cor-superficie);
+    border-radius: var(--raio-grande);
+    box-shadow: var(--sombra-modal);
+    position: relative;
+    padding: var(--espaco-grande);
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transicao-rapida);
+}
+
+.modal-fechar:hover {
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+}
+
+.modal-detalhes-foto {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: var(--raio-medio);
+    margin-bottom: var(--espaco-medio);
+}
+
+.modal-tabela-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--espaco-medio) 0;
+    font-size: 0.95rem;
+}
+
+.modal-tabela-info th,
+.modal-tabela-info td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--cor-borda-suave);
+    text-align: left;
+}
+
+.modal-tabela-info th {
+    width: 35%;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    background-color: var(--cor-fundo);
+}
+
+.secao-ninjas-extra {
+    margin-top: var(--espaco-medio);
+    padding: var(--espaco-medio);
+    background-color: var(--cor-destaque-suave);
+    border-radius: var(--raio);
+    border-left: 4px solid var(--cor-destaque-folha);
+}
+
+.secao-ninjas-extra h4 {
+    color: var(--cor-primaria);
+    margin-bottom: var(--espaco-pequeno);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   Rodapé
+   ========================================================================== */
+footer {
+    padding: var(--espaco-extra) var(--espaco-grande);
+    text-align: center;
+    background-color: var(--cor-primaria-escura);
+    color: var(--cor-destaque-suave);
+    margin-top: var(--espaco-extra);
+}
+
+footer p {
+    font-size: 0.95rem;
+    max-width: 700px;
+    margin: 0 auto 6px;
+}
+
+/* ==========================================================================
+   Responsividade
+   ========================================================================== */
+@media (max-width: 768px) {
+    .cabecalho {
+        padding: var(--espaco-grande) var(--espaco-medio);
+    }
+
+    .cabecalho h1 {
+        font-size: 1.75rem;
+    }
+
+    .navbar {
+        padding: 10px var(--espaco-medio);
+    }
+
+    .botao-menu {
+        display: flex;
+    }
+
+    .menu-principal {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding-top: var(--espaco-pequeno);
+    }
+
+    .menu-principal.aberto {
+        display: flex;
+    }
+
+    .menu-principal > li > a {
+        width: 100%;
+        padding: 10px 14px;
+    }
+
+    .submenu {
+        position: static;
+        min-width: 0;
+        margin: 4px var(--espaco-pequeno);
+        box-shadow: none;
+        background-color: var(--cor-destaque-suave);
+    }
+
+    main {
+        width: min(100% - 24px, 1000px);
+        padding: var(--espaco-grande) 0;
+    }
+
+    section {
+        padding: var(--espaco-medio);
+    }
+
+    .grid-fauna {
+        grid-template-columns: 1fr;
+    }
+}

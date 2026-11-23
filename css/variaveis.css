@@ -1,0 +1,87 @@
+/**
+ * Variáveis de Design do Projeto Animalia
+ * Paleta de cores inspirada na biodiversidade paraibana e no iNaturalist
+ */
+:root {
+    /* Cores primárias - Tons de floresta e vegetação nativa */
+    --cor-primaria: #22482e;
+    --cor-primaria-escura: #16321f;
+    --cor-primaria-clara: #2d5d3b;
+    --cor-primaria-rgb: 34, 72, 46;
+
+    /* Destaque verde-folha (estilo iNaturalist) */
+    --cor-destaque-folha: #74ac00;
+    --cor-destaque-folha-hover: #5f8c00;
+    --cor-destaque-folha-rgb: 116, 172, 0;
+
+    /* Tons verdes suaves para fundos de destaque */
+    --cor-destaque-suave: #eaf3e8;
+    --cor-destaque-medio: #d5e7d2;
+    --cor-destaque-borda: #bcd6b8;
+
+    /* Tons terrosos (Caatinga, solos e habitats naturais) */
+    --cor-terrosa: #8c6d48;
+    --cor-terrosa-escura: #664d30;
+    --cor-terrosa-clara: #f4eee7;
+    --cor-terrosa-borda: #dcd0c2;
+
+    /* Cores de superfície e fundo */
+    --cor-fundo: #f6f8f5;
+    --cor-superficie: #ffffff;
+    --cor-superficie-elevada: #ffffff;
+
+    /* Tipografia e contrastes */
+    --cor-texto: #18281b;
+    --cor-texto-secundario: #4b6050;
+    --cor-texto-suave: #6e8273;
+    --cor-texto-invertido: #ffffff;
+
+    /* Bordas e divisores */
+    --cor-borda: #d1dfcf;
+    --cor-borda-suave: #e3ede1;
+    --cor-borda-foco: #22482e;
+    --cor-campo: #97aa97;
+
+    /* Estados semânticos e conservação IUCN */
+    --cor-sucesso: #2e7d32;
+    --cor-sucesso-fundo: #e8f5e9;
+    --cor-atencao: #e65100;
+    --cor-atencao-fundo: #fff3e0;
+    --cor-perigo: #c62828;
+    --cor-perigo-fundo: #ffebee;
+    --cor-info: #1565c0;
+    --cor-info-fundo: #e3f2fd;
+
+    /* Conservação de espécies */
+    --cor-status-lc: #2e7d32; /* Pouco Preocupante */
+    --cor-status-nt: #b26a00; /* Quase Ameaçada */
+    --cor-status-vu: #d84315; /* Vulnerável */
+    --cor-status-en: #c62828; /* Em Perigo */
+    --cor-status-cr: #880e4f; /* Criticamente em Perigo */
+
+    /* Espaçamentos padronizados */
+    --espaco-micro: 0.25rem; /* 4px */
+    --espaco-pequeno: 0.5rem; /* 8px */
+    --espaco-medio: 1rem;    /* 16px */
+    --espaco-grande: 1.5rem;  /* 24px */
+    --espaco-extra: 2.5rem;   /* 40px */
+
+    /* Bordas arredondadas e sombras */
+    --raio-pequeno: 4px;
+    --raio: 8px;
+    --raio-medio: 12px;
+    --raio-grande: 16px;
+    --raio-pilula: 9999px;
+
+    --sombra-card: 0 2px 8px rgba(24, 40, 27, 0.07);
+    --sombra-hover: 0 8px 24px rgba(24, 40, 27, 0.12);
+    --sombra-modal: 0 16px 40px rgba(24, 40, 27, 0.22);
+
+    /* Tipografia */
+    --fonte-principal: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --fonte-secundaria: Georgia, Cambria, "Times New Roman", Times, serif;
+
+    /* Transições */
+    --transicao-rapida: 0.15s ease;
+    --transicao-normal: 0.25s ease;
+}
