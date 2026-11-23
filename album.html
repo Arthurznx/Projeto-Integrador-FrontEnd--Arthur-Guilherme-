@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Configurações básicas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Álbum Animal - Registre e organize seus encontros e observações da fauna da Paraíba.">
+
+    <title>Álbum Animal - Animalia</title>
+
+    <!-- Arquivos CSS em minúsculas e modulares -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variaveis.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/album.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho do projeto -->
+    <header class="cabecalho">
+        <div class="cabecalho-conteudo">
+            <h1>Álbum Animal</h1>
+            <p>Seu diário personalizado de observações e encontros com a fauna paraibana.</p>
+        </div>
+    </header>
+
+    <!-- Barra de navegação responsiva -->
+    <nav class="navbar" aria-label="Navegação principal">
+
+        <!-- Logo e identificação -->
+        <a class="marca" href="index.html#inicio" aria-label="Animalia - Página inicial">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <path d="M320 32C327 32 333.7 35.1 338.3 40.5L474.3 200.5C480.4 207.6 481.7 217.6 477.8 226.1C473.9 234.6 465.4 240 456 240L431.1 240L506.3 328.5C512.4 335.6 513.7 345.6 509.8 354.1C505.9 362.6 497.4 368 488 368L449.5 368L538.3 472.5C544.4 479.6 545.7 489.6 541.8 498.1C537.9 506.6 529.4 512 520 512L352 512L352 576C352 593.7 337.7 608 320 608C302.3 608 288 593.7 288 576L288 512L120 512C110.6 512 102.1 506.6 98.2 498.1C94.3 489.6 95.6 479.6 101.7 472.5L190.5 368L152 368C142.6 368 134.1 362.6 130.2 354.1C126.3 345.6 127.6 335.6 133.7 328.5L208.9 240L184 240C174.6 240 166.1 234.6 162.2 226.1C158.3 217.6 159.6 207.6 165.7 200.5L301.7 40.5C306.3 35.1 313 32 320 32z"/>
+            </svg>
+            <span>Animalia</span>
+        </a>
+
+        <!-- Botão hambúrguer acessível para telas móveis -->
+        <button
+            class="botao-menu"
+            id="botao-menu"
+            type="button"
+            aria-label="Alternar menu de navegação"
+            aria-controls="menu-principal"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Links principais -->
+        <ul class="menu-principal" id="menu-principal">
+
+            <li>
+                <a href="index.html#inicio">
+                    Início
+                </a>
+            </li>
+
+            <!-- Menu dropdown de espécies e biomas -->
+            <li class="item-dropdown">
+                <a href="index.html#fauna" aria-haspopup="true">
+                    Fauna da Paraíba
+                    <span class="seta" aria-hidden="true">▾</span>
+                </a>
+
+                <ul class="submenu">
+                    <li>
+                        <a href="index.html#fauna">Explorar espécies</a>
+                    </li>
+                    <li>
+                        <a href="index.html#conservacao">Conservação e biomas</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Aba ativa -->
+            <li>
+                <a class="ativo" href="album.html" aria-current="page">
+                    Álbum Animal
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- ETAPA 1: Interface de Acesso e Criação de Álbum -->
+        <section id="secao-autenticacao">
+            <div class="aviso-seguranca" role="note">
+                <strong>Nota sobre Arquitetura e Segurança:</strong> Como este projeto é executado inteiramente no navegador (frontend no GitHub Pages), as credenciais não são enviadas a servidores externos e as senhas são protegidas por hash criptográfico SHA-256 via Web Crypto API (nunca armazenadas em texto puro). A arquitetura é totalmente desacoplada e modular, pronta para conexão com backends ou serviços de autenticação futuros.
+            </div>
+
+            <div class="card-autenticacao">
+                <div class="abas-autenticacao" role="tablist">
+                    <button type="button" class="aba-auth ativa" id="tab-criar" role="tab" aria-selected="true" aria-controls="form-criar-album">
+                        Criar Novo Álbum
+                    </button>
+                    <button type="button" class="aba-auth" id="tab-acessar" role="tab" aria-selected="false" aria-controls="form-acessar-album">
+                        Acessar Meu Álbum
+                    </button>
+                </div>
+
+                <div id="feedback-auth" class="mensagem-feedback" role="alert" hidden></div>
+
+                <!-- Formulário de Criação de Álbum -->
+                <form id="form-criar-album" class="form-auth" novalidate>
+                    <div class="grupo-campo">
+                        <label for="campo-nome-usuario">
+                            Seu Nome <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="campo-nome-usuario"
+                            class="input-padrao"
+                            placeholder="Ex.: Maria Silva"
+                            required
+                        >
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="campo-nome-album">
+                            Nome do Álbum <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="campo-nome-album"
+                            class="input-padrao"
+                            placeholder="Ex.: Minhas Observações na Caatinga"
+                            required
+                        >
+                        <span class="campo-dica">Dê um título especial para a sua coleção de encontros.</span>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="campo-email-cadastro">
+                            E-mail <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="campo-email-cadastro"
+                            class="input-padrao"
+                            placeholder="seu-email@exemplo.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="campo-senha-cadastro">
+                            Senha de Acesso <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="password"
+                            id="campo-senha-cadastro"
+                            class="input-padrao"
+                            placeholder="Mínimo 6 caracteres"
+                            required
+                            minlength="6"
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-primario">
+                        🌱 Criar e Entrar no Meu Álbum
+                    </button>
+                </form>
+
+                <!-- Formulário de Acesso a Álbum Existente -->
+                <form id="form-acessar-album" class="form-auth" hidden novalidate>
+                    <div class="grupo-campo">
+                        <label for="campo-email-login">
+                            E-mail Cadastrado <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="campo-email-login"
+                            class="input-padrao"
+                            placeholder="seu-email@exemplo.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="campo-senha-login">
+                            Senha <span class="obrigatorio" title="Campo obrigatório">*</span>
+                        </label>
+                        <input
+                            type="password"
+                            id="campo-senha-login"
+                            class="input-padrao"
+                            placeholder="Sua senha de acesso"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-primario">
+                        🌿 Acessar Meu Álbum
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ETAPA 2: Página Interna do Álbum Animal -->
+        <section id="secao-painel-album" hidden>
+
+            <!-- Cabeçalho do Álbum -->
+            <div class="cabecalho-album">
+                <div class="cabecalho-album-info">
+                    <h2 id="titulo-album-exibicao">Meu Álbum de Encontros</h2>
+                    <span class="badge-dono-album" id="dono-album-exibicao">
+                        👤 Naturalista: Usuário
+                    </span>
+                </div>
+
+                <div class="acoes-album">
+                    <button type="button" class="btn-secundario" id="btn-toggle-formulario">
+                        ➕ Registrar Novo Encontro
+                    </button>
+                    <button type="button" class="btn-perigo" id="btn-sair-album">
+                        🚪 Sair
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resumo de Estatísticas -->
+            <div class="estatisticas-album">
+                <div class="card-estatistica">
+                    <div class="card-estatistica-valor" id="stat-total-encontros">0</div>
+                    <div class="card-estatistica-rotulo">Encontros Registrados</div>
+                </div>
+                <div class="card-estatistica">
+                    <div class="card-estatistica-valor" id="stat-total-animais">0</div>
+                    <div class="card-estatistica-rotulo">Animais Observados</div>
+                </div>
+                <div class="card-estatistica">
+                    <div class="card-estatistica-valor" id="stat-especies-distintas">0</div>
+                    <div class="card-estatistica-rotulo">Espécies Únicas</div>
+                </div>
+            </div>
+
+            <!-- Formulário de Registro / Edição de Encontros -->
+            <div class="card-formulario-encontro" id="container-formulario-encontro" hidden>
+                <h3 id="titulo-form-encontro">Registrar Encontro com a Fauna</h3>
+                <div id="feedback-form-encontro" class="mensagem-feedback" role="alert" hidden></div>
+
+                <form id="form-registro-encontro" novalidate>
+                    <input type="hidden" id="encontro-id-edicao" value="">
+
+                    <div class="grade-campos-dupla">
+                        <div class="grupo-campo">
+                            <label for="encontro-nome">
+                                Nome do Encontro ou Título <span class="obrigatorio">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="encontro-nome"
+                                class="input-padrao"
+                                placeholder="Ex.: Família de Saguis na Mata"
+                                required
+                            >
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="encontro-especie">
+                                Espécie (Nome Científico ou Popular) <span class="obrigatorio">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="encontro-especie"
+                                class="input-padrao"
+                                placeholder="Ex.: Callithrix jacchus"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="grade-campos-dupla">
+                        <div class="grupo-campo">
+                            <label for="encontro-tipo">
+                                Tipo de Animal <span class="obrigatorio">*</span>
+                            </label>
+                            <select id="encontro-tipo" class="select-padrao" required>
+                                <option value="Mamífero">Mamífero</option>
+                                <option value="Ave">Ave</option>
+                                <option value="Réptil">Réptil</option>
+                                <option value="Anfíbio">Anfíbio</option>
+                                <option value="Peixe">Peixe</option>
+                                <option value="Invertebrado">Invertebrado</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="encontro-habitat">
+                                Local / Habitat do Encontro <span class="obrigatorio">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="encontro-habitat"
+                                class="input-padrao"
+                                placeholder="Ex.: Mata do Buraquinho, João Pessoa - PB"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="grade-campos-dupla">
+                        <div class="grupo-campo">
+                            <label for="encontro-data">
+                                Data do Encontro <span class="obrigatorio">*</span>
+                            </label>
+                            <input
+                                type="date"
+                                id="encontro-data"
+                                class="input-padrao"
+                                required
+                            >
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="encontro-quantidade">
+                                Quantidade de Animais Observados <span class="obrigatorio">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                id="encontro-quantidade"
+                                class="input-padrao"
+                                min="1"
+                                max="1000"
+                                value="1"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Seleção e Pré-visualização da Fotografia -->
+                    <div class="grupo-campo">
+                        <label for="encontro-arquivo-foto">
+                            Fotografia do Encontro (Destaque Visual)
+                        </label>
+                        <input
+                            type="file"
+                            id="encontro-arquivo-foto"
+                            class="input-padrao"
+                            accept="image/*"
+                        >
+                        <span class="campo-dica">Selecione uma imagem do seu dispositivo (JPEG, PNG ou WebP).</span>
+
+                        <div id="container-preview" class="container-preview-foto" hidden>
+                            <img id="img-preview" class="preview-imagem" src="" alt="Pré-visualização da fotografia">
+                            <button type="button" id="btn-remover-foto" class="btn-remover-preview" title="Remover fotografia">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="encontro-relato">
+                            Relato ou Descrição da Experiência
+                        </label>
+                        <textarea
+                            id="encontro-relato"
+                            class="textarea-padrao"
+                            rows="4"
+                            placeholder="Descreva detalhes como comportamento do animal, clima, vegetação ao redor e a emoção do avistamento..."
+                        ></textarea>
+                    </div>
+
+                    <div class="acoes-formulario">
+                        <button type="submit" class="btn-primario" id="btn-salvar-encontro">
+                            💾 Salvar Registro no Álbum
+                        </button>
+                        <button type="button" class="btn-secundario" id="btn-cancelar-edicao" hidden>
+                            Cancelar Edição
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Grade de Cards dos Encontros -->
+            <div id="container-encontros-album" class="grade-encontros">
+                <!-- Preenchido dinamicamente pelo JavaScript (album-ui.js) -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p><strong>Animalia</strong> — Preservação e Divulgação da Fauna da Paraíba</p>
+        <p>
+            Módulo Álbum Animal: registros pessoais e conservação ambiental participativa.
+        </p>
+    </footer>
+
+    <!-- Scripts JavaScript específicos do Álbum -->
+    <script type="module" src="js/album-main.js"></script>
+
+</body>
+</html>
