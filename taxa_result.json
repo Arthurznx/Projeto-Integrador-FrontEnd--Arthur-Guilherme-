@@ -1,0 +1,233 @@
+{
+  "Callithrix jacchus": {
+    "taxon_id": 43373,
+    "scientific_name": "Callithrix jacchus",
+    "common_name": "Common Marmoset",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/17876038/large.jpg",
+    "attribution": "(c) Rum Bucolic Ape, some rights reserved (CC BY-ND)"
+  },
+  "Tolypeutes tricinctus": {
+    "taxon_id": 47080,
+    "scientific_name": "Tolypeutes tricinctus",
+    "common_name": "Brazilian Three-banded Armadillo",
+    "photo_url": "https://static.inaturalist.org/photos/683160535/large.jpg",
+    "attribution": "(c) William Lewis, all rights reserved, uploaded by William Lewis"
+  },
+  "Bradypus torquatus": {
+    "taxon_id": 47066,
+    "scientific_name": "Bradypus torquatus",
+    "common_name": "Maned Three-toed Sloth",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/707560611/large.jpg",
+    "attribution": "(c) Conrado Pável de Oliveira, some rights reserved (CC BY), uploaded by Conrado Pável de Oliveira"
+  },
+  "Bradypus variegatus": {
+    "taxon_id": 47067,
+    "scientific_name": "Bradypus variegatus",
+    "common_name": "Brown-throated Three-toed Sloth",
+    "photo_url": "https://static.inaturalist.org/photos/73892662/large.jpg",
+    "attribution": "(c) Siegfried Baesler, all rights reserved, uploaded by Siegfried Baesler"
+  },
+  "Puma concolor": {
+    "taxon_id": 42007,
+    "scientific_name": "Puma concolor",
+    "common_name": "Mountain Lion",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/9834553/large.jpg",
+    "attribution": "(c) pfaucher, some rights reserved (CC BY-NC), uploaded by pfaucher"
+  },
+  "Kerodon rupestris": {
+    "taxon_id": 43808,
+    "scientific_name": "Kerodon rupestris",
+    "common_name": "Rock Cavy",
+    "photo_url": "https://static.inaturalist.org/photos/217443938/large.jpeg",
+    "attribution": "(c) Geraldo M. Pereira, all rights reserved, uploaded by Geraldo M. Pereira"
+  },
+  "Tamandua tetradactyla": {
+    "taxon_id": 47104,
+    "scientific_name": "Tamandua tetradactyla",
+    "common_name": "Southern Tamandua",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/10425251/large.jpg",
+    "attribution": "(c) Instituto Últimos Refúgios, some rights reserved (CC BY-NC), uploaded by Instituto Últimos Refúgios"
+  },
+  "Trichechus manatus": {
+    "taxon_id": 46316,
+    "scientific_name": "Trichechus manatus",
+    "common_name": "West Indian Manatee",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/17174106/large.jpg",
+    "attribution": "(c) U.S. Fish and Wildlife Service Headquarters, some rights reserved (CC BY)"
+  },
+  "Procyon cancrivorus": {
+    "taxon_id": 41667,
+    "scientific_name": "Procyon cancrivorus",
+    "common_name": "Crab-eating Raccoon",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/171203983/large.jpeg",
+    "attribution": "(c) Rodrigo M. Ferronato, some rights reserved (CC BY-NC), uploaded by Rodrigo M. Ferronato"
+  },
+  "Sotalia guianensis": {
+    "taxon_id": 112853,
+    "scientific_name": "Sotalia guianensis",
+    "common_name": "Guyana Dolphin",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/110630841/large.jpeg",
+    "attribution": "(c) Jakob Fahr, some rights reserved (CC BY-NC), uploaded by Jakob Fahr"
+  },
+  "Eudocimus ruber": {
+    "taxon_id": 3750,
+    "scientific_name": "Eudocimus ruber",
+    "common_name": "Scarlet Ibis",
+    "photo_url": "https://static.inaturalist.org/photos/258315551/large.jpg",
+    "attribution": "(c) Luciano Bernardes, all rights reserved, uploaded by Luciano Bernardes"
+  },
+  "Platalea ajaja": {
+    "taxon_id": 62529,
+    "scientific_name": "Platalea ajaja",
+    "common_name": "Roseate Spoonbill",
+    "photo_url": "https://static.inaturalist.org/photos/32776247/large.jpg",
+    "attribution": "(c) drdad, all rights reserved"
+  },
+  "Cariama cristata": {
+    "taxon_id": 14,
+    "scientific_name": "Cariama cristata",
+    "common_name": "Red-legged Seriema",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467050157/large.jpg",
+    "attribution": "(c) Mauricio Silvera, some rights reserved (CC BY-NC), uploaded by Mauricio Silvera"
+  },
+  "Penelope jacucaca": {
+    "taxon_id": 2074,
+    "scientific_name": "Penelope jacucaca",
+    "common_name": "White-browed Guan",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/240589426/large.jpg",
+    "attribution": "no rights reserved, uploaded by NINA WENÓLI"
+  },
+  "Caracara plancus": {
+    "taxon_id": 4715,
+    "scientific_name": "Caracara plancus",
+    "common_name": "Crested Caracara",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/344678876/large.jpeg",
+    "attribution": "(c) Juan Cruzado Cortés, some rights reserved (CC BY), uploaded by Juan Cruzado Cortés"
+  },
+  "Spinus yarrellii": {
+    "taxon_id": 145312,
+    "scientific_name": "Spinus yarrellii",
+    "common_name": "Yellow-faced Siskin",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/141187965/large.jpg",
+    "attribution": "(c) Breno Farias, some rights reserved (CC BY-NC-SA), uploaded by Breno Farias"
+  },
+  "Eupsittula cactorum": {
+    "taxon_id": 367561,
+    "scientific_name": "Eupsittula cactorum",
+    "common_name": "Cactus Parakeet",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/141276572/large.jpg",
+    "attribution": "(c) Breno Farias, some rights reserved (CC BY-NC), uploaded by Breno Farias"
+  },
+  "Buteo platypterus": {
+    "taxon_id": 5227,
+    "scientific_name": "Buteo platypterus",
+    "common_name": "Broad-winged Hawk",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/112152791/large.jpg",
+    "attribution": "(c) Andy Pearce 🕊, some rights reserved (CC BY-NC), uploaded by Andy Pearce 🕊"
+  },
+  "Eretmochelys imbricata": {
+    "taxon_id": 39672,
+    "scientific_name": "Eretmochelys imbricata",
+    "common_name": "Hawksbill Sea Turtle",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/308087101/large.jpeg",
+    "attribution": "(c) malu_md, some rights reserved (CC BY-NC)"
+  },
+  "Caiman latirostris": {
+    "taxon_id": 116518,
+    "scientific_name": "Caiman latirostris",
+    "common_name": "Broad-snouted Caiman",
+    "photo_url": "https://static.inaturalist.org/photos/342308003/large.jpg",
+    "attribution": "(c) Rodrigo Conte, all rights reserved, uploaded by Rodrigo Conte"
+  },
+  "Erythrolamprus viridis": {
+    "taxon_id": 539705,
+    "scientific_name": "Erythrolamprus viridis",
+    "common_name": "Crown Ground Snake",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/668510452/large.jpg",
+    "attribution": "(c) Inacio Oliveira, some rights reserved (CC BY), uploaded by Inacio Oliveira"
+  },
+  "Philodryas nattereri": {
+    "taxon_id": 29104,
+    "scientific_name": "Philodryas nattereri",
+    "common_name": "Paraguay Green Racer",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60377054/large.jpeg",
+    "attribution": "(c) José Vinícius de Medeiros, some rights reserved (CC BY-NC-SA), uploaded by José Vinícius de Medeiros"
+  },
+  "Salvator merianae": {
+    "taxon_id": 318758,
+    "scientific_name": "Salvator merianae",
+    "common_name": "Argentine Black-and-white Tegu",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/55249908/large.jpg",
+    "attribution": "(c) Allan Hopkins, some rights reserved (CC BY-NC-ND)"
+  },
+  "Boa constrictor": {
+    "taxon_id": 32093,
+    "scientific_name": "Boa constrictor",
+    "common_name": "Boa Constrictor",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/588689904/large.jpg",
+    "attribution": "(c) nicolas burnel, some rights reserved (CC BY-NC), uploaded by nicolas burnel"
+  },
+  "Rhinella jimi": {
+    "taxon_id": 67107,
+    "scientific_name": "Rhinella diptycha",
+    "common_name": "Cururu Toad",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5518079/large.jpeg",
+    "attribution": "(c) Luis Felipe Mayorga, some rights reserved (CC BY-NC), uploaded by Luis Felipe Mayorga"
+  },
+  "Boana albomarginata": {
+    "taxon_id": 555074,
+    "scientific_name": "Boana albomarginata",
+    "common_name": "White-edged Tree Frog",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/10387293/large.jpg",
+    "attribution": "(c) Instituto Últimos Refúgios, some rights reserved (CC BY-NC), uploaded by Instituto Últimos Refúgios"
+  },
+  "Ceratophrys joazeirensis": {
+    "taxon_id": 22845,
+    "scientific_name": "Ceratophrys joazeirensis",
+    "common_name": "Caatinga Horned Frog",
+    "photo_url": "https://static.inaturalist.org/photos/115444040/large.jpeg",
+    "attribution": "(c) igorjroberto, all rights reserved"
+  },
+  "Epinephelus itajara": {
+    "taxon_id": 100110,
+    "scientific_name": "Epinephelus itajara",
+    "common_name": "Atlantic Goliath Grouper",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/98481122/large.jpg",
+    "attribution": "(c) victorbach, some rights reserved (CC BY-NC), uploaded by victorbach"
+  },
+  "Stegastes fuscus": {
+    "taxon_id": 49924,
+    "scientific_name": "Stegastes fuscus",
+    "common_name": "Brazilian damselfish",
+    "photo_url": "https://static.inaturalist.org/photos/14309214/large.jpg",
+    "attribution": "(c) Rodrigo Maia-Nogueira, all rights reserved, uploaded by Rodrigo Maia-Nogueira"
+  },
+  "Hoplias malabaricus": {
+    "taxon_id": 172357,
+    "scientific_name": "Hoplias malabaricus",
+    "common_name": "Common Wolffish",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/313660985/large.jpeg",
+    "attribution": "(c) Marie-Aurélia Sabatte, some rights reserved (CC BY-NC), uploaded by Marie-Aurélia Sabatte"
+  },
+  "Ucides cordatus": {
+    "taxon_id": 295362,
+    "scientific_name": "Ucides cordatus",
+    "common_name": "Atlantic Mangrove Ghost Crab",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/227804427/large.jpeg",
+    "attribution": "(c) Horacio Alberto Garcia, some rights reserved (CC BY-NC), uploaded by Horacio Alberto Garcia"
+  },
+  "Melipona subnitida": {
+    "taxon_id": 1038281,
+    "scientific_name": "Melipona subnitida",
+    "common_name": "Abelha-jandaira",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/135477977/large.jpg",
+    "attribution": "(c) José Vinícius de Medeiros, some rights reserved (CC BY-NC-SA), uploaded by José Vinícius de Medeiros"
+  },
+  "Panulirus argus": {
+    "taxon_id": 47299,
+    "scientific_name": "Panulirus argus",
+    "common_name": "Caribbean Spiny Lobster",
+    "photo_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/30862642/large.jpg",
+    "attribution": "(c) terence zahner, some rights reserved (CC BY-NC), uploaded by terence zahner"
+  }
+}
