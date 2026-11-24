@@ -76,7 +76,10 @@
                         <a href="#fauna">Explorar espécies</a>
                     </li>
                     <li>
-                        <a href="#conservacao">Conservação e biomas</a>
+                        <a href="#biomas">Biomas e habitats</a>
+                    </li>
+                    <li>
+                        <a href="#conservacao">Categorias de conservação</a>
                     </li>
                 </ul>
             </li>
@@ -183,42 +186,118 @@
             </div>
         </section>
 
-        <!-- Seção de Conservação e Biomas -->
-        <section id="conservacao">
-            <h2>Conservação e Ecossistemas da Paraíba</h2>
+        <!-- Seção de Biomas e Habitats da Paraíba -->
+        <section id="biomas">
+            <h2>Biomas e Habitats da Paraíba</h2>
 
             <p>
-                A preservação da fauna paraibana depende da proteção integral de seus ecossistemas naturais. Conhecer as características e ameaças de cada bioma é essencial para a conservação das espécies.
+                A biogeografia da Paraíba é marcada por dois domínios macroecológicos oficiais reconhecidos pelo Ministério do Meio Ambiente e IBGE: o <strong>Bioma Caatinga</strong>, que recobre a maior parte do estado no interior semiárido, e o <strong>Bioma Mata Atlântica</strong>, situado na porção leste litorânea e em enclaves serranos úmidos (brejos de altitude). Conhecer a diferença entre <em>bioma</em> (classificação fitogeográfica regional) e <em>habitat</em> (ambiente ecológico específico onde o animal reside) é indispensável para a conservação.
             </p>
 
-            <div class="grid-conservacao">
-                <div class="card-conservacao">
-                    <h3>Caatinga Paraibana</h3>
-                    <p>
-                        Único bioma exclusivamente brasileiro, abriga espécies notáveis como o Tatu-bola, mocós e diversas serpentes adaptadas à aridez. Evitar o desmatamento e o tráfico de animais silvestres é prioritário.
+            <div class="grid-biomas">
+                <article class="card-bioma caatinga">
+                    <div class="card-bioma-cabecalho">
+                        <span class="card-bioma-tipo">Bioma Continental Semiárido</span>
+                        <h3>Caatinga</h3>
+                        <span class="card-bioma-extensao">Ocupa aproximadamente 92% do território paraibano (Sertão, Cariri, Curimataú e Agreste)</span>
+                    </div>
+                    <p class="card-bioma-descricao">
+                        Único bioma exclusivamente brasileiro. Caracteriza-se por clima semiárido, índices pluviométricos baixos e concentrados, vegetação xerófila e caducifólia com espinhos e suculência (cactáceas e bromélias), além de solos rasos e pedregosos. A fauna desenvolveu adaptações evolutivas extremas para estivação, hábitos noturnos e aproveitamento eficiente de água.
                     </p>
-                </div>
+                    <ul class="bioma-topicos">
+                        <li><strong>Vegetação Predominante:</strong> Arbustiva e arbórea espinhosa, juazeiro, umbuzeiro, baraúna, mandacaru e xique-xique.</li>
+                        <li><strong>Relação com a Fauna:</strong> Alto endemismo de répteis, anfíbios anuros adaptados à seca e mamíferos de pequeno e médio porte.</li>
+                        <li><strong>Espécies Emblemáticas:</strong> Tatu-bola-do-nordeste, Mocó, Seriema, Cascavel-de-quatro-ventas e Sapo-cururu-do-nordeste.</li>
+                    </ul>
+                    <div class="bioma-habitats-lista">
+                        <div class="bioma-habitats-titulo">Habitats Específicos Integrados:</div>
+                        <div class="bioma-habitats-chips">
+                            <span class="chip-habitat">Caatinga arbustiva</span>
+                            <span class="chip-habitat">Caatinga arbórea</span>
+                            <span class="chip-habitat">Afloramentos rochosos e lajedos</span>
+                            <span class="chip-habitat">Matas ciliares intermitentes</span>
+                        </div>
+                    </div>
+                </article>
 
-                <div class="card-conservacao">
-                    <h3>Mata Atlântica</h3>
-                    <p>
-                        Presente na faixa litorânea e brejos de altitude da Paraíba. Habitat de primatas como o Sagui-de-tufos-brancos e preguiças. A conservação de fragmentos florestais é crucial para corredores ecológicos.
+                <article class="card-bioma mata-atlantica">
+                    <div class="card-bioma-cabecalho">
+                        <span class="card-bioma-tipo">Bioma Costeiro e Florestal Tropical</span>
+                        <h3>Mata Atlântica</h3>
+                        <span class="card-bioma-extensao">Ocupa a faixa costeira oriental (Litoral e Zona da Mata) e os Brejos de Altitude do interior</span>
+                    </div>
+                    <p class="card-bioma-descricao">
+                        Floresta tropical densa e perenifólia sob influência de massas de ar oceânicas úmidas. Apresenta alta pluviosidade, solo rico em serrapilheira e dossel contínuo com múltiplos estratos de árvores centenárias, epífitas e lianas. Inclui também os ecossistemas associados da zona costeira (manguezais estuarinos e restingas).
                     </p>
-                </div>
+                    <ul class="bioma-topicos">
+                        <li><strong>Vegetação Predominante:</strong> Floresta ombrófila densa, sucupira, pau-pombo, ipês, mangues vermelho/preto e vegetação fixadora de dunas.</li>
+                        <li><strong>Relação com a Fauna:</strong> Berçário crucial de primatas ameaçados, aves florestais e limícolas, tartarugas marinhas e anfíbios arborícolas.</li>
+                        <li><strong>Espécies Emblemáticas:</strong> Sagui-de-tufos-brancos, Preguiça-de-coleira, Guará, Tartaruga-de-pente e Jacaré-de-papo-amarelo.</li>
+                    </ul>
+                    <div class="bioma-habitats-lista">
+                        <div class="bioma-habitats-titulo">Habitats Específicos Integrados:</div>
+                        <div class="bioma-habitats-chips">
+                            <span class="chip-habitat">Florestas úmidas de encosta</span>
+                            <span class="chip-habitat">Brejos de altitude</span>
+                            <span class="chip-habitat">Manguezais estuarinos</span>
+                            <span class="chip-habitat">Restingas e praias arenosas</span>
+                            <span class="chip-habitat">Recifes de arenito e corais</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-                <div class="card-conservacao">
-                    <h3>Manguezais e Estuários</h3>
-                    <p>
-                        Berçários naturais vitais para aves costeiras como o Guará e o Colhereiro, além de moluscos e crustáceos. O combate à poluição hídrica e à ocupação desordenada preserva este equilíbrio.
-                    </p>
-                </div>
+        <!-- Seção de Categorias de Conservação (IUCN / ICMBio) sem siglas na interface -->
+        <section id="conservacao">
+            <h2>Categorias e Estado de Conservação da Fauna</h2>
 
-                <div class="card-conservacao">
-                    <h3>Restingas e Praias</h3>
+            <p>
+                O estado de conservação indica a probabilidade de uma espécie continuar sobrevivendo na natureza ou ser extinta a curto e médio prazo. As avaliações apresentadas neste portal fundamentam-se nas diretrizes científicas da <strong>Lista Vermelha da IUCN</strong> (União Internacional para a Conservação da Natureza) e do <strong>ICMBio</strong> (Instituto Chico Mendes de Conservação da Biodiversidade / Livro Vermelho da Fauna Brasileira Ameaçada de Extinção).
+            </p>
+
+            <div class="grid-categorias-conservacao">
+                <article class="card-categoria-conservacao lc">
+                    <h3>Pouco preocupante</h3>
                     <p>
-                        Áreas de desova de tartarugas marinhas e descanso de aves migratórias. Manter praias limpas e proteger os ninhos sinalizados são ações diretas de cidadania ambiental.
+                        A espécie foi avaliada e apresenta ampla distribuição geográfica e populações abundantes e estáveis na natureza, sem ameaça imediata de extinção documentada.
                     </p>
-                </div>
+                </article>
+
+                <article class="card-categoria-conservacao nt">
+                    <h3>Quase ameaçada</h3>
+                    <p>
+                        A espécie não se enquadra atualmente nas categorias de ameaça, mas está próxima de preencher os critérios de vulnerabilidade caso medidas preventivas de proteção do habitat não sejam mantidas.
+                    </p>
+                </article>
+
+                <article class="card-categoria-conservacao vu">
+                    <h3>Vulnerável</h3>
+                    <p>
+                        Enfrenta um risco elevado de extinção na natureza a médio prazo, decorrente de fatores como redução severa do tamanho populacional ou perda contínua de habitat.
+                    </p>
+                </article>
+
+                <article class="card-categoria-conservacao en">
+                    <h3>Em perigo</h3>
+                    <p>
+                        Apresenta risco muito alto de extinção na natureza em um futuro próximo, com acentuado declínio populacional e fragmentação acentuada de suas áreas de ocorrência.
+                    </p>
+                </article>
+
+                <article class="card-categoria-conservacao cr">
+                    <h3>Criticamente em perigo</h3>
+                    <p>
+                        Classificação de maior urgência e gravidade para espécies silvestres, indicando risco extremamente elevado de desaparecimento imediato na natureza.
+                    </p>
+                </article>
+
+                <article class="card-categoria-conservacao dd">
+                    <h3>Dados insuficientes</h3>
+                    <p>
+                        As informações taxonômicas, biológicas ou ecológicas existentes ainda são inadequadas para determinar diretamente o grau de risco de extinção da espécie.
+                    </p>
+                </article>
             </div>
         </section>
 
@@ -249,16 +328,20 @@
                         <td id="modal-grupo"></td>
                     </tr>
                     <tr>
-                        <th scope="row">Habitat / Bioma</th>
+                        <th scope="row">Bioma na Paraíba</th>
+                        <td id="modal-bioma"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Habitat Natural</th>
                         <td id="modal-habitat"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Local da Observação</th>
+                        <td id="modal-local"></td>
                     </tr>
                     <tr>
                         <th scope="row">Estado de Conservação</th>
                         <td id="modal-conservacao"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Local de Observação</th>
-                        <td id="modal-local"></td>
                     </tr>
                 </tbody>
             </table>
