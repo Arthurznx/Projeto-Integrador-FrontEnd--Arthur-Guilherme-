@@ -1,12 +1,12 @@
 /**
  * Componente: Explorador da Fauna Paraibana
- * Gerencia a busca sem acentos (accent-insensitive), filtros taxonômicos
- * por 6 grupos, renderização com fotografias em alta resolução, atribuição de autores,
- * distinção de observações de campo e paginação progressiva.
+ * Gerencia a barra de pesquisa sem acentos, filtros por grupo taxonômico,
+ * renderização de cards contendo exclusivamente as informações essenciais,
+ * fotos em alta resolução autenticadas e modal de detalhes científicos.
  */
 
 import { buscarEspeciesParaiba } from '../services/inaturalist.js';
-import { buscarDadosComplementares } from '../services/api-ninjas.js';
+import { validarEspecieCompleta, obterChaveCanonica } from '../services/fauna-service.js';
 
 /**
  * Remove acentos e normaliza para busca insensível a acentuação e caixa
@@ -31,7 +31,7 @@ export function inicializarExploradorFauna() {
     const contadorResultados = document.querySelector('#contador-resultados');
     const btnCarregarMais = document.querySelector('#btn-carregar-mais');
 
-    // Elementos do Modal de Detalhes
+    // Elementos do Modal de Detalhes Científicos
     const modal = document.querySelector('#modal-detalhes-animal');
     const modalBtnFechar = document.querySelector('#modal-btn-fechar');
     const modalTitulo = document.querySelector('#modal-titulo');
@@ -46,8 +46,6 @@ export function inicializarExploradorFauna() {
     const modalLocal = document.querySelector('#modal-local');
     const modalDataObservacao = document.querySelector('#modal-data-observacao');
     const modalConservacao = document.querySelector('#modal-conservacao');
-    const modalDescricaoComplementar = document.querySelector('#modal-descricao-complementar');
-    const modalDieta = document.querySelector('#modal-dieta');
 
     if (!containerCards) return;
 
@@ -59,7 +57,7 @@ export function inicializarExploradorFauna() {
     let carregandoMais = false;
 
     /**
-     * Carrega e renderiza os dados da fauna (página 1 ou inicial)
+     * Carrega e renderiza os dados da fauna (página 1 ou filtros novos)
      */
     async function carregarEspecies() {
         paginaAtual = 1;
@@ -76,13 +74,12 @@ export function inicializarExploradorFauna() {
                 pagina: 1
             });
 
-            listaEspeciesAtuais = [...especies];
+            listaEspeciesAtuais = especies.filter(validarEspecieCompleta);
             renderizarCards(listaEspeciesAtuais, false);
             atualizarContador(listaEspeciesAtuais.length);
 
             // Gerenciar visibilidade do botão de carregar mais
             if (btnCarregarMais) {
-                // Se houver registros e não for uma busca com termo específico restrito
                 btnCarregarMais.hidden = listaEspeciesAtuais.length < 8;
                 btnCarregarMais.innerHTML = `
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icone-btn" aria-hidden="true">
@@ -99,7 +96,7 @@ export function inicializarExploradorFauna() {
     }
 
     /**
-     * Carrega mais espécies da próxima página (paginação progressiva)
+     * Carrega mais espécies da próxima página mantendo a desduplicação
      */
     async function carregarMaisEspecies() {
         if (carregandoMais) return;
@@ -119,9 +116,19 @@ export function inicializarExploradorFauna() {
             });
 
             if (novasEspecies && novasEspecies.length > 0) {
-                // Filtrar duplicidades existentes por espécie
-                const idsExistentes = new Set(listaEspeciesAtuais.map((item) => item.especie.toLowerCase()));
-                const especiesFiltradas = novasEspecies.filter((item) => !idsExistentes.has(item.especie.toLowerCase()));
+                // Desduplicação estrita por chave canônica e validação integral de completude
+                const chavesExistentes = new Set(
+                    listaEspeciesAtuais.map(obterChaveCanonica)
+                );
+
+                const especiesFiltradas = novasEspecies
+                    .filter(validarEspecieCompleta)
+                    .filter(item => {
+                        const chave = obterChaveCanonica(item);
+                        if (!chave || chavesExistentes.has(chave)) return false;
+                        chavesExistentes.add(chave);
+                        return true;
+                    });
 
                 if (especiesFiltradas.length > 0) {
                     listaEspeciesAtuais = [...listaEspeciesAtuais, ...especiesFiltradas];
@@ -161,7 +168,7 @@ export function inicializarExploradorFauna() {
     }
 
     /**
-     * Renderiza os cards das espécies
+     * Renderiza os cards das espécies contendo estritamente as informações essenciais
      * @param {Array} especies - Lista de espécies
      * @param {boolean} concatenar - Se verdadeiro, adiciona aos cards existentes
      */
@@ -180,17 +187,17 @@ export function inicializarExploradorFauna() {
             card.className = 'card-animal';
             card.dataset.id = animal.id_fauna;
 
-            const fotoUrl = animal.foto_url || 'assets/imagens/placeholder-animal.jpg';
+            const fotoUrl = animal.foto_url || 'assets/imagens/placeholder-animal.svg';
             const statusClass = animal.codigo_status || 'lc';
-            const dataObs = animal.data_observacao ? animal.data_observacao : 'Registro confirmado';
+            const dataObs = animal.data_observacao || 'Registro confirmado';
             const municipioObs = animal.municipio || 'Paraíba';
             const autorFoto = animal.foto_atribuicao ? animal.foto_atribuicao.split(',')[0] : 'Colaborador iNaturalist';
 
             card.innerHTML = `
                 <div class="card-animal-foto-wrapper">
-                    <img class="card-animal-foto" src="${fotoUrl}" alt="Fotografia de ${animal.nome}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1535083783855-76ae62b2914e?auto=format&fit=crop&w=800&q=80'">
+                    <img class="card-animal-foto" src="${fotoUrl}" alt="Fotografia de ${animal.nome}" loading="lazy" onerror="this.src='assets/imagens/placeholder-animal.svg'">
                     <span class="badge-taxonomia">${animal.tipo_animal}</span>
-                    <span class="badge-conservacao ${statusClass}" title="Status de Conservação">${animal.risco_preservacao}</span>
+                    <span class="badge-conservacao ${statusClass}" title="Status de Conservação Oficial">${animal.risco_preservacao}</span>
                 </div>
                 <div class="card-animal-conteudo">
                     <h3 class="card-animal-nome">${animal.nome}</h3>
@@ -201,12 +208,16 @@ export function inicializarExploradorFauna() {
                         <span>${municipioObs}, PB • ${dataObs}</span>
                     </div>
 
-                    <span class="card-animal-habitat">
-                        <svg class="icone-metadado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        ${animal.habitat}
-                    </span>
-
-                    <p class="card-animal-descricao">${animal.descricao}</p>
+                    <div class="card-animal-metadados-ecologicos">
+                        <span class="tag-bioma-card" title="Bioma oficial de ocorrência na Paraíba">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icone-ecologico" aria-hidden="true"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                            ${animal.bioma}
+                        </span>
+                        <span class="card-animal-habitat" title="Habitat ecológico característico">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icone-ecologico" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            ${animal.habitat}
+                        </span>
+                    </div>
 
                     <div class="card-animal-rodape">
                         <span class="card-animal-fonte" title="${animal.foto_atribuicao || animal.fonte}">${autorFoto}</span>
@@ -306,20 +317,20 @@ export function inicializarExploradorFauna() {
     }
 
     /**
-     * Abre e preenche o modal de detalhes científicos e biológicos
+     * Abre e preenche o modal de detalhes científicos essenciais
      */
-    async function abrirModalDetalhes(animal) {
+    function abrirModalDetalhes(animal) {
         if (!modal) return;
 
         modalTitulo.textContent = animal.nome;
         modalEspecie.textContent = animal.especie;
-        modalFoto.src = animal.foto_url || 'assets/imagens/placeholder-animal.jpg';
+        modalFoto.src = animal.foto_url || 'assets/imagens/placeholder-animal.svg';
         modalFoto.alt = `Fotografia em alta resolução de ${animal.nome}`;
 
         if (modalFotoCredito) {
             modalFotoCredito.textContent = animal.foto_atribuicao
                 ? `Fotografia: ${animal.foto_atribuicao}`
-                : 'Fotografia: Colaborador voluntário iNaturalist (licença Creative Commons)';
+                : 'Fotografia em processo de catalogação científica';
         }
 
         modalNomePopular.textContent = animal.nome;
@@ -327,39 +338,21 @@ export function inicializarExploradorFauna() {
         modalGrupo.textContent = animal.tipo_animal;
 
         if (modalBioma) {
-            modalBioma.textContent = animal.bioma_principal || 'Caatinga / Mata Atlântica';
+            modalBioma.textContent = animal.bioma || 'Informação não disponível';
         }
 
-        modalHabitat.textContent = animal.habitat;
-        modalLocal.textContent = animal.local_observacao || (animal.municipio ? `${animal.municipio}, Paraíba, Brasil` : 'Paraíba, Brasil');
+        modalHabitat.textContent = animal.habitat || 'Informação não disponível';
+        modalLocal.textContent = animal.municipio ? `${animal.municipio}, Paraíba, Brasil` : (animal.local_observacao || 'Paraíba, Brasil');
 
         if (modalDataObservacao) {
-            modalDataObservacao.textContent = animal.data_observacao || 'Registro de campo recente';
+            modalDataObservacao.textContent = animal.data_observacao || 'Registro verificado';
         }
 
         modalConservacao.textContent = animal.risco_preservacao;
 
-        modalDescricaoComplementar.textContent = 'Consultando informações biológicas complementares...';
-        modalDieta.textContent = '';
-
         modal.classList.add('aberto');
         modal.setAttribute('aria-hidden', 'false');
         if (modalBtnFechar) modalBtnFechar.focus();
-
-        // Buscar complementos da Animals API Ninjas / Base biológica curada
-        try {
-            const complemento = await buscarDadosComplementares(animal.especie, animal.nome);
-            if (complemento && complemento.dados) {
-                modalDescricaoComplementar.textContent = complemento.dados.caracteristicas_principais || animal.descricao;
-                modalDieta.textContent = `Dieta alimentar: ${complemento.dados.dieta || 'Alimentação nativa adaptada aos ecossistemas da Paraíba.'}`;
-            } else {
-                modalDescricaoComplementar.textContent = animal.descricao;
-                modalDieta.textContent = '';
-            }
-        } catch {
-            modalDescricaoComplementar.textContent = animal.descricao;
-            modalDieta.textContent = '';
-        }
     }
 
     /**
