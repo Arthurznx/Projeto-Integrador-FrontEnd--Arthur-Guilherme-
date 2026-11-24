@@ -512,6 +512,10 @@ section h2 {
 .badge-conservacao.vu { background-color: var(--cor-status-vu); }
 .badge-conservacao.en { background-color: var(--cor-status-en); }
 .badge-conservacao.cr { background-color: var(--cor-status-cr); }
+.badge-conservacao.dd { background-color: var(--cor-texto-suave); }
+.badge-conservacao.ne { background-color: var(--cor-borda-escura); }
+.badge-conservacao.ew { background-color: #3e2723; }
+.badge-conservacao.ex { background-color: #212121; }
 
 .card-animal-conteudo {
     padding: var(--espaco-medio);
@@ -631,6 +635,59 @@ section h2 {
     border: 0;
     border-radius: var(--raio);
     cursor: pointer;
+}
+
+.acoes-catalogo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--espaco-grande);
+    padding: var(--espaco-medio) 0;
+}
+
+.btn-carregar-fauna {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: var(--raio);
+    transition: all var(--transicao-rapida);
+}
+
+.modal-foto-bloco {
+    margin-bottom: var(--espaco-medio);
+}
+
+.modal-foto-credito {
+    font-size: 0.78rem;
+    color: var(--cor-texto-suave);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.card-animal-campo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+    margin-bottom: 6px;
+}
+
+.card-animal-campo svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.icone-fechar,
+.icone-acao {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2.5;
 }
 
 /* ==========================================================================
