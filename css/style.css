@@ -32,6 +32,36 @@ textarea:focus-visible {
 }
 
 /* ==========================================================================
+   Ícones e Utilitários SVG Profissionais
+   ========================================================================== */
+.icone-svg {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    flex-shrink: 0;
+}
+
+.icone-bioma,
+.icone-metadado,
+.icone-btn,
+.icone-info {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -2px;
+    flex-shrink: 0;
+}
+
+.icone-btn {
+    margin-right: 6px;
+}
+
+.icone-metadado {
+    margin-right: 5px;
+}
+
+/* ==========================================================================
    Cabeçalho
    ========================================================================== */
 .cabecalho {
