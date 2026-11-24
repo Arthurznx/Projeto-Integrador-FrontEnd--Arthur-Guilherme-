@@ -6,6 +6,7 @@
  */
 
 import { buscarEspeciesParaiba } from '../services/inaturalist.js';
+import { validarEspecieCompleta, obterChaveCanonica } from '../services/fauna-service.js';
 
 /**
  * Remove acentos e normaliza para busca insensível a acentuação e caixa
@@ -73,7 +74,7 @@ export function inicializarExploradorFauna() {
                 pagina: 1
             });
 
-            listaEspeciesAtuais = [...especies];
+            listaEspeciesAtuais = especies.filter(validarEspecieCompleta);
             renderizarCards(listaEspeciesAtuais, false);
             atualizarContador(listaEspeciesAtuais.length);
 
@@ -115,17 +116,19 @@ export function inicializarExploradorFauna() {
             });
 
             if (novasEspecies && novasEspecies.length > 0) {
-                // Desduplicação estrita por identificador taxonômico e nome científico canônico
+                // Desduplicação estrita por chave canônica e validação integral de completude
                 const chavesExistentes = new Set(
-                    listaEspeciesAtuais.map(item => item.taxon_id ? `taxon-${item.taxon_id}` : `sp-${normalizarTexto(item.especie)}`)
+                    listaEspeciesAtuais.map(obterChaveCanonica)
                 );
 
-                const especiesFiltradas = novasEspecies.filter(item => {
-                    const chave = item.taxon_id ? `taxon-${item.taxon_id}` : `sp-${normalizarTexto(item.especie)}`;
-                    if (chavesExistentes.has(chave)) return false;
-                    chavesExistentes.add(chave);
-                    return true;
-                });
+                const especiesFiltradas = novasEspecies
+                    .filter(validarEspecieCompleta)
+                    .filter(item => {
+                        const chave = obterChaveCanonica(item);
+                        if (!chave || chavesExistentes.has(chave)) return false;
+                        chavesExistentes.add(chave);
+                        return true;
+                    });
 
                 if (especiesFiltradas.length > 0) {
                     listaEspeciesAtuais = [...listaEspeciesAtuais, ...especiesFiltradas];

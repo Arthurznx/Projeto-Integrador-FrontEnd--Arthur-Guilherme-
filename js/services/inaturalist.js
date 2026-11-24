@@ -7,7 +7,14 @@
  * atribuição autoral, validação taxonômica e desduplicação rigorosa.
  */
 
-import { normalizarEntidadeFauna, formatarStatusConservacao, FAUNA_PARAIBA_PADRAO, DICIONARIO_TAXONOMICO_BR } from './fauna-service.js';
+import {
+    normalizarEntidadeFauna,
+    formatarStatusConservacao,
+    FAUNA_PARAIBA_PADRAO,
+    DICIONARIO_TAXONOMICO_BR,
+    validarEspecieCompleta,
+    obterChaveCanonica
+} from './fauna-service.js';
 
 const INAT_API_BASE = 'https://api.inaturalist.org/v1';
 const ID_LUGAR_PARAIBA = 12593; // Identificador oficial do Estado da Paraíba no iNaturalist
@@ -23,22 +30,6 @@ const cacheRequisicoes = new Map();
 function normalizarTexto(str) {
     if (!str) return '';
     return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-}
-
-/**
- * Gera chave canônica única para uma espécie considerando taxon_id e sinônimos
- * @param {Object} animal
- * @returns {string}
- */
-function obterChaveCanonica(animal) {
-    if (animal.taxon_id) {
-        return `taxon-${animal.taxon_id}`;
-    }
-    const sp = (animal.especie || '').trim();
-    if (sp && DICIONARIO_TAXONOMICO_BR[sp]) {
-        return `taxon-${DICIONARIO_TAXONOMICO_BR[sp].taxon_id}`;
-    }
-    return `sp-${normalizarTexto(sp)}`;
 }
 
 /**
@@ -67,7 +58,7 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', pagin
     const iconicTaxa = mapaTaxons[grupo] || mapaTaxons.todos;
 
     // Se estiver na página 1 e sem busca por termo, o catálogo base certificado é a fundação
-    let catalogoBase = [...FAUNA_PARAIBA_PADRAO];
+    let catalogoBase = FAUNA_PARAIBA_PADRAO.filter(validarEspecieCompleta);
 
     if (grupo !== 'todos') {
         const grupoMapeado = {
@@ -200,10 +191,16 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', pagin
                     fonte: 'iNaturalist API'
                 });
 
-                // Chave de desduplicação
+                // Validação estrita dos 6 critérios essenciais:
+                // Descarta sumariamente qualquer registro incompleto ou inconsistente retornado pela API
+                if (!validarEspecieCompleta(animalNormalizado)) {
+                    continue;
+                }
+
+                // Chave de desduplicação canônica por taxon_id ou sinônimo científico oficial
                 const chave = obterChaveCanonica(animalNormalizado);
                 if (chavesRegistradas.has(chave)) {
-                    continue; // Descarta repetições de espécies já presentes
+                    continue; // Descarta repetições de espécies já presentes ou sinônimos
                 }
                 chavesRegistradas.add(chave);
 
@@ -225,8 +222,8 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', pagin
             }
         }
 
-        // Se for página 1, combinar o catálogo base com as novas espécies únicas
-        const resultadoFinal = pagina === 1 ? [...catalogoBase, ...listaNovas] : listaNovas;
+        // Se for página 1, combinar o catálogo base com as novas espécies únicas, garantindo 100% de completude
+        const resultadoFinal = (pagina === 1 ? [...catalogoBase, ...listaNovas] : listaNovas).filter(validarEspecieCompleta);
         cacheRequisicoes.set(chaveCache, resultadoFinal);
         return resultadoFinal;
 
