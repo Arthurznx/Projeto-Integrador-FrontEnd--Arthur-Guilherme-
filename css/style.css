@@ -634,31 +634,168 @@ section h2 {
 }
 
 /* ==========================================================================
-   Seção Conservação
+   Seções Biomas e Conservação Científica
    ========================================================================== */
-.grid-conservacao {
+.grid-biomas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--espaco-grande);
+    margin-top: var(--espaco-grande);
+}
+
+.card-bioma {
+    display: flex;
+    flex-direction: column;
+    padding: var(--espaco-grande);
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-medio);
+    box-shadow: var(--sombra-card);
+    transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+
+.card-bioma:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-hover);
+}
+
+.card-bioma.caatinga {
+    border-top: 5px solid var(--cor-terrosa);
+}
+
+.card-bioma.mata-atlantica {
+    border-top: 5px solid var(--cor-primaria);
+}
+
+.card-bioma-cabecalho {
+    margin-bottom: var(--espaco-medio);
+}
+
+.card-bioma-tipo {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+    margin-bottom: 6px;
+}
+
+.card-bioma h3 {
+    font-size: 1.4rem;
+    color: var(--cor-primaria);
+    margin-bottom: 4px;
+}
+
+.card-bioma-extensao {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    font-weight: 600;
+}
+
+.card-bioma-descricao {
+    font-size: 0.95rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+    margin-bottom: var(--espaco-medio);
+}
+
+.bioma-topicos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--espaco-medio) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.bioma-topicos li {
+    padding-left: 18px;
+    position: relative;
+    color: var(--cor-texto);
+}
+
+.bioma-topicos li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--cor-destaque-folha);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.bioma-habitats-lista {
+    margin-top: auto;
+    padding-top: var(--espaco-medio);
+    border-top: 1px solid var(--cor-borda-suave);
+}
+
+.bioma-habitats-titulo {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.bioma-habitats-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chip-habitat {
+    padding: 3px 10px;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pilula);
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+}
+
+.grid-categorias-conservacao {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--espaco-medio);
-    margin-top: var(--espaco-medio);
+    margin-top: var(--espaco-grande);
 }
 
-.card-conservacao {
+.card-categoria-conservacao {
     padding: var(--espaco-medio);
-    background-color: var(--cor-fundo);
-    border-left: 4px solid var(--cor-destaque-folha);
-    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra-card);
+    border-left: 5px solid var(--cor-borda);
+    display: flex;
+    flex-direction: column;
 }
 
-.card-conservacao h3 {
-    font-size: 1.1rem;
+.card-categoria-conservacao.lc { border-left-color: var(--cor-status-lc); }
+.card-categoria-conservacao.nt { border-left-color: var(--cor-status-nt); }
+.card-categoria-conservacao.vu { border-left-color: var(--cor-status-vu); }
+.card-categoria-conservacao.en { border-left-color: var(--cor-status-en); }
+.card-categoria-conservacao.cr { border-left-color: var(--cor-status-cr); }
+.card-categoria-conservacao.dd { border-left-color: var(--cor-texto-suave); }
+
+.card-categoria-conservacao h3 {
+    font-size: 1.05rem;
     color: var(--cor-primaria);
-    margin-bottom: var(--espaco-pequeno);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.card-conservacao p {
-    font-size: 0.9rem;
+.card-categoria-conservacao p {
+    font-size: 0.88rem;
     color: var(--cor-texto-secundario);
+    line-height: 1.5;
 }
 
 /* ==========================================================================
