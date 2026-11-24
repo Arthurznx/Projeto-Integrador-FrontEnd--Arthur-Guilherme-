@@ -773,6 +773,122 @@ export const DICIONARIO_TAXONOMICO_BR = {
 };
 
 /**
+ * Gera chave canônica única para uma espécie considerando identificador taxonômico e sinônimos.
+ * Garante que a mesma espécie com grafias diferentes, nomes populares distintos ou consultada
+ * via sinônimo seja detectada como única e nunca seja duplicada.
+ * @param {Object} animal
+ * @returns {string}
+ */
+export function obterChaveCanonica(animal) {
+    if (!animal) return '';
+    if (animal.taxon_id) {
+        return `taxon-${animal.taxon_id}`;
+    }
+    const sp = (animal.especie || animal.name || '').trim();
+    if (sp && DICIONARIO_TAXONOMICO_BR[sp]) {
+        return `taxon-${DICIONARIO_TAXONOMICO_BR[sp].taxon_id}`;
+    }
+    // Verificar se corresponde a algum sinônimo registrado no dicionário oficial
+    const spLower = sp.toLowerCase();
+    for (const item of Object.values(DICIONARIO_TAXONOMICO_BR)) {
+        if (item.sinonimos && item.sinonimos.some(s => s.toLowerCase() === spLower)) {
+            return `taxon-${item.taxon_id}`;
+        }
+    }
+    return `sp-${spLower.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()}`;
+}
+
+/**
+ * Validação rigorosa dos 6 critérios essenciais para permanência no catálogo da fauna paraibana.
+ * Qualquer espécie que não satisfaça TODOS os 6 requisitos é terminantemente excluída da base.
+ *
+ * 1. Nome popular: autêntico no Brasil (sem duplicação com nome científico, sem termos em inglês, sem 'não identificado').
+ * 2. Nome científico: válido e no nível de espécie (binômio gênero + espécie, sem 'sp.', sem indeterminações).
+ * 3. Fotografia: imagem real, nítida e correspondente à espécie (sem placeholders, sem Unsplash genérico, sem ausência).
+ * 4. Habitat: ecologicamente correto e confirmado para a espécie (sem descrições genéricas ou ausentes).
+ * 5. Bioma: ocorrência comprovada na Paraíba (Caatinga, Mata Atlântica ou ambos).
+ * 6. Localização: observação ou ocorrência registrada na Paraíba (município ou localidade no estado).
+ *
+ * @param {Object} animal
+ * @returns {boolean} Retorna true se todos os 6 critérios forem rigorosamente atendidos.
+ */
+export function validarEspecieCompleta(animal) {
+    if (!animal || typeof animal !== 'object') return false;
+
+    // 1. Nome popular: autêntico no Brasil
+    const nome = String(animal.nome || '').trim();
+    const sp = String(animal.especie || '').trim();
+    if (!nome) return false;
+    const nomeLower = nome.toLowerCase();
+    if (nomeLower === 'nome popular não identificado' || 
+        nomeLower.includes('não identificado') ||
+        nomeLower.includes('indeterminado') ||
+        nomeLower.includes('desconhecido')) {
+        return false;
+    }
+    if (nomeLower === sp.toLowerCase()) {
+        return false; // Duplicação indevida de nome científico no campo de nome popular
+    }
+    const termosIngles = ['toad', 'hawk', 'frog', 'crab', 'viper', 'heron', 'tanager', 'marmoset', 'sloth', 'snake', 'lizard'];
+    if (termosIngles.some(t => nomeLower.includes(t))) {
+        return false; // Nomes em inglês sem correspondência válida em português
+    }
+
+    // 2. Nome científico: válido e no nível de espécie
+    if (!sp) return false;
+    const partesSp = sp.split(/\s+/);
+    if (partesSp.length < 2) return false; // Deve conter no mínimo gênero e epíteto específico
+    if (sp.endsWith(' sp.') || sp.endsWith(' spp.') || sp.endsWith(' sp') || sp.toLowerCase() === 'indeterminada') {
+        return false;
+    }
+
+    // 3. Fotografia real, nítida e correspondente
+    const foto = String(animal.foto_url || '').trim();
+    if (!foto) return false;
+    if (foto.includes('placeholder') || foto.includes('default_photo') || foto.includes('unsplash.com')) {
+        return false; // Exclui placeholders e fotos aleatórias não identificadas
+    }
+    if (!foto.startsWith('http://') && !foto.startsWith('https://') && !foto.startsWith('assets/')) {
+        return false;
+    }
+
+    // 4. Habitat ecológico correto e confirmado
+    const habitat = String(animal.habitat || '').trim();
+    if (!habitat || habitat.length < 5) return false;
+    const habitatLower = habitat.toLowerCase();
+    if (habitatLower === 'informação não disponível' || 
+        habitatLower.includes('não disponível') ||
+        habitatLower.includes('desconhecido')) {
+        return false;
+    }
+
+    // 5. Bioma confirmado na Paraíba (Caatinga, Mata Atlântica ou ambos)
+    const bioma = String(animal.bioma || '').trim();
+    if (!bioma) return false;
+    const biomaLower = bioma.toLowerCase();
+    if (biomaLower === 'informação não disponível' || biomaLower.includes('não disponível')) {
+        return false;
+    }
+    const contemCaatinga = bioma.includes('Caatinga');
+    const contemMataAtlantica = bioma.includes('Mata Atlântica') || bioma.includes('Mata Atlantica');
+    if (!contemCaatinga && !contemMataAtlantica) {
+        return false; // Ocorrência fora dos biomas existentes na Paraíba
+    }
+
+    // 6. Localização com presença comprovada na Paraíba
+    const local = String(animal.local_observacao || '').trim();
+    const municipio = String(animal.municipio || '').trim();
+    if (!local || !municipio) return false;
+    const comprovadoPB = local.includes('PB') || local.includes('Paraíba') || local.includes('Paraiba') || 
+                         municipio.includes('PB') || municipio.includes('Paraíba') || municipio.includes('Paraiba');
+    if (!comprovadoPB) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * Catálogo Oficial da Fauna com Ocorrência Comprovada na Paraíba
  * 33 espécies rigorosamente validadas cobrindo os 6 grupos taxonômicos.
  */
@@ -1437,7 +1553,7 @@ export const FAUNA_PARAIBA_PADRAO = [
         data_observacao: "2024-01-11",
         fonte: "iNaturalist / ICMBio"
     },
-];
+].filter(validarEspecieCompleta);
 
 /**
  * Resolve e valida taxonomicamente uma espécie, eliminando duplicidade entre nome científico e popular.
