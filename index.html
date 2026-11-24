@@ -153,11 +153,11 @@
                         autocomplete="off"
                     >
                     <button type="button" id="btn-limpar-busca" class="botao-limpar-busca" aria-label="Limpar campo de pesquisa" hidden>
-                        ✕
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icone-acao" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
 
-                <!-- Filtros rápidos por classe/grupo taxonômico -->
+                <!-- Filtros rápidos por classe/grupo taxonômico da fauna -->
                 <div class="filtros-categorias" role="group" aria-label="Filtrar por grupo de animal">
                     <span class="filtro-rotulo">Filtrar por grupo:</span>
                     <button type="button" class="btn-filtro ativo" data-filtro="todos">Todos</button>
@@ -165,6 +165,8 @@
                     <button type="button" class="btn-filtro" data-filtro="aves">Aves</button>
                     <button type="button" class="btn-filtro" data-filtro="repteis">Répteis</button>
                     <button type="button" class="btn-filtro" data-filtro="anfibios">Anfíbios</button>
+                    <button type="button" class="btn-filtro" data-filtro="peixes">Peixes</button>
+                    <button type="button" class="btn-filtro" data-filtro="invertebrados">Invertebrados</button>
                 </div>
 
                 <!-- Resumo dinâmico e identificação da fonte de dados -->
@@ -183,6 +185,17 @@
                     <div class="spinner" aria-hidden="true"></div>
                     <p>Consultando dados da fauna paraibana no iNaturalist...</p>
                 </div>
+            </div>
+
+            <!-- Controles de Carregamento e Paginação da Fauna -->
+            <div class="acoes-catalogo-container">
+                <button type="button" id="btn-carregar-mais" class="btn-secundario btn-carregar-fauna">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icone-btn" aria-hidden="true">
+                        <polyline points="7 13 12 18 17 13"></polyline>
+                        <polyline points="7 6 12 11 17 6"></polyline>
+                    </svg>
+                    Carregar mais espécies da Paraíba
+                </button>
             </div>
         </section>
 
@@ -306,12 +319,17 @@
     <!-- Modal de Detalhes Científicos e Biológicos do Animal -->
     <div id="modal-detalhes-animal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
         <div class="modal-conteudo">
-            <button type="button" class="modal-fechar" id="modal-btn-fechar" aria-label="Fechar detalhes do animal">✕</button>
+            <button type="button" class="modal-fechar" id="modal-btn-fechar" aria-label="Fechar detalhes do animal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icone-fechar" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
 
             <h3 id="modal-titulo">Detalhes da Espécie</h3>
             <p id="modal-especie" class="card-animal-especie"></p>
 
-            <img id="modal-foto" class="modal-detalhes-foto" src="" alt="" loading="lazy">
+            <div class="modal-foto-bloco">
+                <img id="modal-foto" class="modal-detalhes-foto" src="" alt="" loading="lazy">
+                <p id="modal-foto-credito" class="modal-foto-credito"></p>
+            </div>
 
             <table class="modal-tabela-info">
                 <tbody>
@@ -338,6 +356,10 @@
                     <tr>
                         <th scope="row">Local da Observação</th>
                         <td id="modal-local"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data do Registro de Campo</th>
+                        <td id="modal-data-observacao"></td>
                     </tr>
                     <tr>
                         <th scope="row">Estado de Conservação</th>

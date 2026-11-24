@@ -2,11 +2,12 @@
  * Serviço de Integração com a API do iNaturalist
  * Documentação oficial: https://api.inaturalist.org/v1/
  *
- * Consulta observações e táxons com foco exclusivo na fauna do estado da Paraíba (place_id=12593),
- * aplicando internacionalização (locale=pt-BR) e tratamento de erros com fallback.
+ * Consulta observações com ocorrência comprovada na Paraíba (place_id=12593),
+ * aplicando internacionalização (locale=pt-BR), seleção de fotografias em alta resolução,
+ * atribuição autoral, paginação e suporte a múltiplos grupos taxonômicos.
  */
 
-import { normalizarEntidadeFauna, FAUNA_PARAIBA_PADRAO } from './fauna-service.js';
+import { normalizarEntidadeFauna, formatarStatusConservacao, FAUNA_PARAIBA_PADRAO } from './fauna-service.js';
 
 const INAT_API_BASE = 'https://api.inaturalist.org/v1';
 const ID_LUGAR_PARAIBA = 12593; // Identificador oficial do Estado da Paraíba no iNaturalist
@@ -16,11 +17,11 @@ const cacheRequisicoes = new Map();
 
 /**
  * Consulta observações recentes e com fotos da fauna na Paraíba
- * @param {Object} opcoes - Parâmetros de filtro
+ * @param {Object} opcoes - Parâmetros de filtro e paginação
  * @returns {Promise<Array>} Lista de espécies normalizadas (Entidade Fauna)
  */
-export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limite = 24 } = {}) {
-    const chaveCache = `inat-${grupo}-${termo}-${limite}`;
+export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', pagina = 1, limite = 24 } = {}) {
+    const chaveCache = `inat-${grupo}-${termo}-${pagina}-${limite}`;
 
     if (cacheRequisicoes.has(chaveCache)) {
         return cacheRequisicoes.get(chaveCache);
@@ -32,7 +33,9 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
         aves: 'Aves',
         repteis: 'Reptilia',
         anfibios: 'Amphibia',
-        todos: 'Mammalia,Aves,Reptilia,Amphibia'
+        peixes: 'Actinopterygii,Chondrichthyes',
+        invertebrados: 'Insecta,Mollusca,Arachnida,Crustacea',
+        todos: 'Mammalia,Aves,Reptilia,Amphibia,Actinopterygii,Mollusca,Arachnida,Insecta'
     };
 
     const iconicTaxa = mapaTaxons[grupo] || mapaTaxons.todos;
@@ -41,9 +44,9 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
     url.searchParams.set('place_id', String(ID_LUGAR_PARAIBA));
     url.searchParams.set('locale', 'pt-BR');
     url.searchParams.set('photos', 'true');
-    url.searchParams.set('popular', 'true');
     url.searchParams.set('order_by', 'votes');
     url.searchParams.set('order', 'desc');
+    url.searchParams.set('page', String(pagina));
     url.searchParams.set('per_page', String(limite));
     url.searchParams.set('iconic_taxa', iconicTaxa);
 
@@ -85,20 +88,43 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
             if (especiesVistas.has(nomeCientifico)) continue;
             especiesVistas.add(nomeCientifico);
 
-            // Obter melhor fotografia disponível
+            // Obter fotografia em melhor resolução disponível (large / medium em vez de square)
             let foto = null;
+            let credito = 'iNaturalist';
+
             if (obs.photos && obs.photos.length > 0) {
-                foto = obs.photos[0].url.replace('square', 'medium');
+                const fotoObj = obs.photos[0];
+                foto = fotoObj.url ? fotoObj.url.replace('/square.', '/large.') : null;
+                credito = fotoObj.attribution || (obs.user ? `Observado por ${obs.user.name || obs.user.login}` : 'iNaturalist');
             } else if (obs.taxon.default_photo) {
-                foto = obs.taxon.default_photo.medium_url;
+                foto = obs.taxon.default_photo.medium_url ? obs.taxon.default_photo.medium_url.replace('/square.', '/large.') : null;
+                credito = obs.taxon.default_photo.attribution || 'iNaturalist';
             }
 
-            // Status de conservação
-            let riscoPreservacao = 'Pouco Preocupante (LC)';
+            // Normalização do status de conservação (sem siglas)
+            let riscoBruto = 'Pouco preocupante';
             if (obs.taxon.conservation_status && obs.taxon.conservation_status.status_name) {
-                riscoPreservacao = obs.taxon.conservation_status.status_name;
+                riscoBruto = obs.taxon.conservation_status.status_name;
             } else if (obs.taxon.threatened) {
-                riscoPreservacao = 'Ameaçada de Extinção';
+                riscoBruto = 'Vulnerável';
+            }
+            const statusFormatado = formatarStatusConservacao(riscoBruto);
+
+            // Localização precisa e data da observação de campo na Paraíba
+            let localFormatado = obs.place_guess || 'Paraíba, Brasil';
+            let municipio = 'Paraíba';
+            if (obs.place_guess) {
+                const partes = obs.place_guess.split(',');
+                municipio = partes[0].trim();
+            }
+
+            let dataObs = 'Registro verificado';
+            if (obs.observed_on_details && obs.observed_on_details.date) {
+                dataObs = obs.observed_on_details.date;
+                localFormatado += ` (${dataObs})`;
+            } else if (obs.observed_on) {
+                dataObs = obs.observed_on;
+                localFormatado += ` (${dataObs})`;
             }
 
             const animalNormalizado = normalizarEntidadeFauna({
@@ -106,35 +132,43 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
                 nome: obs.taxon.preferred_common_name || obs.species_guess || obs.taxon.name,
                 especie: obs.taxon.name,
                 tipo_animal: obs.taxon.iconic_taxon_name,
-                habitat: obs.place_guess ? `Paraíba (${obs.place_guess})` : 'Paraíba, Brasil',
-                descricao: `Espécie observada em ambiente natural na Paraíba. Registrada com ${obs.identifications_count || 1} identificação(ões) na plataforma científica iNaturalist.`,
-                risco_preservacao: riscoPreservacao,
+                habitat: obs.place_guess ? `Ocorrência observada em ${obs.place_guess}` : 'Habitat nativo paraibano',
+                descricao: `Espécie com registro verificado no estado da Paraíba. Catalogada com ${obs.identifications_count || 1} identificação(ões) na plataforma científica iNaturalist.`,
+                risco_preservacao: statusFormatado.nome,
+                codigo_status: statusFormatado.codigo,
                 foto_url: foto,
-                local_observacao: obs.place_guess || 'Paraíba, BR',
+                foto_credito: credito,
+                foto_atribuicao: credito,
+                municipio: municipio,
+                data_observacao: dataObs,
+                local_observacao: localFormatado,
                 fonte: 'iNaturalist API'
             });
 
             listaNormalizada.push(animalNormalizado);
         }
 
-        // Se a busca pelo termo não retornar nada do iNaturalist, filtrar a base padrão
-        if (listaNormalizada.length === 0 && termo) {
-            const t = termo.toLowerCase();
-            const filtradosBase = FAUNA_PARAIBA_PADRAO.filter((animal) =>
-                animal.nome.toLowerCase().includes(t) ||
-                animal.especie.toLowerCase().includes(t) ||
-                animal.tipo_animal.toLowerCase().includes(t) ||
-                animal.habitat.toLowerCase().includes(t)
-            );
-            cacheRequisicoes.set(chaveCache, filtradosBase);
-            return filtradosBase;
-        }
-
-        // Se a API retornar menos de 4 itens, complementar com a base padrão para garantir riqueza visual
-        if (listaNormalizada.length < 4 && (!termo || termo.trim() === '')) {
+        // Se estiver na primeira página e o resultado for curto, mesclar com a base paraibana curada
+        if (pagina === 1 && (!termo || termo.trim() === '')) {
             const combinados = [...listaNormalizada];
-            for (const padrao of FAUNA_PARAIBA_PADRAO) {
-                if (!combinados.some((item) => item.especie === padrao.especie)) {
+            let baseFiltrada = [...FAUNA_PARAIBA_PADRAO];
+
+            if (grupo !== 'todos') {
+                const grupoMapeado = {
+                    mamiferos: 'Mamífero',
+                    aves: 'Ave',
+                    repteis: 'Réptil',
+                    anfibios: 'Anfíbio',
+                    peixes: 'Peixe',
+                    invertebrados: 'Invertebrado'
+                }[grupo];
+                if (grupoMapeado) {
+                    baseFiltrada = baseFiltrada.filter((i) => i.tipo_animal === grupoMapeado);
+                }
+            }
+
+            for (const padrao of baseFiltrada) {
+                if (!combinados.some((item) => item.especie.toLowerCase() === padrao.especie.toLowerCase())) {
                     combinados.push(padrao);
                 }
             }
@@ -142,13 +176,29 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
             return combinados;
         }
 
+        // Se a busca por termo não retornar itens do iNaturalist, filtrar base local
+        if (listaNormalizada.length === 0 && termo) {
+            const t = termo.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const filtradosBase = FAUNA_PARAIBA_PADRAO.filter((animal) => {
+                const n = (animal.nome || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const e = (animal.especie || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const tp = (animal.tipo_animal || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const h = (animal.habitat || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const b = (animal.bioma || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const loc = (animal.local_observacao || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                return n.includes(t) || e.includes(t) || tp.includes(t) || h.includes(t) || b.includes(t) || loc.includes(t);
+            });
+            cacheRequisicoes.set(chaveCache, filtradosBase);
+            return filtradosBase;
+        }
+
         cacheRequisicoes.set(chaveCache, listaNormalizada);
         return listaNormalizada;
 
     } catch (erro) {
-        console.warn('Aviso: Não foi possível obter dados ao vivo da API iNaturalist. Utilizando base catalogada da fauna paraibana.', erro.message);
+        console.warn('Aviso: Utilizando base catalogada da fauna paraibana devido a limite ou rede:', erro.message);
 
-        // Fallback seguro: filtrar base local paraibana
+        // Fallback robusto a partir do catálogo catalogado da Paraíba
         let fallback = [...FAUNA_PARAIBA_PADRAO];
 
         if (grupo !== 'todos') {
@@ -156,7 +206,9 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
                 mamiferos: 'Mamífero',
                 aves: 'Ave',
                 repteis: 'Réptil',
-                anfibios: 'Anfíbio'
+                anfibios: 'Anfíbio',
+                peixes: 'Peixe',
+                invertebrados: 'Invertebrado'
             }[grupo];
 
             if (grupoMapeado) {
@@ -165,13 +217,15 @@ export async function buscarEspeciesParaiba({ grupo = 'todos', termo = '', limit
         }
 
         if (termo && termo.trim() !== '') {
-            const t = termo.toLowerCase();
-            fallback = fallback.filter((animal) =>
-                animal.nome.toLowerCase().includes(t) ||
-                animal.especie.toLowerCase().includes(t) ||
-                animal.tipo_animal.toLowerCase().includes(t) ||
-                animal.habitat.toLowerCase().includes(t)
-            );
+            const t = termo.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            fallback = fallback.filter((animal) => {
+                const n = (animal.nome || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const e = (animal.especie || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const tp = (animal.tipo_animal || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const h = (animal.habitat || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const b = (animal.bioma || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                return n.includes(t) || e.includes(t) || tp.includes(t) || h.includes(t) || b.includes(t);
+            });
         }
 
         return fallback;
