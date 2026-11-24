@@ -538,26 +538,48 @@ section h2 {
     margin-bottom: var(--espaco-pequeno);
 }
 
-.card-animal-habitat {
+.card-animal-metadados-ecologicos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+    margin-bottom: var(--espaco-medio);
+    flex-grow: 1;
+}
+
+.tag-bioma-card {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     padding: 3px 8px;
-    background-color: var(--cor-terrosa-clara);
-    color: var(--cor-terrosa-escura);
+    background-color: var(--cor-destaque-suave);
+    color: var(--cor-primaria);
+    border: 1px solid var(--cor-destaque-borda);
     border-radius: var(--raio-pequeno);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    margin-bottom: var(--espaco-pequeno);
     align-self: flex-start;
 }
 
-.card-animal-descricao {
-    font-size: 0.9rem;
-    color: var(--cor-texto-secundario);
-    line-height: 1.5;
-    margin-bottom: var(--espaco-medio);
-    flex-grow: 1;
+.card-animal-habitat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background-color: var(--cor-terrosa-clara);
+    color: var(--cor-terrosa-escura);
+    border: 1px solid rgba(138, 86, 44, 0.2);
+    border-radius: var(--raio-pequeno);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.3;
+    align-self: flex-start;
+}
+
+.icone-ecologico {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .card-animal-rodape {
