@@ -85,7 +85,10 @@ export function inicializarExploradorFauna() {
                 <div class="card-animal-conteudo">
                     <h3 class="card-animal-nome">${animal.nome}</h3>
                     <p class="card-animal-especie">${animal.especie}</p>
-                    <span class="card-animal-habitat">📍 ${animal.habitat}</span>
+                    <span class="card-animal-habitat">
+                        <svg class="icone-metadado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        ${animal.habitat}
+                    </span>
                     <p class="card-animal-descricao">${animal.descricao}</p>
                     <div class="card-animal-rodape">
                         <span class="card-animal-fonte">${animal.fonte}</span>
@@ -214,7 +217,7 @@ export function inicializarExploradorFauna() {
             const complemento = await buscarDadosComplementares(animal.especie, animal.nome);
             if (complemento && complemento.dados) {
                 modalDescricaoComplementar.textContent = complemento.dados.caracteristicas_principais || animal.descricao;
-                modalDieta.textContent = `🥗 Dieta: ${complemento.dados.dieta || 'Alimentação nativa de ecossistemas da Paraíba.'}`;
+                modalDieta.textContent = `Dieta: ${complemento.dados.dieta || 'Alimentação nativa de ecossistemas da Paraíba.'}`;
             } else {
                 modalDescricaoComplementar.textContent = animal.descricao;
                 modalDieta.textContent = '';
