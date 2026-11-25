@@ -1,7 +1,6 @@
-# Projeto-Integrador-FrontEnd--Arthur-Guilherme-
+# Animalia — Conhecimento, Exploração e Preservação da Fauna da Paraíba
 
-Projeto "Animalia"
-Tema: Preservação ambiental intuitiva 
+O **Animalia** é uma plataforma web interativa voltada à catalogação, valorização e preservação da fauna nativa do estado da Paraíba. Desenvolvida para estudantes, pesquisadores e entusiastas da biodiversidade, a aplicação reúne informações científicas autênticas sobre espécies dos biomas Caatinga e Mata Atlântica com fotografias de alta resolução e dados de conservação integrados ao iNaturalist. Além de explorar o catálogo, os usuários podem documentar seus próprios avistamentos e relatos de campo na natureza por meio do módulo participativo Álbum Animal.
 
 Este projeto tem por objetivo por em prática o desenvolvimento de uma aplicação para demonstrar os principais animais da Paraíba e sua importâmcia, como características, curiosidades, risco de extinção e etc. A aplicação irá permitir que os usuários ao efetuarem login possam desfrutar do conhecimento da fauna local paraibana e também registrar seus momentos de encontro com os animais, através de um álbum personalizado onde o usuário vai poder colocar a foto ou relato do encontro com o ser vivo. O projeto pretende não só distruibuir informações importantes sobre a fauna do estado, como também pretende ajudar a população paraibana em relação a importância da preservação ambiental.
 
