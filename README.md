@@ -1,4 +1,4 @@
-# Animalia — Conhecimento, Exploração e Preservação da Fauna da Paraíba
+# Projeto Animalia — Conhecimento, Exploração e Preservação da Fauna da Paraíba
 
 O **Animalia** é uma plataforma web interativa voltada à catalogação, valorização e preservação da fauna nativa do estado da Paraíba. Desenvolvida para estudantes, pesquisadores e entusiastas da biodiversidade, a aplicação reúne informações científicas autênticas sobre espécies dos biomas Caatinga e Mata Atlântica com fotografias de alta resolução e dados de conservação integrados ao iNaturalist. Além de explorar o catálogo, os usuários podem documentar seus próprios avistamentos e relatos de campo na natureza por meio do módulo participativo Álbum Animal.
 
