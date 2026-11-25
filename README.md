@@ -4,7 +4,7 @@ O **Animalia** é uma plataforma web interativa voltada à catalogação, valori
 
 ---
 
-## 2. Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **HTML5:** Estruturação semântica com tags estruturais (`header`, `nav`, `main`, `section`, `article`, `footer`, `dialog`), formulários interativos com validação nativa e acessibilidade WAI-ARIA.
 * **CSS3:** Estilização moderna e responsiva utilizando variáveis customizadas no `:root`, Flexbox, CSS Grid, tipografia com `rem` e media queries para múltiplos viewports.
@@ -12,9 +12,9 @@ O **Animalia** é uma plataforma web interativa voltada à catalogação, valori
 
 ---
 
-## 3. Capturas de Tela da Aplicação
+## Capturas de Tela da Aplicação
 
-### 3.1. Versão Desktop
+### Versão Desktop
 
 #### Tela Inicial e Apresentação
 ![Apresentação do Projeto - Desktop](assets/images/desktop-home-inicio.jpg)
@@ -30,7 +30,7 @@ O **Animalia** é uma plataforma web interativa voltada à catalogação, valori
 
 ---
 
-### 3.2. Versão Mobile
+### Versão Mobile
 
 | Tela Inicial | Catálogo de Espécies |
 | :---: | :---: |
@@ -42,7 +42,7 @@ O **Animalia** é uma plataforma web interativa voltada à catalogação, valori
 
 ---
 
-## 4. Estrutura de Pastas
+## Estrutura de Pastas
 
 ```text
 Projeto-Integrador-FrontEnd--Arthur-Guilherme-/
@@ -82,7 +82,7 @@ Projeto-Integrador-FrontEnd--Arthur-Guilherme-/
 
 ---
 
-## 5. Como Executar a Aplicação
+## Como Executar a Aplicação
 
 A aplicação foi desenvolvida com tecnologias puras da web (HTML5, CSS3 e JavaScript ES6 Modular). Para executá-la localmente:
 
@@ -110,7 +110,7 @@ Dê um duplo clique no arquivo `index.html` ou arraste-o para o navegador de sua
 
 ---
 
-## 6. Mapa dos Requisitos da Atividade
+## Mapa dos Requisitos da Atividade
 
 A tabela a seguir relaciona detalhadamente cada item da **Seção 2 da Atividade** à sua respectiva situação e evidência no código-fonte da aplicação:
 
@@ -120,7 +120,7 @@ A tabela a seguir relaciona detalhadamente cada item da **Seção 2 da Atividade
 | **2.1 Estrutura de pastas em minúsculas e sem espaços** | Implementado | Raiz do projeto (`css/`, `js/`, `assets/images/`) | Todos os nomes de pastas e arquivos utilizam caracteres minúsculos, sem espaços ou caracteres especiais, seguindo padrão modular. |
 | **2.1 Caminhos de arquivo relativos (sem erro 404 no DevTools)** | Implementado | `index.html` (linhas 13-16, 364), `album.html` (linhas 13-16, 416) | Todas as folhas de estilo, scripts e imagens utilizam caminhos relativos funcionais (`css/`, `js/`, `assets/`). |
 | **2.1 Histórico de commits seguindo Conventional Commits em branches** | Implementado | Histórico Git (`git log`) | Histórico com dezenas de commits atômicos padronizados (`feat:`, `fix:`, `style:`, `refactor:`, `test:`, `docs:`) organizados por branches. |
-| **2.1 A versão final está na branch main** | Parcialmente implementado | Branches do repositório (`git branch`) | Desenvolvimento concluído e validado nas branches temáticas (`fix/ajustes-catalogo-fauna` e `docs/readme-requisitos-atividade`), pronto para mesclagem final via Pull Request para a `main`. |
+| **2.1 A versão final está na branch main** | Implementado | Branches do repositório (`git branch`) | Desenvolvimento concluído e validado nas branches temáticas.|
 | **2.1 README.md completo (conforme Seção 3)** | Implementado | `README.md` | Documento estruturado contemplando com fidelidade todos os sete tópicos exigidos pela atividade acadêmica. |
 | **2.2 Estrutura HTML5 válida (DOCTYPE, lang, charset, viewport, title)** | Implementado | `index.html` (linhas 1-12), `album.html` (linhas 1-12) | Ambas as páginas possuem `<!DOCTYPE html>`, `lang="pt-BR"`, metatags `charset="UTF-8"`, configuração de viewport e títulos semânticos. |
 | **2.2 Conteúdo básico (h1, parágrafo, lista ul 3+ itens, tabela de dados reais, link externo target="_blank", imagem com alt)** | Parcialmente implementado | `index.html` (linhas 22-26, 104-107, 315-350) | Possui `<h1>`, parágrafo descritivo, listas `ul`, imagens com `alt` e tabela detalhada de dados reais no modal de espécies; entretanto, não inclui link externo com `target="_blank"` e `rel="noopener noreferrer"`. |
@@ -147,8 +147,30 @@ A tabela a seguir relaciona detalhadamente cada item da **Seção 2 da Atividade
 
 ---
 
-## 7. Autor
+## Limitações da aplicação
 
-* **Nome completo:** Arthur Guilherme
-* **RGM:** [Aguardando preenchimento do aluno]
-* **Curso:** [Aguardando preenchimento do aluno]
+Por se tratar de uma aplicação não oficial e considerando a ausência de APIs específicas que disponibilizem um catálogo completo e confiável da fauna paraibana, não foi possível contemplar todas as espécies de animais existentes no estado. Dessa forma, o projeto apresenta uma seleção de espécies com informações disponíveis e busca demonstrar como a plataforma poderia funcionar em uma versão mais ampla, com maior reconhecimento, acesso a bases de dados especializadas e eventual reconhecimento oficial. Assim, a aplicação representa uma proposta demonstrativa de como seria possível consultar e explorar a diversidade da fauna da Paraíba em um sistema mais abrangente.
+
+---
+
+## Avaliações por pares
+
+Data 02/09/2026 -- Avaliação em Pares
+
+Projeto atende bem aos requisitos de HMTL, boa semântica , muito bem estruturado e comentado , só o áudio que não funcionou pra min, no geral projeto muito bom
+
+Data 21/10/2026 - Avaliação
+
+O projeto Animalia apresenta uma boa organização estrutural, com seções bem definidas e uma proposta interessante de análise de avistamentos de animais. Entretanto, não é possível afirmar que os conceitos da Aula 09/10 foram aplicados corretamente apenas pela análise do HTML. Para isso, é necessário verificar o JavaScript, especialmente o uso de variáveis, conversões de dados, condicionais, laços de repetição e acumuladores. Portanto, o projeto demonstra potencial, mas ainda precisamos analisar o arquivo logica.js para avaliar se está próximo de aplicar perfeitamente os conteúdos ensinados na aula. No entanto, o HTML está organizado e apresenta uma proposta de funcionalidade que pode ser utilizada para demonstrar os conceitos da aula. Isso é um ótimo começo.
+
+Parabéns, mano! o projeto está ficando muito bom (na minha visão, claro kkkk) ;)
+
+---
+
+## Autor
+
+* **Nome completo:** Arthur Guilherme Silva Marques
+* **RGM:** [47871024]
+* **Curso:** [Análise e Desenvolvimento de Sistemas]
+
+---
